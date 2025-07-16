@@ -1,11 +1,15 @@
 package com.emranhss.project.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "policestations")
 
 public class PoliceStation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -36,4 +40,6 @@ public class PoliceStation {
     public void setId(int id) {
         this.id = id;
     }
+
+
 }

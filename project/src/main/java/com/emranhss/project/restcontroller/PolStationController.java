@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/policestation/")
-public class PoliceStationRestController {
+public class PolStationController {
+
 
     @Autowired
     private PoliceStationService policeStationService;
@@ -31,8 +33,10 @@ public class PoliceStationRestController {
     }
     @GetMapping("{id}")
     public void deleteById(@PathVariable Integer id) {
-         policeStationService.deleteById(id);
+        policeStationService.deleteById(id);
     }
+
+    @PutMapping("{id}")
     public void update(@RequestBody PoliceStation police) {
         policeStationService.saveOrUpdate(police);
     }
