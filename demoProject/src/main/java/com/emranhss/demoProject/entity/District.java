@@ -29,9 +29,10 @@ public class District {
         this.name = name;
     }
 
-    public District(List<PoliceStation> policeStation) {
+    public District(List<PoliceStation> policeStations) {
         this.policeStations = policeStations;
     }
+
 
     public int getId() {
         return id;
