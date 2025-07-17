@@ -1,7 +1,6 @@
 package com.emranhss.home.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -9,7 +8,49 @@ import java.util.List;
 @Table(name = "districts")
 public class District {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(length = 100 , nullable = false)
     private String name;
 
+    @OneToMany(mappedBy = "district" , cascade = CascadeType.ALL)
+    private List<PoliceStation> policeStations;
+
+    public District() {
+    }
+
+    public District(int id, String name, List<PoliceStation> policeStations) {
+        this.id = id;
+        this.name = name;
+        this.policeStations = policeStations;
+    }
+
+    public District(List<PoliceStation> policeStations) {
+        this.policeStations = policeStations;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<PoliceStation> getPoliceStations() {
+        return policeStations;
+    }
+
+    public void setPoliceStations(List<PoliceStation> policeStations) {
+        this.policeStations = policeStations;
+    }
 }
