@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DistrictService {
+public class
+DistrictService {
 
     @Autowired
     private IDistrictRepository districtRepository;

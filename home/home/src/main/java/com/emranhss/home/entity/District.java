@@ -17,6 +17,10 @@ public class District {
     @OneToMany(mappedBy = "district" , cascade = CascadeType.ALL)
     private List<PoliceStation> policeStations;
 
+    @ManyToOne
+    @JoinColumn(name = "division_id")
+    private Division division;
+
     public District() {
     }
 
