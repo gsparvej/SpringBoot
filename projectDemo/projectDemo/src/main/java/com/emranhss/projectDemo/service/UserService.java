@@ -3,10 +3,18 @@ package com.emranhss.projectDemo.service;
 import com.emranhss.projectDemo.entity.User;
 import com.emranhss.projectDemo.repository.IUserRepo;
 import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -17,9 +25,13 @@ public class UserService {
     @Autowired
     private EmailService emailService;
 
-    public void saveOrUpdate(User user) {
+    @Value("src/main/resources/static/images")
+    private String uploadDir;
+
+
+    public void saveOrUpdate(User user, MultipartFile imageFile) {
         userRepo.save(user);
-    sendActivationEmail(user);
+        sendActivationEmail(user);
     }
 
     public List<User> findAll() {
@@ -30,6 +42,7 @@ public class UserService {
         return userRepo.findById(id).get();
 
     }
+
     public void delete(User user) {
         userRepo.delete(user);
     }
@@ -74,4 +87,32 @@ public class UserService {
             throw new RuntimeException("Failed to send activation email", e);
         }
     }
+
+    public String saveImage(MultipartFile file, User user) throws IOException {
+        Path uploadPath = Paths.get(uploadDir + "/users");
+        if (!Files.exists(uploadPath)) {
+            try {
+                Files.createFile(uploadPath);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        String fileName = user.getName() + "_" + UUID.randomUUID().toString();
+
+
+        try {
+
+            Path filePath = uploadPath.resolve(fileName);
+            Files.copy(file.getInputStream(), filePath);
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return fileName;
+
     }
+
+}
+
