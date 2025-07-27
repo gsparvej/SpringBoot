@@ -30,8 +30,17 @@ public class UserService {
 
 
     public void saveOrUpdate(User user, MultipartFile imageFile) {
-        userRepo.save(user);
-        sendActivationEmail(user);
+        if(imageFile != null && !imageFile.isEmpty()){
+            String filename = null;
+            try {
+                filename = saveImage(imageFile, user);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            user.setPhoto(filename);
+        }
+
+
     }
 
     public List<User> findAll() {
@@ -113,6 +122,13 @@ public class UserService {
         return fileName;
 
     }
+
+//    public void saveOrUpdate(User user, MultipartFile imageFile) {
+//        if (imageFile != null && !imageFile.isEmpty()) {
+//            String fileName =  saveImage(imageFile, user);
+//            user.setPhoto(fileName);
+//        }
+//    }
 
 }
 
