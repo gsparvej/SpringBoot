@@ -28,7 +28,7 @@ public class UserRestController {
     public ResponseEntity<Map<String, String>> saveUser(
             @RequestPart(value = "user") String userJson,
             @RequestParam(value = "photo") MultipartFile file
-            ) throws JsonProcessingException {
+    ) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         User user = objectMapper.readValue(userJson, User.class);
 
@@ -41,12 +41,14 @@ public class UserRestController {
         } catch (Exception e) {
 
             Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("Message", "User Add Failed " + e);
+            errorResponse.put("Message", "User Add Faild " + e);
             return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
 
     }
+
+
     @GetMapping("")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.findAll();
