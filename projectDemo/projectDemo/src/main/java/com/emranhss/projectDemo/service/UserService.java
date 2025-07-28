@@ -100,7 +100,7 @@ public class UserService {
     }
 
 
-    // for User folder ekhane check dite hbe , ekhane vul thakte pare 
+    // for User folder ekhane check dite hbe , ekhane vul thakte pare
     public String saveImage(MultipartFile file, User user) {
 
         Path uploadPath = Paths.get(uploadDir + "/users");
