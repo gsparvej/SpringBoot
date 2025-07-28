@@ -2,8 +2,6 @@ package com.emranhss.projectDemo.entity;
 
 import jakarta.persistence.*;
 
-import javax.management.relation.Role;
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -91,4 +89,6 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+
 }
