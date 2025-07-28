@@ -2,6 +2,8 @@ package com.emranhss.projectDemo.entity;
 
 import jakarta.persistence.*;
 
+import javax.management.relation.Role;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -17,17 +19,21 @@ public class User {
     private String phone;
     private String photo;
 
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+
 
     public User() {
     }
 
-    public User(int id, String name, String email, String password, String phone, String photo) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
+    public User(Role role, String photo, String phone, String password, String email, String name, int id) {
+        this.role = role;
         this.photo = photo;
+        this.phone = phone;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.id = id;
     }
 
     public int getId() {
@@ -76,5 +82,13 @@ public class User {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
