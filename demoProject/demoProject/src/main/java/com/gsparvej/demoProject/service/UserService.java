@@ -49,9 +49,7 @@ public class UserService {
 
 
     // ekhane mail er method hbe , mail apatoto kori ni
-
-
-
+    
     public String saveImageForUser(MultipartFile file, User user) {
         Path uploadPath = Paths.get(uploadDir+ "/users");
     if (!Files.exists(uploadPath)) {
