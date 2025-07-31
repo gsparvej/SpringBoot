@@ -24,10 +24,10 @@ public class EmployeeController {
         return "home";
     }
 
-    @GetMapping("/empForm")
-    public String empForm(Model model){
+    @GetMapping("/stuForm")
+    public String stuForm(Model model){
         model.addAttribute("employee", new Employee());
-        return "addemployee";
+        return "addstudent";
     }
 
     @PostMapping("/save")
@@ -50,7 +50,7 @@ public class EmployeeController {
     public String edit(@PathVariable Long id, Model model) {
         Employee employee=employeeService.getById(id);
         model.addAttribute("employee", employee);
-        return "addemployee";
+        return "addstudent";
     }
 
     @GetMapping("/delete/{id}")

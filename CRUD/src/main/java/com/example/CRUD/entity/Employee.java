@@ -3,7 +3,7 @@ package com.example.CRUD.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "employees")
+@Table(name = "students")
 public class Employee {
 
 
@@ -11,22 +11,23 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private float salary;
-    private String designation;
-    private String phone;
+    private String roll;
+    private float mark;
+    private String subject;
 
     public Employee() {
     }
 
-    public Employee(Long id, String name, float salary, String designation, String phone) {
+    public Employee(Long id, String name, String roll, float mark, String subject) {
         this.id = id;
         this.name = name;
-        this.salary = salary;
-        this.designation = designation;
-        this.phone = phone;
+        this.roll = roll;
+        this.mark = mark;
+        this.subject = subject;
     }
 
-    public Employee(String name, float salary, String designation) {}
+//    public Employee(String name, float salary, String designation) {}
+
 
     public Long getId() {
         return id;
@@ -44,27 +45,27 @@ public class Employee {
         this.name = name;
     }
 
-    public float getSalary() {
-        return salary;
+    public String getRoll() {
+        return roll;
     }
 
-    public void setSalary(float salary) {
-        this.salary = salary;
+    public void setRoll(String roll) {
+        this.roll = roll;
     }
 
-    public String getDesignation() {
-        return designation;
+    public float getMark() {
+        return mark;
     }
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
+    public void setMark(float mark) {
+        this.mark = mark;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 }
