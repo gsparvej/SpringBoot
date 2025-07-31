@@ -13,15 +13,17 @@ public class Employee {
     private String name;
     private float salary;
     private String designation;
+    private String phone;
 
     public Employee() {
     }
 
-    public Employee(Long id, String name, float salary, String designation) {
+    public Employee(Long id, String name, float salary, String designation, String phone) {
         this.id = id;
         this.name = name;
         this.salary = salary;
         this.designation = designation;
+        this.phone = phone;
     }
 
     public Employee(String name, float salary, String designation) {}
@@ -56,5 +58,13 @@ public class Employee {
 
     public void setDesignation(String designation) {
         this.designation = designation;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
