@@ -8,13 +8,12 @@ import com.gsparvej.demoProject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -24,6 +23,7 @@ public class JobSeekerRestController {
     @Autowired
     private UserService userService;
 
+    @PostMapping("")
     public ResponseEntity<Map<String, String>> registerJobSeeker(
             @RequestPart(value = "user") String userJson,
             @RequestPart(value = "jobSeeker") String jobSeekerJson,
@@ -45,5 +45,11 @@ public class JobSeekerRestController {
             errorResponse.put("Message", "User Add Failed"+e);
             return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("")
+    public List<JobSeeker> getAllJobSeekers() {
+        List<JobSeeker> jobSeekers = new ArrayList<>();
+        return jobSeekers;
     }
 }
