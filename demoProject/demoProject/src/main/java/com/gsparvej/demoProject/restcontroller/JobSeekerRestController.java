@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gsparvej.demoProject.entity.JobSeeker;
 import com.gsparvej.demoProject.entity.User;
+import com.gsparvej.demoProject.service.JobSeekerService;
 import com.gsparvej.demoProject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,9 @@ public class JobSeekerRestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JobSeekerService  jobSeekerService;
 
     @PostMapping("")
     public ResponseEntity<Map<String, String>> registerJobSeeker(
@@ -49,7 +53,6 @@ public class JobSeekerRestController {
 
     @GetMapping("")
     public List<JobSeeker> getAllJobSeekers() {
-        List<JobSeeker> jobSeekers = new ArrayList<>();
-        return jobSeekers;
+        return jobSeekerService.getAll();
     }
 }
