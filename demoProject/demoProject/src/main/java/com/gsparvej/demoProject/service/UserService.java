@@ -6,6 +6,9 @@ import com.gsparvej.demoProject.entity.User;
 import com.gsparvej.demoProject.repository.IUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,9 +18,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
-
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private IUserRepo userRepo;
@@ -113,11 +115,10 @@ public class UserService {
     }
 
 
-
-
-
-
-
-
-
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepo.findByEmail(username)
+                .orElseThrow(()-> new UsernameNotFoundException(
+                        ("User Not found")));
+    }
 }

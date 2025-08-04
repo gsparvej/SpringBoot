@@ -2,6 +2,7 @@ package com.gsparvej.demoProject.restcontroller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gsparvej.demoProject.dto.AuthenticationResponse;
 import com.gsparvej.demoProject.entity.User;
 import com.gsparvej.demoProject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,19 @@ public class UserRestController {
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.findAll();
         return ResponseEntity.ok(users);
+    }
+
+    @PostMapping("login")
+    public ResponseEntity<AuthenticationResponse>  login(@RequestBody User request){
+        return ResponseEntity.ok(userService.authencate(request));
+
+    }
+
+    @GetMapping("/active/{id}")
+    public ResponseEntity<String> activeUser(@PathVariable("id") int id){
+
+        String response= userService.activeUser(id);
+        return  ResponseEntity.ok(response);
     }
 
 
