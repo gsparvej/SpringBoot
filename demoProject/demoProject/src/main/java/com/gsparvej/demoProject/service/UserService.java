@@ -1,14 +1,22 @@
 package com.gsparvej.demoProject.service;
 
+import com.gsparvej.demoProject.dto.AuthenticationResponse;
 import com.gsparvej.demoProject.entity.JobSeeker;
 import com.gsparvej.demoProject.entity.Role;
+import com.gsparvej.demoProject.entity.Token;
 import com.gsparvej.demoProject.entity.User;
+import com.gsparvej.demoProject.jwt.JwtService;
+import com.gsparvej.demoProject.repository.ITokenRepository;
 import com.gsparvej.demoProject.repository.IUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,10 +33,21 @@ public class UserService implements UserDetailsService {
     private IUserRepo userRepo;
 
     @Autowired
+    private ITokenRepository tokenRepository;
+
+    @Autowired
     private JobSeekerService jobSeekerService;
 
     @Value("src/main/resources/static/images")
     private String uploadDir;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    @Lazy
+    private AuthenticationManager authenticationManager;
 
     public void saveOrUpdate(User user, MultipartFile imageFile) {
         if(imageFile != null && !imageFile.isEmpty()) {
@@ -51,29 +70,32 @@ public class UserService implements UserDetailsService {
 
 
     // ekhane mail er method hbe , mail apatoto kori ni
-    
+
     public String saveImageForUser(MultipartFile file, User user) {
-        Path uploadPath = Paths.get(uploadDir+ "/users");
-    if (!Files.exists(uploadPath)) {
-        try {
-            Files.createDirectory(uploadPath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        Path uploadPath = Paths.get(uploadDir + "/users");
+
+        // Create directory if it does not exist (including all parents)
+        if (!Files.exists(uploadPath)) {
+            try {
+                Files.createDirectories(uploadPath);
+            } catch (IOException e) {
+                throw new RuntimeException("Could not create upload directory", e);
+            }
         }
 
-    }
-    String fileName = user.getName()+ "_"+ UUID.randomUUID().toString();
-
+        // Generate unique file name
+        String fileName = user.getName() + "_" + UUID.randomUUID();
 
         try {
             Path filePath = uploadPath.resolve(fileName);
             Files.copy(file.getInputStream(), filePath);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Could not save file", e);
         }
-        return  fileName;
 
+        return fileName;
     }
+
     // for User Folder
     public String saveImageForJobSeeker(MultipartFile file, JobSeeker jobSeeker) {
         Path uploadPath = Paths.get(uploadDir+ "/jobSeeker");
@@ -106,13 +128,80 @@ public class UserService implements UserDetailsService {
             jobSeekerData.setPhoto(jobSeekerPhoto);
             user.setPhoto(fileName);
         }
+
+        // Encode Password before saving User
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(Role.JOBSEEKER);
+        user.setActive(false);
+
         User savedUser = userRepo.save(user);
 
         jobSeekerData.setUser(savedUser);
         jobSeekerService.save(jobSeekerData);
 
+
+        String jwt = jwtService.generateToken(savedUser);
+
     }
+    private void savedUserToken(String jwt, User user) {
+        Token token = new Token();
+        token.setToken(jwt);
+        token.setLogout(false);
+        token.setUser(user);
+
+        tokenRepository.save(token);
+    }
+
+    private void removeAllTokenByUser(User user) {
+        List<Token> validTokens = tokenRepository.findAllTokenByUser(user.getId());
+
+        if (validTokens.isEmpty()) {
+            return;
+        }
+        validTokens.forEach(t-> {
+            t.setLogout(true);
+        });
+        tokenRepository.saveAll(validTokens);
+    }
+
+    // It is Login Method
+    public AuthenticationResponse authencate(User request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getUsername(),
+                        request.getPassword()
+                )
+        );
+        User user = userRepo.findByEmail(request.getEmail()).orElseThrow();
+        if(!user.isActive()) {
+            throw new RuntimeException("Account is not activated. Please check your email for activation link.");
+        }
+        // generate token for current user
+        String jwt = jwtService.generateToken(user);
+
+        // Remove All existing tokens  for this user
+        removeAllTokenByUser(user);
+
+        savedUserToken(jwt, user);
+        return new AuthenticationResponse(jwt, "User Login Successful");
+
+    }
+    public String activeUser(int id) {
+        User user = userRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("User not found with this ID "+id))  ;
+
+        if (user !=null) {
+            user.setActive(true);
+
+            userRepo.save(user);
+            return "User Activated Successfully!";
+        } else {
+            return "Invalid Activation Token!";
+        }
+    }
+
+
+
 
 
     @Override
@@ -121,4 +210,6 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(()-> new UsernameNotFoundException(
                         ("User Not found")));
     }
+
+
 }

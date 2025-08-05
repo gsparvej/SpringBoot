@@ -31,6 +31,8 @@ public class User implements UserDetails {
     private List<Token> tokens;
 
 
+
+
      // for user details
     @Column(nullable = false)
     private boolean active;
@@ -103,6 +105,25 @@ public class User implements UserDetails {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Token> getTokens() {
+        return tokens;
+    }
+    public void setTokens(List<Token> tokens) {
+        this.tokens = tokens;
+    }
+    public boolean isActive() {
+        return active;
+    }
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    public boolean isLock() {
+        return isLock;
+    }
+    public void setLock(boolean lock) {
+        isLock = lock;
     }
 
 
