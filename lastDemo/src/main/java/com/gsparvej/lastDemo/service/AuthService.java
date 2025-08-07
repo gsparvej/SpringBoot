@@ -8,6 +8,7 @@ import com.gsparvej.lastDemo.entity.User;
 import com.gsparvej.lastDemo.jwt.JwtService;
 import com.gsparvej.lastDemo.repository.ITokenRepository;
 import com.gsparvej.lastDemo.repository.IUserRepository;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
@@ -134,6 +135,52 @@ public class AuthService {
 
     }
 
+    private void sendActivationEmail(User user) {
+        String subject = "Welcome to Our Service – Confirm Your Registration";
+
+        String activationLink="http://localhost:8080/api/user/active/"+user.getId();
+
+        String mailText = "<!DOCTYPE html>"
+                + "<html>"
+                + "<head>"
+                + "<style>"
+                + "  body { font-family: Arial, sans-serif; line-height: 1.6; }"
+                + "  .container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px; }"
+                + "  .header { background-color: #4CAF50; color: white; padding: 10px; text-align: center; border-radius: 10px 10px 0 0; }"
+                + "  .content { padding: 20px; }"
+                + "  .footer { font-size: 0.9em; color: #777; margin-top: 20px; text-align: center; }"
+                + "</style>"
+                + "</head>"
+                + "<body>"
+                + "  <div class='container'>"
+                + "    <div class='header'>"
+                + "      <h2>Welcome to Our Platform</h2>"
+                + "    </div>"
+                + "    <div class='content'>"
+                + "      <p>Dear " + user.getName() + ",</p>"
+                + "      <p>Thank you for registering with us. We are excited to have you on board!</p>"
+                + "      <p>Please confirm your email address to activate your account and get started.</p>"
+                + "      <p>If you have any questions or need help, feel free to reach out to our support team.</p>"
+                + "      <br>"
+                + "      <p>Best regards,<br>The Support Team</p>"
+                + "      <p>To Activate Your Account, please click the following link:</p>"
+                + "      <p><a href=\"" + activationLink + "\">Activate Account</a></p>"
+                + "    </div>"
+                + "    <div class='footer'>"
+                + "      &copy; " + java.time.Year.now() + " YourCompany. All rights reserved."
+                + "    </div>"
+                + "  </div>"
+                + "</body>"
+                + "</html>";
+
+        try {
+            emailService.sendSimpleEmail(user.getEmail(), subject, mailText);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Failed to send activation email", e);
+        }
+    }
+
+
     public void registerJobSeeker(User user, MultipartFile imageFile, JobSeeker jobSeekerData) {
         if (imageFile != null && !imageFile.isEmpty()) {
             // Save image for both User and JobSeeker
@@ -160,7 +207,7 @@ public class AuthService {
 
         saveUserToken(jwt, savedUser);
 
-        // Send Activation Email
+
 
     }
     private void saveUserToken(String jwt, User user) {
