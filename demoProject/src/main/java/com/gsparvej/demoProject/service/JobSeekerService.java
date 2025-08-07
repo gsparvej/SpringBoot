@@ -29,5 +29,9 @@ public class JobSeekerService {
     public void delete(Long id) {
         jobSeekerRepo.deleteById(id);
     }
+    public JobSeeker getProfileByUserId(int userId) {
+        return jobSeekerRepo.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Job Seeker Not Found"));
+    }
 
 }
