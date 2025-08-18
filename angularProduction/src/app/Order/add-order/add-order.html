@@ -1,0 +1,62 @@
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 rounded-3">
+    <h3 class="text-center text-primary mb-4">➕ Add New Order</h3>
+
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+      <!-- PO Number -->
+      <div class="mb-3">
+        <label class="form-label">PO Number</label>
+        <input type="text" class="form-control" formControlName="poNumber" placeholder="Enter PO Number">
+        <div *ngIf="orderForm.get('poNumber')?.invalid && orderForm.get('poNumber')?.touched" class="text-danger">
+          PO Number is required
+        </div>
+      </div>
+
+      <!-- Buyer Name -->
+      <div class="mb-3">
+        <label class="form-label">Buyer Name</label>
+        <input type="text" class="form-control" formControlName="buyerName" placeholder="Enter Buyer Name">
+        <div *ngIf="orderForm.get('buyerName')?.invalid && orderForm.get('buyerName')?.touched" class="text-danger">
+          Buyer Name is required
+        </div>
+      </div>
+
+      <!-- Style Name -->
+      <div class="mb-3">
+        <label class="form-label">Style Name</label>
+        <input type="text" class="form-control" formControlName="styleName" placeholder="Enter Style Name">
+        <div *ngIf="orderForm.get('styleName')?.invalid && orderForm.get('styleName')?.touched" class="text-danger">
+          Style Name is required
+        </div>
+      </div>
+
+      <!-- Order Quantity -->
+      <div class="mb-3">
+        <label class="form-label">Order Quantity</label>
+        <input type="number" class="form-control" formControlName="orderQuantity" placeholder="Enter Quantity">
+        <div *ngIf="orderForm.get('orderQuantity')?.invalid && orderForm.get('orderQuantity')?.touched" class="text-danger">
+          Quantity must be at least 1
+        </div>
+      </div>
+
+      <!-- Delivery Date -->
+      <div class="mb-3">
+        <label class="form-label">Delivery Date</label>
+        <input type="date" class="form-control" formControlName="deliveryDate">
+        <div *ngIf="orderForm.get('deliveryDate')?.invalid && orderForm.get('deliveryDate')?.touched" class="text-danger">
+          Delivery Date is required
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-success" [disabled]="orderForm.invalid">
+          <i class="fa fa-save me-2"></i> Save
+        </button>
+        <button type="button" class="btn btn-secondary" routerLink="/orders">
+          <i class="fa fa-arrow-left me-2"></i> Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
