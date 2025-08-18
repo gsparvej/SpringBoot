@@ -1,1 +1,67 @@
-<p>add-fabric-receive works!</p>
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 rounded-3">
+    <h3 class="text-center text-primary mb-4">➕ Add Fabric Receive</h3>
+
+    <form [formGroup]="fabricForm" (ngSubmit)="onSubmit()">
+      <!-- Order Dropdown -->
+      <div class="mb-3">
+        <label class="form-label">Order</label>
+        <select class="form-select" formControlName="orderId">
+          <option value="" disabled selected>Select Order</option>
+          <option *ngFor="let order of orders" [value]="order.id">
+            {{ order.poNumber }} - {{ order.styleName }}
+          </option>
+        </select>
+        <div *ngIf="fabricForm.get('orderId')?.invalid && fabricForm.get('orderId')?.touched" class="text-danger">
+          Order is required
+        </div>
+      </div>
+
+      <!-- Receive Date -->
+      <div class="mb-3">
+        <label class="form-label">Receive Date</label>
+        <input type="date" class="form-control" formControlName="receiveDate">
+        <div *ngIf="fabricForm.get('receiveDate')?.invalid && fabricForm.get('receiveDate')?.touched" class="text-danger">
+          Receive Date is required
+        </div>
+      </div>
+
+      <!-- Quantity -->
+      <div class="mb-3">
+        <label class="form-label">Quantity (Meters)</label>
+        <input type="number" class="form-control" formControlName="quantityInMeters">
+        <div *ngIf="fabricForm.get('quantityInMeters')?.invalid && fabricForm.get('quantityInMeters')?.touched" class="text-danger">
+          Quantity must be at least 1
+        </div>
+      </div>
+
+      <!-- Challan No -->
+      <div class="mb-3">
+        <label class="form-label">Challan No</label>
+        <input type="text" class="form-control" formControlName="challanNo">
+        <div *ngIf="fabricForm.get('challanNo')?.invalid && fabricForm.get('challanNo')?.touched" class="text-danger">
+          Challan No is required
+        </div>
+      </div>
+
+      <!-- Supplier Name -->
+      <div class="mb-3">
+        <label class="form-label">Supplier Name</label>
+        <input type="text" class="form-control" formControlName="supplierName">
+        <div *ngIf="fabricForm.get('supplierName')?.invalid && fabricForm.get('supplierName')?.touched" class="text-danger">
+          Supplier Name is required
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-success" [disabled]="fabricForm.invalid">
+          <i class="fa fa-save me-2"></i> Save
+        </button>
+        <button type="button" class="btn btn-secondary" routerLink="/fabric-receive-list">
+          <i class="fa fa-arrow-left me-2"></i> Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

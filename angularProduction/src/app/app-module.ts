@@ -9,6 +9,7 @@ import { AddFabricReceive } from './Fabric/add-fabric-receive/add-fabric-receive
 import { ViewFabricReceive } from './Fabric/view-fabric-receive/view-fabric-receive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { NavCompo } from './navbar/nav-compo/nav-compo';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     AddOrder,
     ViewOrder,
     AddFabricReceive,
-    ViewFabricReceive
+    ViewFabricReceive,
+    NavCompo
   ],
   imports: [
     BrowserModule,

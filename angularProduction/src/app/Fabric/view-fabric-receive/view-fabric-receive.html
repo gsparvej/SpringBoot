@@ -1,1 +1,46 @@
-<p>view-fabric-receive works!</p>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="text-primary">📋 Fabric Receive List</h3>
+    <button class="btn btn-success" (click)="addFabric()">
+      <i class="fa fa-plus me-2"></i> Add Fabric
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="text-center my-5">
+    <div class="spinner-border text-primary"></div>
+    <p>Loading fabric receives...</p>
+  </div>
+
+  <table class="table table-bordered table-hover shadow-sm" *ngIf="!loading && fabrics.length > 0">
+    <thead class="table-dark text-center">
+      <tr>
+        <th>ID</th>
+        <th>Order</th>
+        <th>Receive Date</th>
+        <th>Quantity (m)</th>
+        <th>Challan No</th>
+        <th>Supplier</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody class="text-center align-middle">
+      <tr *ngFor="let fabric of fabrics">
+        <td>{{ fabric.id }}</td>
+        <td>{{ fabric.order.poNumber }} - {{ fabric.order.styleName }}</td>
+        <td>{{ fabric.receiveDate | date }}</td>
+        <td>{{ fabric.quantityInMeters }}</td>
+        <td>{{ fabric.challanNo }}</td>
+        <td>{{ fabric.supplierName }}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="deleteFabric(fabric.id)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && fabrics.length === 0" class="alert alert-warning text-center">
+    No fabric receive entries found.
+  </div>
+</div>
