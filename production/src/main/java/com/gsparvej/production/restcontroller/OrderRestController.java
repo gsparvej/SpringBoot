@@ -37,10 +37,6 @@ public class OrderRestController {
         return ResponseEntity.ok(orderService.getOrdersByBuyer(buyerName));
     }
 
-    @GetMapping("/status/{status}")
-    public ResponseEntity<List<Order>> getOrdersByStatus(@PathVariable String status) {
-        return ResponseEntity.ok(orderService.getOrdersByStatus(status));
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOrder(@PathVariable Long id) {

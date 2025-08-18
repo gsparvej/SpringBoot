@@ -4,5 +4,6 @@ export interface Order {
   buyerName: string;
   styleName: string;
   orderQuantity: number;
-  deliveryDate: string;   // ISO date string
+  deliveryDate: string; 
+  orderDate: string;  // ISO date string
 }

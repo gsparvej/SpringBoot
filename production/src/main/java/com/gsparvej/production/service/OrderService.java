@@ -31,10 +31,6 @@ public class OrderService {
         return orderRepo.findByBuyerName(buyerName);
     }
 
-    public List<Order> getOrdersByStatus(String status) {
-        return orderRepo.findByStatus(status);
-    }
-
     public void deleteOrder(Long id) {
         orderRepo.deleteById(id);
     }

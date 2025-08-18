@@ -3,6 +3,7 @@ package com.gsparvej.production.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,12 +17,11 @@ public class Order {
     private String poNumber;     // Purchase Order Number
     private String styleName;    // Style / Design Name
     private String buyerName;    // Buyer / Customer
-    private String season;       // Optional - Season (Summer/Winter)
     private Integer orderQuantity;
-    private LocalDate orderDate;
-    private LocalDate shipmentDate;
+    private Date orderDate;
+    private Date deliveryDate;
 
-    private String status;
+
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<FabricReceive> fabricReceives;
@@ -33,16 +33,14 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, String poNumber, String styleName, String buyerName, String season, Integer orderQuantity, LocalDate orderDate, LocalDate shipmentDate, String status, List<FabricReceive> fabricReceives, List<Cutting> cuttings) {
+    public Order(Long id, String poNumber, String styleName, String buyerName, Integer orderQuantity, Date orderDate, Date deliveryDate, List<FabricReceive> fabricReceives, List<Cutting> cuttings) {
         this.id = id;
         this.poNumber = poNumber;
         this.styleName = styleName;
         this.buyerName = buyerName;
-        this.season = season;
         this.orderQuantity = orderQuantity;
         this.orderDate = orderDate;
-        this.shipmentDate = shipmentDate;
-        this.status = status;
+        this.deliveryDate = deliveryDate;
         this.fabricReceives = fabricReceives;
         this.cuttings = cuttings;
     }
@@ -79,14 +77,6 @@ public class Order {
         this.buyerName = buyerName;
     }
 
-    public String getSeason() {
-        return season;
-    }
-
-    public void setSeason(String season) {
-        this.season = season;
-    }
-
     public Integer getOrderQuantity() {
         return orderQuantity;
     }
@@ -95,28 +85,20 @@ public class Order {
         this.orderQuantity = orderQuantity;
     }
 
-    public LocalDate getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
-    public LocalDate getShipmentDate() {
-        return shipmentDate;
+    public Date getDeliveryDate() {
+        return deliveryDate;
     }
 
-    public void setShipmentDate(LocalDate shipmentDate) {
-        this.shipmentDate = shipmentDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setDeliveryDate(Date deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 
     public List<FabricReceive> getFabricReceives() {

@@ -48,6 +48,15 @@
         </div>
       </div>
 
+
+      <div class="mb-3">
+        <label class="form-label">Order Date</label>
+        <input type="date" class="form-control" formControlName="deliveryDate">
+        <div *ngIf="orderForm.get('orderDate')?.invalid && orderForm.get('orderDate')?.touched" class="text-danger">
+          Order Date is required
+        </div>
+      </div>
+
       <!-- Buttons -->
       <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-success" [disabled]="orderForm.invalid">
