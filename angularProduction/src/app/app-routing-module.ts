@@ -4,7 +4,7 @@ import { AddOrder } from './Order/add-order/add-order';
 import { ViewOrder } from './Order/view-order/view-order';
 import { AddFabricReceive } from './Fabric/add-fabric-receive/add-fabric-receive';
 import { ViewFabricReceive } from './Fabric/view-fabric-receive/view-fabric-receive';
-import { NavCompo } from './navbar/nav-compo/nav-compo';
+
 
 const routes: Routes = [
   {path: 'addOrder', component: AddOrder},
