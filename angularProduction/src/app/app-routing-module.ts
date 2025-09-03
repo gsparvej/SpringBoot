@@ -8,7 +8,7 @@ import { ViewFabricReceive } from './Fabric/view-fabric-receive/view-fabric-rece
 
 const routes: Routes = [
   {path: 'addOrder', component: AddOrder},
-  {path: 'viewOrder', component: ViewOrder},
+  {path: '', component: ViewOrder},
   {path: 'addFabricReceive', component: AddFabricReceive},
   {path: 'viewFabRe', component: ViewFabricReceive}
 ];
