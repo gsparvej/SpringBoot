@@ -1,0 +1,82 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Add Day Wise Productions</h2>
+
+  <!-- Form -->
+  <form [formGroup]="dayWiseProForm" (ngSubmit)="addDayWisePro()" class="card p-4 mb-4">
+    <div class="row g-3">
+
+      <!-- Updated Date -->
+      <div class="row col-md-3">
+        <label class="form-label">Updated Date</label>
+        <input type="date" class="form-control" formControlName="updatedDate" />
+      </div>
+
+      <!-- Short Size Quantities -->
+      <div class="row">
+        <div class="col-md-3">
+        <label class="form-label">Short Small Size Quantity</label>
+        <input type="number" class="form-control" formControlName="shortSQty" />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Short Medium Size Quantity</label>
+        <input type="number" class="form-control" formControlName="shortMQty" />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Short Large Size Quantity</label>
+        <input type="number" class="form-control" formControlName="shortLQty" />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Short XL Size Quantity</label>
+        <input type="number" class="form-control" formControlName="shortXLQty" />
+      </div>
+      </div>
+
+      <!-- Full Size Quantities -->
+      <div class="row">
+        <div class="col-md-3">
+        <label class="form-label">Full Small Size Quantity</label>
+        <input type="number" class="form-control" formControlName="fullSQty" />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Full Medium Size Quantity</label>
+        <input type="number" class="form-control" formControlName="fullMQty" />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Full Large Size Quantity</label>
+        <input type="number" class="form-control" formControlName="fullLQty" />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Full XL Size Quantity</label>
+        <input type="number" class="form-control" formControlName="fullXLQty" />
+      </div>
+      </div>
+
+      <!-- Production Order Selection -->
+      <div class="col-md-4" formGroupName="productionOrder">
+        <label class="form-label">Production Order Id:</label>
+        <select class="form-select" formControlName="id">
+          <option value="">---- select -------</option>
+          <option *ngFor="let s of productionOrder" [ngValue]="s.id">{{ s.id }}</option>
+        </select>
+      </div>
+
+      <!-- Order Selection -->
+      <div class="col-md-4" formGroupName="order">
+        <label class="form-label">Order ID:</label>
+        <select class="form-select" formControlName="id">
+          <option value="">---- select -------</option>
+          <option *ngFor="let o of order" [ngValue]="o.id">{{ o.id }}</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- Submit Button -->
+    <div class="mt-4">
+      <button type="submit" class="btn btn-success px-5 py-2 rounded-pill shadow-lg fw-bold">
+        <i class="bi bi-check-circle me-2"></i>Submit Order
+      </button>
+    </div>
+    
+  </form>
+</div>

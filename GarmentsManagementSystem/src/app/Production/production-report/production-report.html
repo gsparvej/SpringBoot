@@ -1,0 +1,50 @@
+<div class="container my-5">
+  <h5>Production Report (Order ID Wise)</h5>
+
+  <div class="input-group mb-3">
+    <input
+      type="number"
+      class="form-control"
+      placeholder="Enter Order ID"
+      (input)="onOrderIdChange($event)"
+    />
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <button class="btn btn-outline-primary" type="button" (click)="reset()">
+        Reset
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="filteredReports.length === 0">
+    <p class="text-danger">No production data found for this Order ID.</p>
+  </div>
+
+  <div class="row g-4" *ngIf="filteredReports.length > 0">
+    <div class="col-md-4" *ngFor="let order of filteredReports">
+      <div class="card shadow-sm rounded-4 border border-primary-subtle">
+        <div class="card-body">
+          <h5 class="card-title fw-bold text-primary">
+            Production Order #{{ order.id }}
+          </h5>
+          <p>Updated: {{ order.updatedDate | date: 'mediumDate' }}</p>
+          <p>Order ID: {{ order.order.id }}</p>
+          <p>Production Order ID: {{ order.productionOrder.id }}</p>
+
+          <ul class="list-unstyled">
+            <li><strong>Short S:</strong> {{ order.shortSQty }}</li>
+            <li><strong>Short M:</strong> {{ order.shortMQty }}</li>
+            <li><strong>Short L:</strong> {{ order.shortLQty }}</li>
+            <li><strong>Short XL:</strong> {{ order.shortXLQty }}</li>
+            <li><strong>Full S:</strong> {{ order.fullSQty }}</li>
+            <li><strong>Full M:</strong> {{ order.fullMQty }}</li>
+            <li><strong>Full L:</strong> {{ order.fullLQty }}</li>
+            <li><strong>Full XL:</strong> {{ order.fullXLQty }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

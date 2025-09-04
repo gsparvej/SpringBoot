@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <h3 class="text-center text-primary mb-4">
+    <i class="fas fa-industry me-2"></i>Production Summary Report
+  </h3>
+
+  <ng-container *ngIf="orders.length > 0; else noData">
+    <div *ngFor="let order of orders" class="mb-5">
+      <h5 class="text-secondary">
+        <i class="fas fa-hashtag me-2"></i>Order ID: {{ order.id }}
+      </h5>
+
+      <ng-container *ngIf="orderSummaries[order.id]; else noSummary">
+        <table class="table table-bordered table-hover shadow-sm">
+          <thead class="table-dark text-center">
+            <tr>
+              <th>Type</th>
+              <th><i class="fas fa-cube"></i> Quantity</th>
+            </tr>
+          </thead>
+          <tbody class="text-center align-middle">
+            <tr>
+              <td>Short S</td>
+              <td>{{ orderSummaries[order.id].shortSTotal }}</td>
+            </tr>
+            <tr>
+              <td>Short M</td>
+              <td>{{ orderSummaries[order.id].shortMTotal }}</td>
+            </tr>
+            <tr>
+              <td>Short L</td>
+              <td>{{ orderSummaries[order.id].shortLTotal }}</td>
+            </tr>
+            <tr>
+              <td>Short XL</td>
+              <td>{{ orderSummaries[order.id].shortXLTotal }}</td>
+            </tr>
+            <tr>
+              <td>Full S</td>
+              <td>{{ orderSummaries[order.id].fullSTotal }}</td>
+            </tr>
+            <tr>
+              <td>Full M</td>
+              <td>{{ orderSummaries[order.id].fullMTotal }}</td>
+            </tr>
+            <tr>
+              <td>Full L</td>
+              <td>{{ orderSummaries[order.id].fullLTotal }}</td>
+            </tr>
+            <tr>
+              <td>Full XL</td>
+              <td>{{ orderSummaries[order.id].fullXLTotal }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+
+      <ng-template #noSummary>
+        <div class="alert alert-warning text-center">
+          <i class="fas fa-info-circle me-2"></i>No summary data for this order.
+        </div>
+      </ng-template>
+    </div>
+  </ng-container>
+
+  <ng-template #noData>
+    <div class="alert alert-info text-center">
+      <i class="fas fa-info-circle me-2"></i>No orders available to display.
+    </div>
+  </ng-template>
+</div>

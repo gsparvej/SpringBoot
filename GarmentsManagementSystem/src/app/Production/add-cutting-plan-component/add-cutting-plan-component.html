@@ -1,0 +1,93 @@
+<div class="container mt-4">
+  <h3 class="text-center mb-3">Cutting Plan Management</h3>
+
+  <!-- ✅ Cutting Plan Form -->
+  <form [formGroup]="cuttingForm" (ngSubmit)="addCuttingPlan()" class="card p-3 shadow-sm">
+    <div class="row g-3">
+      <!-- Marker No -->
+      <div class="col-md-4">
+        <label class="form-label">Marker No</label>
+        <input type="text" class="form-control" formControlName="markerNo" placeholder="Enter Marker No">
+      </div>
+
+      <!-- Fabric Width -->
+      <div class="col-md-4">
+        <label class="form-label">Fabric Width</label>
+        <input type="number" class="form-control" formControlName="fabricWidth" placeholder="Enter Fabric Width">
+      </div>
+
+      <!-- Lay Count -->
+      <div class="col-md-4">
+        <label class="form-label">Lay Count</label>
+        <input type="number" class="form-control" formControlName="layCount" placeholder="Enter Lay Count">
+      </div>
+
+      <!-- Planned Pcs -->
+      <div class="col-md-4">
+        <label class="form-label">Planned Pcs</label>
+        <input type="number" class="form-control" formControlName="plannedPcs" placeholder="Enter Planned Pcs">
+      </div>
+
+      <!-- Fabric Used -->
+      <div class="col-md-4">
+        <label class="form-label">Fabric Used</label>
+        <input type="number" class="form-control" formControlName="fabricUsed" placeholder="Enter Fabric Used">
+      </div>
+
+      <!-- Status -->
+      <div class="col-md-4">
+        <label class="form-label">Status</label>
+        <select class="form-select" formControlName="status">
+          <option value="">-- Select Status --</option>
+          <option value="Planned">Planned</option>
+          <option value="Running">Running</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+
+      <!-- Cutting Date -->
+      <div class="col-md-4">
+        <label class="form-label">Cutting Date</label>
+        <input type="date" class="form-control" formControlName="cuttingDate">
+      </div>
+
+     <!-- UOM Dropdown + Size -->
+<div formGroupName="uom" class="row">
+  <div class="col-md-4">
+    <label class="form-label">UOM (Base Fabric)</label>
+    <select class="form-select" formControlName="id">
+      <option value="">-- Select UOM --</option>
+      <option *ngFor="let u of uom" [value]="u.id">{{ u.baseFabric }}</option>
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label fw-semibold">Size</label>
+    <input type="text" class="form-control" [value]="selectedBaseFabric" readonly />
+  </div>
+</div>
+
+
+      <!-- Production Order Dropdown -->
+      <div class="col-md-4" formGroupName="productionOrder">
+        <label class="form-label">Production Order</label>
+        <select class="form-select" formControlName="id">
+          <option value="">-- Select Production Order --</option>
+          <option *ngFor="let po of productionOrder" [value]="po.id">
+            {{ po.id }} 
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="mt-3">
+      <button type="submit" class="btn btn-success">
+        {{ editingOrder ? 'Update' : 'Add' }} Cutting Plan
+      </button>
+      <button type="button" class="btn btn-secondary ms-2" (click)="cuttingForm.reset()">Reset</button>
+    </div>
+  </form>
+
+  
+</div>

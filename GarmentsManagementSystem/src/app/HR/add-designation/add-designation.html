@@ -1,0 +1,51 @@
+<div class="container mt-3">
+  <form [formGroup]="desigForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="designationTitle" class="form-label">Designation Title</label>
+      <input type="text" id="designationTitle" formControlName="designationTitle" class="form-control" />
+      <div *ngIf="desigForm.get('designationTitle')?.invalid && desigForm.get('designationTitle')?.touched" class="text-danger">
+        Designation  Title is required.
+      </div>
+    </div>
+
+    <div formGroupName="department" class="mb-3">
+      <label for="department" class="form-label">Departments</label>
+      <select id="department" formControlName="id" class="form-select">
+        <option value="" disabled>Select Departments</option>
+        <option *ngFor="let d of departments" [value]="d.id">{{ d.name }}</option>
+      </select>
+      <div *ngIf="desigForm.get('department.id')?.invalid && desigForm.get('department.id')?.touched" class="text-danger">
+        Department Name is required.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="desigForm.invalid">
+      {{ editing ? 'Update' : 'Add' }}
+    </button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="resetForm()" *ngIf="editing">Cancel</button>
+  </form>
+
+  <hr />
+
+  <table class="table table-striped mt-3">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Designation Title</th>
+        <th>Department Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ps of designations">
+        <td>{{ ps.id }}</td>
+        <td>{{ ps.designationTitle }}</td>
+        <td>{{ ps.department?.name || 'N/A' }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" (click)="onEdit(ps)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="onDelete(ps.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

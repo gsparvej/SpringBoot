@@ -1,0 +1,426 @@
+{
+  "user": [
+    {
+      "id": "86db",
+      "name": "Eiasin",
+      "email": "eiasin@gmail.com",
+      "password": "12345",
+      "photo": "https://avatars.githubusercontent.com/u/196037667?v=4",
+      "role": "admin"
+    },
+    {
+      "id": "e64b",
+      "name": "Rahmatullah",
+      "email": "rahmat@gmail.com",
+      "password": "12345",
+      "photo": "https://avatars.githubusercontent.com/u/108518708?v=4",
+      "role": "hrexecutive"
+    },
+    {
+      "id": "399f",
+      "name": "Md. Rakib Islam",
+      "email": "rakib@gmail.com",
+      "password": "12345",
+      "photo": "https://avatars.githubusercontent.com/u/196038058?v=4",
+      "role": "hradmin"
+    },
+    {
+      "id": "3293",
+      "name": "Mohammad Emran Hossain",
+      "email": "emranhss@gmail.com",
+      "password": "12345",
+      "photo": "https://avatars.githubusercontent.com/u/21266856?v=4",
+      "role": "superadmin"
+    },
+    {
+      "id": "e376",
+      "name": "Sazid Mahmud Joy",
+      "email": "sazid@gmail.com",
+      "password": "12345",
+      "photo": "https://avatars.githubusercontent.com/u/45362238?v=4",
+      "role": "merchandiserjunior"
+    },
+    {
+      "id": "3728",
+      "name": "Md. Rahim Khan",
+      "email": "mdrahim@gmail.com",
+      "password": "12345",
+      "photo": "https://avatars.githubusercontent.com/u/196035214?v=4",
+      "role": "purchaseexecutive"
+    },
+    {
+      "id": "4696",
+      "name": "Md. Atiqul Islam",
+      "email": "atiq@gmail.com",
+      "password": "12345",
+      "photo": "https://avatars.githubusercontent.com/u/196037602?v=4",
+      "role": "purchasemanager"
+    },
+    {
+      "id": "d834",
+      "name": "Md. Imran Mia",
+      "email": "imran@gmail.com",
+      "password": "12345",
+      "photo": "https://avatars.githubusercontent.com/u/195880852?v=4",
+      "role": "merchandisermanager"
+    }
+  ],
+  "item": [
+    {
+      "id": "11c1",
+      "categoryName": "Woven knit Fabric",
+      "unit": "yards"
+    },
+    {
+      "id": "0ec8",
+      "categoryName": "Plastic Button",
+      "unit": "1 Gross = 144 pcs"
+    },
+    {
+      "id": "af5a",
+      "categoryName": "Sewing Thread",
+      "unit": "Cone"
+    },
+    {
+      "id": "4361",
+      "categoryName": "Wash care tag",
+      "unit": "Roll"
+    },
+    {
+      "id": "cde8",
+      "categoryName": "Poly Bag",
+      "unit": "Box"
+    },
+    {
+      "id": "b063",
+      "categoryName": "Light Weight Polyester Fabric",
+      "unit": "yards"
+    }
+  ],
+  "stokIn": [
+    {
+      "id": "391e",
+      "itemId": "11c1",
+      "quantity": 100,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "26e0",
+      "itemId": "0ec8",
+      "quantity": 100,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "3177",
+      "itemId": "0ec8",
+      "quantity": 100,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "bd5e",
+      "itemId": "11c1",
+      "quantity": 100,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "b064",
+      "itemId": "11c1",
+      "quantity": 123,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "63d4",
+      "itemId": "11c1",
+      "quantity": 2342,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "09dc",
+      "itemId": "11c1",
+      "quantity": 50,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "c47b",
+      "itemId": "af5a",
+      "quantity": 234,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "11c7",
+      "itemId": "0ec8",
+      "quantity": 500,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "b5d0",
+      "itemId": "0ec8",
+      "quantity": 34234,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "76ea",
+      "itemId": "0ec8",
+      "quantity": 123,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "c3da",
+      "itemId": "11c1",
+      "quantity": 100,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "464e",
+      "itemId": "11c1",
+      "quantity": 12,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "50c0",
+      "itemId": "af5a",
+      "quantity": 100,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "2add",
+      "itemId": "cde8",
+      "quantity": 50,
+      "receivedTransactionDate": "2025-07-15"
+    },
+    {
+      "id": "ed98",
+      "itemId": "4361",
+      "quantity": 5,
+      "receivedTransactionDate": "2025-07-16"
+    },
+    {
+      "id": "48a7",
+      "itemId": "0ec8",
+      "quantity": 10,
+      "receivedTransactionDate": "2025-07-18"
+    },
+    {
+      "id": "8150",
+      "itemId": "11c1",
+      "quantity": 100,
+      "receivedTransactionDate": "2025-07-23"
+    },
+    {
+      "id": "c8a6",
+      "itemId": "0ec8",
+      "quantity": 500,
+      "receivedTransactionDate": "2025-08-07"
+    }
+  ],
+  "inventories": [
+    {
+      "quantity": 100,
+      "categoryName": "Woven knit Fabric",
+      "id": "11c1"
+    },
+    {
+      "quantity": 510,
+      "categoryName": "Plastic Button",
+      "id": "0ec8"
+    },
+    {
+      "quantity": 50,
+      "categoryName": "Sewing Thread",
+      "id": "af5a"
+    },
+    {
+      "quantity": 5,
+      "categoryName": "Wash care tag",
+      "id": "4361"
+    },
+    {
+      "quantity": 20,
+      "categoryName": "Poly Bag",
+      "id": "cde8"
+    },
+    {
+      "id": "b063",
+      "categoryName": "Light Weight Polyester Fabric",
+      "quantity": 0
+    }
+  ],
+  "stockOut": [
+    {
+      "id": "b4d4",
+      "itemId": "11c1",
+      "quantity": 112,
+      "transactionDate": "2025-07-15"
+    },
+    {
+      "id": "3fe7",
+      "itemId": "cde8",
+      "quantity": 30,
+      "transactionDate": "2025-07-15"
+    },
+    {
+      "id": "c3cf",
+      "itemId": "af5a",
+      "quantity": 50,
+      "transactionDate": "2025-07-16"
+    }
+  ],
+  "messages": [
+    {
+      "id": "d5aa",
+      "sender": "You",
+      "content": "hi",
+      "timestamp": "2025-07-22T06:19:52.012Z"
+    },
+    {
+      "id": "de17",
+      "sender": "You",
+      "content": "hello, whats up!",
+      "timestamp": "2025-07-22T06:20:12.216Z"
+    },
+    {
+      "id": "bb7f",
+      "sender": "You",
+      "content": "hello, guys!",
+      "timestamp": "2025-07-22T06:21:17.071Z"
+    },
+    {
+      "id": "a658",
+      "sender": "You",
+      "content": "hey",
+      "timestamp": "2025-07-22T06:26:20.704Z"
+    },
+    {
+      "id": "cb31",
+      "sender": "You",
+      "content": "nice",
+      "timestamp": "2025-07-22T06:26:35.172Z"
+    },
+    {
+      "id": "44b1",
+      "sender": "",
+      "content": "hello",
+      "timestamp": "2025-07-22T06:32:26.767Z"
+    },
+    {
+      "id": "08b7",
+      "sender": "",
+      "content": "hi",
+      "timestamp": "2025-07-22T06:32:48.055Z"
+    },
+    {
+      "id": "868c",
+      "sender": "Rahmatullah",
+      "content": "hello eiasin broooo",
+      "timestamp": "2025-07-22T06:43:52.736Z"
+    },
+    {
+      "id": "cff8",
+      "sender": "Rahmatullah",
+      "content": "fine, what about you ! Rahmatullah ?",
+      "timestamp": "2025-07-22T06:44:35.015Z"
+    },
+    {
+      "id": "fcac",
+      "sender": "Eiasin",
+      "content": "fine, what about Rahmatullah !",
+      "timestamp": "2025-07-22T06:46:29.310Z"
+    },
+    {
+      "id": "d1b6",
+      "sender": "Eiasin",
+      "content": "Tell me Your Project's Update ",
+      "timestamp": "2025-07-22T06:55:52.648Z"
+    },
+    {
+      "id": "7a8d",
+      "sender": "Rahmatullah",
+      "content": "Ops! Bro, I think I am so late about my Project but inshaallah i will do this in time. ",
+      "timestamp": "2025-07-22T06:57:07.497Z"
+    },
+    {
+      "id": "5707",
+      "sender": "Rahmatullah",
+      "content": "please, pray for me",
+      "timestamp": "2025-07-22T06:57:21.087Z"
+    },
+    {
+      "id": "c63d",
+      "sender": "Eiasin",
+      "content": "Sure bro, Don't be Upset, your work is awesome, i think your project will be the best. ",
+      "timestamp": "2025-07-22T06:58:20.246Z"
+    },
+    {
+      "id": "fdfc",
+      "sender": "Eiasin",
+      "content": "hello bro!",
+      "timestamp": "2025-07-22T09:15:17.914Z"
+    },
+    {
+      "id": "f9e5",
+      "sender": "Rahmatullah",
+      "content": "Hi",
+      "timestamp": "2025-07-22T09:15:38.522Z"
+    },
+    {
+      "id": "bd66",
+      "sender": "Rahmatullah",
+      "content": "hello eiasin , whats Up!",
+      "timestamp": "2025-07-22T09:16:50.826Z"
+    },
+    {
+      "id": "d217",
+      "sender": "Eiasin",
+      "content": "fine, what about You !",
+      "timestamp": "2025-07-22T09:17:16.490Z"
+    },
+    {
+      "id": "75d3",
+      "sender": "Eiasin",
+      "content": "hello istiaq vai ",
+      "timestamp": "2025-07-22T09:18:09.450Z"
+    },
+    {
+      "id": "849c",
+      "sender": "Rahmatullah",
+      "content": "hello, eiasin",
+      "timestamp": "2025-07-22T10:50:43.371Z"
+    },
+    {
+      "id": "081c",
+      "sender": "Eiasin",
+      "content": "hi, rahmat",
+      "timestamp": "2025-07-22T10:51:11.675Z"
+    },
+    {
+      "id": "f591",
+      "sender": "Mohammad Emran Hossain",
+      "content": "hey , everyOne!",
+      "timestamp": "2025-07-22T12:28:38.980Z"
+    },
+    {
+      "id": "dd75",
+      "sender": "Eiasin",
+      "content": "hello, atik vai",
+      "timestamp": "2025-07-22T18:13:32.350Z"
+    },
+    {
+      "id": "a304",
+      "sender": "Md. Atiqul Islam",
+      "content": "hiii, eiasin",
+      "timestamp": "2025-07-22T18:14:02.534Z"
+    },
+    {
+      "id": "8adf",
+      "sender": "Rahmatullah",
+      "content": "hi Eiasin",
+      "timestamp": "2025-09-01T09:19:34.563Z"
+    },
+    {
+      "id": "b165",
+      "sender": "Eiasin",
+      "content": "hello rahmat",
+      "timestamp": "2025-09-01T09:20:03.219Z"
+    }
+  ]
+}

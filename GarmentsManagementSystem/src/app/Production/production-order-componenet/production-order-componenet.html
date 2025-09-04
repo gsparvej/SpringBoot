@@ -1,0 +1,86 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Production Orders</h2>
+
+  <!-- Form -->
+  <form [formGroup]="productionOrderForm" (ngSubmit)="addProductionOrder()" class="card p-3 mb-4">
+    <div class="row g-3">
+      <div class="col-md-3">
+        <label class="form-label">Plan Quantity</label>
+        <input type="number" class="form-control" formControlName="planQty" />
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Start Date</label>
+        <input type="date" class="form-control" formControlName="startDate" />
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">End Date</label>
+        <input type="date" class="form-control" formControlName="endDate" />
+      </div>
+
+      <div class="col-md-4" formGroupName="bomStyle">
+        <label class="form-label">Style Code:</label>
+        <select class="form-select" formControlName="id">
+          <option value="">---- select -------</option>
+          <option *ngFor="let s of bomStyle" [ngValue]="s.id">{{ s.styleCode }}</option>
+        </select>
+      </div>
+
+      <div class="col-md-4" formGroupName="order">
+        <label class="form-label">Order ID:</label>
+        <select class="form-select" formControlName="id">
+          <option value="">---- select -------</option>
+          <option *ngFor="let o of order" [ngValue]="o.id">{{ o.id }}</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Description</label>
+        <select class="form-select" formControlName="description">
+          <option value="">---- select -------</option>
+          <option value="Short Sleeve Shirt">Short Sleeve Shirt</option>
+          <option value="Full Sleeve Shirt">Full Sleeve Shirt</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Size</label>
+        <select class="form-select" formControlName="size">
+          <option value="">---- select -------</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Priority</label>
+        <select class="form-select" formControlName="priority">
+          <option value="">---- select -------</option>
+          <option value="Urgent">Urgent</option>
+          <option value="Normal">Normal</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Status</label>
+        <select class="form-select" formControlName="status">
+          <option value="">---- select -------</option>
+          <option value="Planned">Planned</option>
+          <option value="Running">Running</option>
+          <option value="Completed">Completed</option>
+        </select>
+
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success px-5 py-2 rounded-pill shadow-lg fw-bold mt-2">
+      <i class="bi bi-check-circle me-2"></i>Submit Order
+    </button>
+
+  </form>
+
+</div>

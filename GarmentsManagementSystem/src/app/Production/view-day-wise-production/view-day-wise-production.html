@@ -1,0 +1,74 @@
+<div class="container my-5">
+  <h5>Search Production Orders by Order ID:</h5>
+
+  <div class="input-group mb-3">
+    <input type="number" class="form-control" placeholder="Enter Order ID" [(ngModel)]="searchOrderId"
+      name="searchOrderId" />
+
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <button class="btn btn-outline-primary" type="button" (click)="searchByOrderId()">
+        Search
+      </button>
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-outline-primary" type="reset" (click)="reset()">
+        Reset
+      </button>
+    </div>
+  </div>
+
+  <h2 class="text-center fw-bold mb-4">Day Wise Production</h2>
+
+  <div *ngIf="filteredOrders.length === 0">
+    <p class="text-danger">No production orders found for this Order ID.</p>
+  </div>
+
+  <div class="row g-4" *ngIf="filteredOrders.length > 0">
+    <div class="col-md-4" *ngFor="let order of filteredOrders">
+      <div class="card shadow-sm rounded-4 h-100 border border-primary-subtle">
+        <div class="card-body">
+          <h5 class="card-title fw-bold text-primary">
+            Day Wise Production Order #{{ order.id }}
+          </h5>
+          <p class="card-subtitle text-muted mb-2">
+            Updated Date: {{ order.updatedDate | date: 'mediumDate'}}
+          </p>
+          <p class="card-subtitle text-muted mb-2">
+            Production Order Id: {{ order.productionOrder?.id }}
+          </p>
+          <p class="card-subtitle text-muted mb-2">
+            Order ID: {{ order.order?.id || 'N/A' }}
+          </p>
+          <ul class="list-unstyled mb-3">
+             <h5 class="card-title fw-bold text-primary">
+           Short Size Details
+          </h5>
+            <li><strong> Small Size Quantity:</strong> {{ order.shortSQty }} </li>
+            <li><strong> Medium Size Quantity:</strong> {{ order.shortMQty }}</li>
+            <li><strong> Large Size Quantity:</strong> {{ order.shortLQty }}</li>
+            <li><strong> XL Size Quantity:</strong> {{ order.shortXLQty }}</li>
+             <h5 class="card-title fw-bold text-primary">
+           Full Size Details
+          </h5>
+            <li><strong> Small Size Quantity:</strong> {{ order.fullSQty }}</li>
+            <li><strong> Medium Size Quantity:</strong> {{ order.fullMQty }}</li>
+            <li><strong> Large Size Quantity:</strong> {{ order.fullLQty }}</li>
+            <li><strong> XL Size Quantity:</strong> {{ order.fullXLQty }}</li>
+
+
+          </ul>
+        </div>
+        <div class="card-footer bg-transparent border-0 d-flex justify-content-between">
+          <button class="btn btn-sm btn-outline-info rounded-pill">
+            <i class="bi bi-pencil-square"></i> Edit
+          </button>
+          <button class="btn btn-sm btn-outline-danger rounded-pill">
+            <i class="bi bi-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

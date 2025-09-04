@@ -1,0 +1,75 @@
+<div class="container my-5">
+  <h5>Search Production Orders by Order ID:</h5>
+
+  <div class="input-group mb-3">
+    <input
+      type="number"
+      class="form-control"
+      placeholder="Enter Order ID"
+      [(ngModel)]="searchOrderId"
+      name="searchOrderId"
+    />
+   
+  </div>
+  <div class="row">
+     <div class="col-md-4">
+      <button class="btn btn-outline-primary" type="button" (click)="searchByOrderId()">
+      Search
+    </button>
+     </div>
+     <div class="col-md-4">
+      <button class="btn btn-outline-primary" type="reset" (click)="reset()">
+      Reset
+    </button>
+     </div>
+  </div>
+
+  <h2 class="text-center fw-bold mb-4">Production Orders</h2>
+
+  <div *ngIf="filteredOrders.length === 0">
+    <p class="text-danger">No production orders found for this Order ID.</p>
+  </div>
+
+  <div class="row g-4" *ngIf="filteredOrders.length > 0">
+    <div class="col-md-4" *ngFor="let order of filteredOrders">
+      <div class="card shadow-sm rounded-4 h-100 border border-primary-subtle">
+        <div class="card-body">
+          <h5 class="card-title fw-bold text-primary">
+            Production Order #{{ order.id }}
+          </h5>
+          <p class="card-subtitle text-muted mb-2">
+            Style Code: {{ order.bomStyle?.styleCode || 'N/A' }}
+          </p>
+          <p class="card-subtitle text-muted mb-2">
+            Order ID: {{ order.order?.id || 'N/A' }}
+          </p>
+          <ul class="list-unstyled mb-3">
+            <li><strong>Plan Qty:</strong> {{ order.planQty }}</li>
+            <li><strong>Start Date:</strong> {{ order.startDate | date: 'mediumDate' }}</li>
+            <li><strong>End Date:</strong> {{ order.endDate | date: 'mediumDate'}}</li>
+            <li><strong>Size:</strong> {{ order.size }}</li>
+            <li><strong>Priority:</strong>
+              <span class="badge bg-warning text-dark" *ngIf="order.priority==='Urgent'">Urgent</span>
+              <span class="badge bg-primary" *ngIf="order.priority==='Normal'">Normal</span>
+              <span class="badge bg-secondary" *ngIf="order.priority==='Low'">Low</span>
+            </li>
+            <li><strong>Status:</strong>
+              <span class="badge bg-info text-dark" *ngIf="order.status==='Planned'">Planned</span>
+              <span class="badge bg-success" *ngIf="order.status==='Running'">Running</span>
+              <span class="badge bg-dark" *ngIf="order.status==='Completed'">Completed</span>
+            </li>
+          </ul>
+          <p class="card-text small text-muted">{{ order.description }}</p>
+        </div>
+        <div class="card-footer bg-transparent border-0 d-flex justify-content-between">
+          <button class="btn btn-sm btn-outline-info rounded-pill">
+            <i class="bi bi-pencil-square"></i> Edit
+          </button>
+          <button class="btn btn-sm btn-outline-danger rounded-pill">
+            <i class="bi bi-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="container mt-4">
+  <h4>Search By Production Order Id</h4>
+
+  <div class="input-group mb-3">
+    <input
+      type="number"
+      class="form-control"
+      placeholder="Enter Order ID"
+      [(ngModel)]="searchOrderId"
+      name="searchOrderId"
+    />
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <button class="btn btn-outline-primary" (click)="searchByProductionOrderId()">
+        Search
+      </button>
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-outline-secondary" (click)="reset()">
+        Reset
+      </button>
+    </div>
+  </div>
+
+  <h3 class="text-center mb-3">All Cutting Plans</h3>
+
+  <!-- Cutting Plans as Cards -->
+  <div *ngIf="filteredCuttingPlans.length > 0" class="row g-3">
+    <div class="col-md-4" *ngFor="let cp of filteredCuttingPlans">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="fas fa-cut me-2 text-danger"></i> Marker No: {{ cp.markerNo }}
+          </h5>
+          <p class="card-text mb-1"><strong>Cutting Plan Id:</strong> {{ cp.id }}</p>
+          <p class="card-text mb-1"><strong>Fabric Width:</strong> {{ cp.fabricWidth }}</p>
+          <p class="card-text mb-1"><strong>Lay Count:</strong> {{ cp.layCount }}</p>
+          <p class="card-text mb-1"><strong>Planned Pcs:</strong> {{ cp.plannedPcs }}</p>
+          <p class="card-text mb-1"><strong>Fabric Used:</strong> {{ cp.fabricUsed }}</p>
+          <p class="card-text mb-1">
+            <strong>Cutting Date:</strong> {{ cp.cuttingDate | date: 'mediumDate' }}
+          </p>
+          <p class="card-text mb-1"><strong>UOM:</strong> {{ cp.uom.baseFabric }}</p>
+          <p class="card-text mb-1"><strong>Size:</strong> {{ cp.uom.size }}</p>
+          <p class="card-text mb-1"><strong>Production Order:</strong> {{ cp.productionOrder.id }}</p>
+
+          <div class="mt-2">
+            <span
+              class="badge"
+              [ngClass]="{
+                'bg-secondary': cp.status === 'Planned',
+                'bg-warning text-dark': cp.status === 'Running',
+                'bg-success': cp.status === 'Completed'
+              }"
+            >
+              {{ cp.status }}
+            </span>
+          </div>
+        </div>
+        <div class="card-footer text-end">
+          <button class="btn btn-sm btn-primary me-2" [routerLink]="['/edit-cutting-plan', cp.id]">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteCuttingPlan(cp.id!)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Data -->
+  <div *ngIf="filteredCuttingPlans.length === 0" class="alert alert-info text-center">
+    No Cutting Plans available.
+  </div>
+</div>

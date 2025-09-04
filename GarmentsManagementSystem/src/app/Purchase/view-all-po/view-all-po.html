@@ -1,0 +1,32 @@
+
+
+<div class="container border rounded my-3">
+    <h1 class="text-center my-3 text-success">All PO List</h1>
+    <table class="table table-striped">
+<thead>
+    <tr>
+         <th>PO ID</th>
+        <th>PO Number</th>
+        <th>PO Date</th>
+        <th>Delivery Date</th>
+        <th>Vendor Name</th>
+        <th>Action</th>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor = "let p of po ">
+        <td>{{p.id}}</td>
+        <td>{{p.poNumber}}</td>
+        <td>{{p.poDate | date: 'mediumDate'}}</td>
+         <td>{{p.deliveryDate | date: 'mediumDate'}}</td>
+          <td>{{p.vendor.companyName}}</td>
+        <td>
+            <button class="btn btn-warning m-1 p-1" (click)="getPOById(p.id!)">View</button>
+        </td>
+    </tr>
+</tbody>
+
+
+</table>
+
+</div>

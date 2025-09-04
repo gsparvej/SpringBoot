@@ -1,0 +1,58 @@
+<div class="container my-3">
+    <div class="bg-success text-center p-3">
+        <h1 class="text-white">Update Leave</h1>
+    </div>
+
+    <!-- Start form -->
+    <form *ngIf="leave" (ngSubmit)="updateLeave()">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="name" class="form-label">Leave Type</label>
+                <input type="text" class="form-control" id="leaveType" name="leaveType" 
+                    [(ngModel)]="leave.leaveType">
+            </div>
+        </div>
+       <div class="row">
+             <div class="col-md-6">
+                <label for="email" class="form-label">From Date</label>
+                <input type="date" class="form-control" id="fromDate" name="fromDate"
+                    [(ngModel)]="leave.fromDate">
+            </div>
+             <div class="col-md-6">
+                <label for="email" class="form-label">To Date</label>
+                <input type="date" class="form-control" id="toDate" name="toDate" 
+                    [(ngModel)]="leave.toDate">
+            </div>
+       </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="form-label">Employee Id</label>
+                <select id="" name="employee" class="form-select" [(ngModel)]="leave.employee"
+            >
+                    <option *ngFor="let d of employee" [ngValue]="d">{{ d.id }}</option>
+                </select>
+            </div>
+
+            <!-- <div class="col-md-6">
+                <label for="" class="form-label">Leave Status</label>
+                <select id="" name="status" class="form-select" [(ngModel)]="leave.status"
+            >
+                    <option *ngFor="let d of status" [ngValue]="d">{{ d.status }}</option>
+                </select>
+            </div> -->
+
+        </div>
+
+        <div class="row mt-3 text-center">
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success w-100">Update</button>
+            </div>
+
+            <div class="col-md-6">
+                <button type="reset" class="btn btn-danger w-100">Reset</button>
+            </div>
+        </div>
+    </form>
+    <!-- End form -->
+</div>

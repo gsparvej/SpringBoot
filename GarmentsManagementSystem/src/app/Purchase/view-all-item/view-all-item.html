@@ -1,0 +1,37 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card border-0 shadow-lg rounded-4 p-4">
+        <h3 class="mb-4 text-center text-success fw-bold border-bottom pb-2">📦 All Items List</h3>
+
+        <div class="table-responsive">
+          <table class="table table-hover align-middle text-center table-bordered rounded-4 overflow-hidden">
+            <thead class="table-success text-dark">
+              <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              <tr *ngFor="let it of item | async">
+                <td class="fw-semibold text-primary">{{ it.id }}</td>
+                <td class="text-capitalize">{{ it.categoryName }}</td>
+                <td class="text-uppercase">{{ it.unit }}</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-info rounded-pill px-3 shadow-sm">
+                    <i class="bi bi-eye me-1"></i> View
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4" class="text-muted">No items available</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

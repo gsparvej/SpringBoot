@@ -1,0 +1,47 @@
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #74ebd5, #9face6);
+  min-height: 100vh;
+}
+
+.register-page {
+  padding: 20px;
+}
+
+.card {
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(148, 189, 223, 0.1);
+  background: #d4f0dc;
+}
+
+.card h2 {
+  font-weight: 700;
+  color: #0d6efd;
+}
+
+.form-control {
+  border-radius: 50px;
+  border: 1px solid #ced4da;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+.btn-primary {
+  border-radius: 50px;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #b8cceb;
+  transform: translateY(-2px);
+}

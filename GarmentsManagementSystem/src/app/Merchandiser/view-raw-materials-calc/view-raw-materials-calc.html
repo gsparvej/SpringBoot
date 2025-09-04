@@ -1,0 +1,68 @@
+<div class="container my-5">
+  <h5>Search Buyer Orders by Order ID:</h5>
+
+  <div class="input-group mb-3">
+    <input
+      type="number"
+      class="form-control"
+      placeholder="Enter Order ID"
+      [(ngModel)]="searchOrderId"
+      name="searchOrderId"
+    />
+   
+  </div>
+  <div class="row">
+     <div class="col-md-4">
+      <button class="btn btn-outline-primary" type="button" (click)="searchByOrderId()">
+      Search
+    </button>
+     </div>
+     <div class="col-md-4">
+      <button class="btn btn-outline-primary" type="reset" (click)="reset()">
+      Reset
+    </button>
+     </div>
+  </div>
+
+  <h2 class="text-center fw-bold mb-4">Raw Materials By Buyer Orders</h2>
+
+  <div *ngIf="filteredOrders.length === 0">
+    <p class="text-danger">No production orders found for this Order ID.</p>
+  </div>
+
+  <div class="row g-4" *ngIf="filteredOrders.length > 0">
+    <div class="col-md-4" *ngFor="let order of filteredOrders">
+      <div class="card shadow-sm rounded-4 h-100 border border-primary-subtle">
+        <div class="card-body">
+          <h5 class="card-title fw-bold text-primary">
+           Raw Materials Id:  #{{ order.id }}
+          </h5>
+        
+          <p class="card-subtitle text-muted mb-2">
+            Order ID: {{ order.order.id || 'N/A' }}
+          </p>
+          <ul class="list-unstyled mb-3">
+            <li><strong>Short Small Size Total Qty:</strong> {{ order.shortSTotalQuantity }}</li>
+            <li><strong>Short Medium Size Total Qty:</strong> {{ order.shortMTotalQuantity }}</li>
+            <li><strong>Short Large Size Total Qty:</strong> {{ order.shortLTotalQuantity}}</li>
+            <li><strong>Short XL Size Total Qty:</strong> {{ order.shortXLTotalQuantity }}</li>
+           <hr>
+            <li><strong>Full Small Size Total Qty:</strong> {{ order.fullSTotalQuantity }}</li>
+            <li><strong>Full Medium Size Total Qty:</strong> {{ order.fullMTotalQuantity }}</li>
+            <li><strong>Full Large Size Total Qty:</strong> {{ order.fullLTotalQuantity}}</li>
+            <li><strong>Full XL Size Total Qty:</strong> {{ order.fullXLTotalQuantity }}</li>
+          </ul>
+          <li><strong>Total Needed Fabric(meter):</strong> {{ order.totalFabric }}</li>
+        </div>
+        <div class="card-footer bg-transparent border-0 d-flex justify-content-between">
+          <button class="btn btn-sm btn-outline-info rounded-pill">
+            <i class="bi bi-pencil-square"></i> Edit
+          </button>
+          <button class="btn btn-sm btn-outline-danger rounded-pill">
+            <i class="bi bi-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

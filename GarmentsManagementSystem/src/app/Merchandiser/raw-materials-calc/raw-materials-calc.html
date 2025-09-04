@@ -1,0 +1,105 @@
+<form [formGroup]="formRawMaterials" class="container">
+
+  <!-- Style Dropdown -->
+  <div class="mb-3">
+    <label>Select Style</label>
+    <select class="form-select" formControlName="selectedStyle" (change)="onStyleChange()">
+      <option value="">-- Select Style --</option>
+      <option *ngFor="let s of order" [value]="s.bomStyle?.styleCode">
+        {{ s.bomStyle?.styleCode }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Order Fields (Short & Full Sleeve) -->
+  <div formGroupName="order">
+    <!-- Short Sleeve Shirt -->
+    <div class="row mt-3 mb-3">
+      <h3 class="text-center">Short Sleeve Shirt</h3>
+      <div class="col-md-3">
+        <label class="text-center">Small</label>
+        <input class="form-control" formControlName="shortSmallSize" readonly />
+      </div>
+      <div class="col-md-3">
+        <label class="text-center">Medium</label>
+        <input class="form-control" formControlName="shortMediumSize" readonly />
+      </div>
+      <div class="col-md-3">
+        <label class="text-center">Large</label>
+        <input class="form-control" formControlName="shortLargeSize" readonly />
+      </div>
+      <div class="col-md-3">
+        <label class="text-center">XL</label>
+        <input class="form-control" formControlName="shortXLSize" readonly />
+      </div>
+    </div>
+
+    <!-- Full Sleeve Shirt -->
+    <div class="row">
+      <h3 class="text-center">Full Sleeve Shirt</h3>
+      <div class="col-md-3">
+        <label class="text-center">Small</label>
+        <input class="form-control" formControlName="fullSmallSize" readonly />
+      </div>
+      <div class="col-md-3">
+        <label class="text-center">Medium</label>
+        <input class="form-control" formControlName="fullMediumSize" readonly />
+      </div>
+      <div class="col-md-3">
+        <label class="text-center">Large</label>
+        <input class="form-control" formControlName="fullLargeSize" readonly />
+      </div>
+      <div class="col-md-3">
+        <label class="text-center">XL</label>
+        <input class="form-control" formControlName="fullXLSize" readonly />
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- UOM Rows -->
+  <div formArrayName="uoms">
+    <div *ngFor="let row of uomsFormArray.controls; let i = index" [formGroupName]="i" class="row mt-3">
+
+      <div class="col-md-3">
+        <label>Product Name {{ i + 1 }}</label>
+        <select class="form-select" formControlName="id">
+          <option value="">-- Select --</option>
+          <option *ngFor="let o of uom" [value]="o.id">{{ o.productName }}</option>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <label>Product Size</label>
+        <input class="form-control" formControlName="size" readonly />
+      </div>
+
+      <div class="col-md-2">
+        <label>Type</label>
+        <input class="form-control" formControlName="type" readonly />
+      </div>
+
+      <div class="col-md-2">
+        <label>Base Fabric</label>
+        <input class="form-control" formControlName="baseFabric" readonly />
+      </div>
+
+      <div class="col-md-3">
+        <label>Calculated Fabric</label>
+        <input class="form-control" formControlName="calculatedFabric" readonly />
+      </div>
+
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="mt-3">
+    <h5>Total Fabric Required: {{ totalCalculatedFabric | number:'1.2-2' }}</h5>
+  </div>
+<div class="mt-3">
+  <button class="btn btn-primary" type="button" (click)="submitFabricData()">Save Fabric Data</button>
+</div>
+
+</form>

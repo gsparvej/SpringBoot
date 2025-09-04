@@ -1,0 +1,78 @@
+.employee-card {
+  border-radius: 0.75rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.employee-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.employee-card .card-body {
+  font-size: 0.95rem;
+  color: #343a40;
+}
+
+.employee-card .card-title {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #212529;
+}
+
+.employee-card .card-subtitle {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.employee-card p {
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.employee-card .card-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  padding: 0.75rem 1.25rem;
+}
+
+.employee-card .btn-sm {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.employee-card .btn-edit {
+  background-color: #ffc107;
+  color: #212529;
+  border: none;
+}
+
+.employee-card .btn-edit:hover {
+  background-color: #e0a800;
+  box-shadow: 0 0.2rem 0.4rem rgba(224, 168, 0, 0.6);
+}
+
+.employee-card .btn-delete {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+}
+
+.employee-card .btn-delete:hover {
+  background-color: #bb2d3b;
+  box-shadow: 0 0.2rem 0.4rem rgba(187, 45, 59, 0.6);
+}
+
+.employee-card .btn-view {
+  background-color: #0d6efd;
+  color: #fff;
+  border: none;
+}
+
+.employee-card .btn-view:hover {
+  background-color: #0a58ca;
+  box-shadow: 0 0.2rem 0.4rem rgba(10, 88, 202, 0.6);
+}

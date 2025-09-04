@@ -1,0 +1,75 @@
+<div class="container border rounded my-3">
+    <h1 class="text-center text-success">Bill Of Current Items : </h1>
+
+    <form [formGroup]="formBomView" method="post">
+
+        <div class="row">
+            <div class="col-md-3">
+                <label for="" class="form-label">Serial</label>
+                <input type="num" class="form-control" id="" formControlName="serial">
+            </div>
+            <div class="col-md-6">
+                <label for="" class="form-label">Material</label>
+                <input type="text" class="form-control" id="" formControlName="material">
+            </div>
+            <div class="col-md-3">
+                <label for="" class="form-label">Unit</label>
+                <input type="text" class="form-control" id="" formControlName="unit">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4" formGroupName="uom">
+                <label for="" class="form-label">Base Fabric:</label>
+                <select formControlName="id" class="form-select">
+                    <option *ngFor="let u of uom" [ngValue]="u.id">{{u.baseFabric}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-4" formGroupName="bomStyle">
+                <label for="" class="form-label">Style Code:</label>
+                <select formControlName="id" class="form-select">
+                    <option *ngFor="let b of bomStyle" [ngValue]="b.id">{{b.styleCode}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label for="" class="form-label">Quantity</label>
+                <input type="number" class="form-control" id="" formControlName="quantity">
+            </div>
+            <div class="col-md-4">
+                <label for="" class="form-label">Unit Price</label>
+                <input type="number" class="form-control" id="" formControlName="unitPrice" (blur)="onFocusLost()">
+            </div>
+            <div class="col-md-4">
+                <label for="" class="form-label">Total Cost</label>
+                <input type="number" class="form-control" id="" formControlName="totalCost" [value]="totalCost">
+            </div>
+        </div>
+
+
+
+
+        <!-- <div class="col-md-6 " formGroupName="bom">
+                
+                <label for="" class="form-label">Style Code :</label>
+                <select id="" formControlName="styleCode" class="form-select">
+                <option *ngFor="let b of bom" [ngValue]="b.styleCode">{{b.styleCode}}</option>
+                </select>
+
+                 <label for="" class="form-label">Description :</label>
+                <select id="" formControlName="description" class="form-select">
+                <option *ngFor="let b of bom" [ngValue]="b.description">{{b.description}}</option>
+                </select>
+
+            </div>        -->
+        <div class="row mt-3 text-center">
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success text-center mb-2" (click)="addBomBomView()">Save</button>
+            </div>
+            <div class="col-md-6">
+                <button type="reset" class="btn btn-danger text-center mb-2">Reset</button>
+            </div>
+        </div>
+    </form>
+
+</div>

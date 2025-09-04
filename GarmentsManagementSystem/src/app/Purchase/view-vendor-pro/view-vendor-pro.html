@@ -1,0 +1,73 @@
+<div class="container py-4">
+  <!-- Project Details Card -->
+  <div class="card shadow rounded-4">
+    
+    <!-- Card Header -->
+    <div class="row card-header flex-column flex-md-row border-bottom mx-0 px-3 bg-light">
+      <div class="col-md-auto me-auto d-md-flex align-items-center">
+        <h5 class="card-title mb-0 text-md-start text-center fw-semibold">Vendor Profile Details</h5>
+      </div>
+      <div class="col-md-auto d-flex justify-content-end align-items-center">
+        <button type="button" class="btn btn-outline-primary btn-sm" onclick="history.back()">
+          <i class="fa-solid fa-arrow-left me-1"></i>Return
+        </button>
+      </div>
+    </div>
+
+    <!-- Card Body -->
+    <div class="card-body">
+      <div class="row g-3">
+
+        <!-- Style Code and Buyer -->
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Vendor ID</label>
+          <div class="text-muted">{{ ven.id }}</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Vendor Name</label>
+          <div class="text-muted">{{ ven.companyName }}</div>
+        </div>
+
+        <!-- Shipping -->
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Company Name</label>
+          <div class="text-muted">{{ ven.companyName }}</div>
+        </div>
+
+        <!-- Dates -->
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Email</label>
+          <div class="text-muted">{{ ven.email }}</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Contact Person</label>
+          <div class="text-muted">{{ ven.contactPerson }}</div>
+        </div>
+
+        <!-- Size & Price Info -->
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Phone Number</label>
+          <div class="text-muted">{{ ven.phone }}</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Address</label>
+          <div class="text-muted">{{ ven.address }}</div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-bold">TIN Number</label>
+          <div class="text-muted">{{ ven.tin }}</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">BIN Number</label>
+          <div class="text-muted">{{ ven.bin }}</div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-bold">VAT Number</label>
+          <div class="text-muted">{{ ven.vat }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<div class="container my-5">
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-header bg-success text-white text-center py-4 rounded-top-4">
+      <h2 class="mb-0">
+        <i class="bi bi-pencil-square me-2"></i>Update Buyer
+      </h2>
+    </div>
+
+    <div class="card-body p-4">
+      <form *ngIf="buyer" (ngSubmit)="updateBuyer()" class="row g-4">
+        <!-- Buyer Name -->
+        <div class="col-md-6 form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Buyer Name"
+            [(ngModel)]="buyer.name"
+            name="name"
+          />
+          <label for="name"><i class="bi bi-person-fill me-2"></i>Buyer Name</label>
+        </div>
+
+        <!-- Country -->
+        <div class="col-md-6 form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="country"
+            placeholder="Country"
+            [(ngModel)]="buyer.country"
+            name="country"
+          />
+          <label for="country"><i class="bi bi-globe-asia-australia me-2"></i>Country</label>
+        </div>
+
+        <!-- Email -->
+        <div class="col-md-6 form-floating">
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Email"
+            [(ngModel)]="buyer.email"
+            name="email"
+          />
+          <label for="email"><i class="bi bi-envelope-fill me-2"></i>Email</label>
+        </div>
+
+        <!-- Contact Person -->
+        <div class="col-md-6 form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="contactperson"
+            placeholder="Contact Person"
+            [(ngModel)]="buyer.contactperson"
+            name="contactperson"
+          />
+          <label for="contactperson"><i class="bi bi-person-lines-fill me-2"></i>Contact Person</label>
+        </div>
+
+        <!-- Phone -->
+        <div class="col-md-6 form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="phone"
+            placeholder="Phone"
+            [(ngModel)]="buyer.phone"
+            name="phone"
+          />
+          <label for="phone"><i class="bi bi-telephone-fill me-2"></i>Phone</label>
+        </div>
+
+        <!-- Address -->
+        <div class="col-md-6 form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="address"
+            placeholder="Address"
+            [(ngModel)]="buyer.address"
+            name="address"
+          />
+          <label for="address"><i class="bi bi-geo-alt-fill me-2"></i>Address</label>
+        </div>
+
+        <!-- Buttons -->
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-success w-100 py-2">
+            <i class="bi bi-check-circle me-1"></i> Update
+          </button>
+        </div>
+        <div class="col-md-6">
+          <button type="reset" class="btn btn-outline-danger w-100 py-2">
+            <i class="bi bi-x-circle me-1"></i> Reset
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

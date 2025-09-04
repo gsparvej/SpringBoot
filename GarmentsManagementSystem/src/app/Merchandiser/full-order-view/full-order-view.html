@@ -1,0 +1,159 @@
+<div class="container py-5" *ngIf="order">
+  <div class="card shadow rounded-4">
+
+    <!-- Header -->
+    <div
+      class="card-header d-flex justify-content-between align-items-center bg-dark text-white rounded-top-4 py-3 px-4">
+      <h4 class="mb-0">
+        <i class="fa-solid fa-box-open me-2"></i> Order Details
+      </h4>
+      <!-- <button class="btn btn-outline-light btn-sm" (click)="router.navigate(['../'], { relativeTo: ar })">
+        <i class="fa-solid fa-arrow-left me-2"></i>Return
+      </button> -->
+    </div>
+
+    <!-- Body -->
+    <div class="card-body px-4 py-4">
+      <!-- Order & Buyer Info -->
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <label class="text-muted">Order ID</label>
+          <div class="fw-semibold text-dark">{{ order.id }}</div>
+        </div>
+        <div class="col-md-4">
+          <label class="text-muted">Style Code</label>
+          <div class="fw-semibold text-dark">{{ order.bomStyle.styleCode }}</div>
+        </div>
+        <div class="col-md-4">
+          <label class="text-muted">Buyer Organization</label>
+          <div class="fw-semibold text-dark">{{ order.buyer.name }}</div>
+        </div>
+        <div class="col-md-6 mt-3">
+          <label class="text-muted">Shipping Address</label>
+          <div class="fw-semibold text-dark">{{ order.buyer.address }}</div>
+        </div>
+        <div class="col-md-3 mt-3">
+          <label class="text-muted">Start Date</label>
+          <div class="text-dark">{{ order.orderDate | date:'mediumDate' }}</div>
+        </div>
+        <div class="col-md-3 mt-3">
+          <label class="text-muted">End Date</label>
+          <div class="text-dark">{{ order.deliveryDate | date:'mediumDate' }}</div>
+        </div>
+      </div>
+
+      <!-- Size & Price Table -->
+      <h4 class="text-center">Short Sleeve Shirt</h4>
+      <div class="table-responsive mb-4">
+        <table class="table table-bordered text-center align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Size</th>
+              <th>Quantity</th>
+              <th>Unit Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>S</td>
+              <td>{{ order.shortSmallSize }}</td>
+              <td>{{ order.shortSPrice | number:'1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>M</td>
+              <td>{{ order.shortMediumSize }}</td>
+              <td>{{ order.shortMPrice | number:'1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>L</td>
+              <td>{{ order.shortLargeSize }}</td>
+              <td>{{ order.shortLPrice | number:'1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>XL</td>
+              <td>{{ order.shortXLSize }}</td>
+              <td>{{ order.shortXLPrice | number:'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="text-center">Full Sleeve Shirt</h4>
+      <div class="table-responsive mb-4">
+        <table class="table table-bordered text-center align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Size</th>
+              <th>Quantity</th>
+              <th>Unit Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>S</td>
+              <td>{{ order.fullSmallSize }}</td>
+              <td>{{ order.fullSPrice | number:'1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>M</td>
+              <td>{{ order.fullMediumSize }}</td>
+              <td>{{ order.fullMPrice | number:'1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>L</td>
+              <td>{{ order.fullLargeSize }}</td>
+              <td>{{ order.fullLPrice | number:'1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>XL</td>
+              <td>{{ order.fullXLSize }}</td>
+              <td>{{ order.fullXLPrice | number:'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Status & Remarks -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <label class="text-muted">Status</label>
+          <div>
+            <span class="badge rounded-pill px-3 py-2" [ngClass]="getStatusClass(order.orderStatus || '')">
+              {{ order.orderStatus || 'N/A' }}
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="text-muted">Remarks</label>
+          <div class="text-muted">{{ order.remarks }}</div>
+        </div>
+      </div>
+
+      <!-- Financial Summary -->
+      <div class="row">
+        <div class="col-md-3">
+          <label class="text-muted">Sub Total</label>
+          <div class="text-dark">{{ order.subTotal | number:'1.2-2' }}</div>
+        </div>
+        <div class="col-md-3">
+          <label class="text-muted">VAT</label>
+          <div class="text-dark">{{ order.vat | number:'1.2-2' }}</div>
+        </div>
+        <div class="col-md-3">
+          <label class="text-muted">Paid Amount</label>
+          <div class="text-dark">{{ order.paidAmount | number:'1.2-2' }}</div>
+        </div>
+        <div class="col-md-3">
+          <label class="text-muted">Due Amount</label>
+          <div class="text-dark">{{ order.dueAmount | number:'1.2-2' }}</div>
+        </div>
+        <div class="col-12 mt-3">
+          <div class="d-flex justify-content-end align-items-center">
+            <h5 class="mb-0">Total:</h5>
+            <h4 class="text-primary ms-3 mb-0">{{ order.total | number:'1.2-2' }}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

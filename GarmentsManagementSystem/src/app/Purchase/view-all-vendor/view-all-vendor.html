@@ -1,0 +1,36 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card p-4">
+        <h3 class="mb-4 text-center text-success">Vendor List</h3>
+
+        <div class="table-responsive">
+          <table class="table table-hover align-middle text-center">
+            <thead class="table-light">
+              <tr>
+                <th>ID</th>
+                <th>Vendor Name</th>
+                <th>Contact Number</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let vendor of vendor |async">
+                <td>{{ vendor.id }}</td>
+                 <td>{{ vendor.companyName }}</td>
+                <td>{{ vendor.phone }}</td>
+                <td>
+                  <button class="btn btn-outline-primary btn-sm" (click)="getVendorById(vendor.id)">View
+                  </button>
+                </td>
+              </tr>
+              <!-- <tr *ngIf="vendor.length === 0">
+                <td colspan="4" class="text-muted">No vendors available</td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

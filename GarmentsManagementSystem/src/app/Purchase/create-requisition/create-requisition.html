@@ -1,0 +1,92 @@
+<div class="container py-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0 text-center">Purchase Requisition Form</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="formPR">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label>PR Date</label>
+            <input type="date" class="form-control" formControlName="prDate" />
+          </div>
+          <div class="col-md-6" [formGroupName]="'department'">
+            <label>Department</label>
+            <select class="form-control" formControlName="id">
+              <option *ngFor="let d of department" [value]="d.id">{{ d.name }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label>Requested By</label>
+            <input type="text" class="form-control" formControlName="requestedBy" />
+          </div>
+          <div class="col-md-6" [formGroupName]="'item'">
+            <label>Category Name</label>
+            <select class="form-control" formControlName="id">
+              <option *ngFor="let it of item" [value]="it.id">{{ it.categoryName }} {{it.unit}}</option>
+            </select>
+          </div>
+
+
+
+           <!-- <div class="col-md-6" [formGroupName]="'item'">
+            <label>Unit</label>
+            <select class="form-control" formControlName="categoryName">
+              <option *ngFor="let it of item" [value]="it.unit"> {{it.unit}}</option>
+            </select>
+          </div> -->
+
+
+
+
+
+          
+        </div>
+
+        <div class="row mb-3">
+          <!-- <div class="col-md-6">
+            <label>Unit</label>
+            <input type="text" class="form-control" [value]="formPR.get('item.categoryName')?.value ? item.find(i => i.categoryName === formPR.get('item.categoryName')?.value)?.unit : ''" readonly />
+          </div> -->
+          <div class="col-md-6" [formGroupName]="'order'">
+            <label>Order ID</label>
+            <select class="form-control" formControlName="id">
+              <option *ngFor="let ord of order" [value]="ord.id">{{ ord.id }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label>Quantity</label>
+            <input type="number" class="form-control" formControlName="quantity" (input)="calculateTotalPrice()" />
+          </div>
+          <div class="col-md-4">
+            <label>Approx Unit Price</label>
+            <input type="number" class="form-control" formControlName="approxUnitPrice" (input)="calculateTotalPrice()" />
+          </div>
+          <div class="col-md-4">
+            <label>Total Estimated Price</label>
+            <input type="number" class="form-control" formControlName="totalEstPrice" readonly />
+          </div>
+        </div>
+
+         <div class="">
+            <label for="orderStatus">PR Status:</label>
+            <select id="orderStatus" formControlName="prStatus">
+              <option value="Pending">Pending</option>
+              <option value="Confirmed">Confirmed</option>
+            </select>
+
+          </div>
+
+        <div class="text-center">
+          <button class="btn btn-success px-4" type="submit" (click)="addRequisiton()">Submit PR</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

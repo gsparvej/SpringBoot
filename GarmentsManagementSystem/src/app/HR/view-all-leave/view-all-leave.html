@@ -1,0 +1,54 @@
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+
+<div class="container border rounded my-3">
+    <h1 class="text-center my-3 text-success">All Leave List</h1>
+
+
+      <!-- Buttons Row -->
+<div class="d-flex justify-content-between mb-3">
+  <button class="btn btn-secondary" (click)="goBack()" title="Return">
+    <i class="fa-solid fa-arrow-left"></i> Return
+  </button>
+  
+  <button class="btn btn-success" (click)="addLeave()" title="Add Leave">
+    <i class="fa-solid fa-plus"></i> Add Leave
+  </button>
+</div>
+
+
+
+    <table class="table table-striped">
+<thead>
+    <tr>
+        <th>ID</th>
+        <th>Employee ID</th>
+        <th>Employee Name</th>
+        <th>Leave Type</th>
+        <th>From Date</th>
+        <th>To Date</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor = "let l of leave | async">
+        <td>{{l.id}}</td>
+        <td>{{l.employee?.id}}</td>
+         <td>{{l.employee?.name}}</td>
+         <td>{{l.leaveType}}</td>
+        <td>{{l.fromDate | date: 'mediumDate'}}</td>
+        <td>{{l.toDate | date: 'mediumDate'}}</td>
+        <td>{{l.status}}</td>
+        <td>
+            <button class="btn btn-warning m-1 p-1" (click)="getLeaveById(l.id)">Edit</button>
+            <button class="btn btn-danger m-1 p-1">Delete</button>
+        </td>
+    </tr>
+</tbody>
+
+
+</table>
+
+</div>

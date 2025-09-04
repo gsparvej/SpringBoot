@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  <h2 class="mb-4"><i class="bi bi-people-fill me-2"></i> All Employee List</h2>
+
+  <div class="row">
+    <div class="col-md-6 col-lg-4 mb-4" *ngFor="let emp of employees">
+      <div class="card shadow h-100 employee-card" role="region">
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="bi bi-person-circle me-1"></i> {{ emp.name }} (ID: {{ emp.id }})
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <i class="bi bi-envelope"></i> {{ emp.email }}
+          </h6>
+
+          <p><strong><i class="bi bi-telephone me-1"></i>Phone:</strong> {{ emp.phoneNumber }}</p>
+          <p><strong><i class="bi bi-calendar-event me-1"></i>Joining:</strong> {{ emp.joinDate }}</p>
+          <p><strong><i class="bi bi-calendar-event me-1"></i>Designation Title:</strong> {{ emp.designation }}</p>
+           <p><strong><i class="bi bi-calendar-event me-1"></i>Department Name:</strong> {{ emp.department}}</p>
+          <!-- <p><strong><i class="bi bi-diagram-3 me-1"></i>Department:</strong> {{ getDepartmentName(emp.department) }}</p>
+          <p><strong><i class="bi bi-briefcase me-1"></i>Designation:</strong> {{ getDesignationTitle(emp.designation) }}</p> -->
+        </div>
+
+        <div class="card-footer text-end">
+          <button class="btn btn-sm btn-edit me-2" (click)="getEmpById(emp.id)">
+            <i class="bi bi-pencil-square"></i> Edit
+          </button>
+          <button class="btn btn-sm btn-delete me-2" (click)="deleteEmp(emp.id)">
+            <i class="bi bi-trash"></i> Delete
+          </button>
+          <button class="btn btn-sm btn-view" (click)="gotoViewProfile(emp.id)">
+            <i class="bi bi-eye"></i> View
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="container my-4">
+  <div class="text-center p-4 rounded-3 shadow-sm mb-4">
+    <h1 class="text-dark fw-bold">Edit Employee</h1>
+  </div>
+
+  <!-- Start form -->
+  <form *ngIf="employee" (ngSubmit)="updateEmployee()" class="needs-validation" novalidate>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label for="name" class="form-label fw-semibold">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="Full Name"
+          [(ngModel)]="employee.name"
+          required
+        />
+        <div class="invalid-feedback">Please enter the employee's name.</div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="phoneNumber" class="form-label fw-semibold">Phone Number</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phoneNumber"
+          name="phoneNumber"
+          placeholder="Phone Number"
+          [(ngModel)]="employee.phoneNumber"
+          required
+          pattern="^\+?\d{7,15}$"
+        />
+        <div class="invalid-feedback">Please enter a valid phone number.</div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="email" class="form-label fw-semibold">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="example@gmail.com"
+          [(ngModel)]="employee.email"
+          required
+        />
+        <div class="invalid-feedback">Please enter a valid email address.</div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="joinDate" class="form-label fw-semibold">Joining Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="joinDate"
+          name="joinDate"
+          [(ngModel)]="employee.joinDate"
+          required
+        />
+        <div class="invalid-feedback">Please select the joining date.</div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="department" class="form-label fw-semibold">Department</label>
+        <select
+          id="department"
+          name="department"
+          class="form-select"
+          [(ngModel)]="employee.department"
+          [compareWith]="compareDepartment"
+          required
+        >
+          <option value="" disabled selected>Select Department</option>
+          <option *ngFor="let d of depart" [ngValue]="d">{{ d.name }}</option>
+        </select>
+        <div class="invalid-feedback">Please select a department.</div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="designation" class="form-label fw-semibold">Designation</label>
+        <select
+          id="designation"
+          name="designation"
+          class="form-select"
+          [(ngModel)]="employee.designation"
+          [compareWith]="compareDesignation"
+          required
+        >
+          <option value="" disabled selected>Select Designation</option>
+          <option *ngFor="let d of desig" [ngValue]="d">{{ d.designationTitle }}</option>
+        </select>
+        <div class="invalid-feedback">Please select a designation.</div>
+      </div>
+    </div>
+  </form>
+  <!-- End form -->
+</div>

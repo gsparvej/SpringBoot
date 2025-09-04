@@ -1,0 +1,30 @@
+
+
+<div class="container border rounded my-3">
+    <h1 class="text-center my-3 text-success">All Requisition List</h1>
+    <table class="table table-striped">
+<thead>
+    <tr>
+        <th>Requisition ID</th>
+        <th>PR Date</th>
+        <th>Requested By</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor = "let requ of requisition ">
+        <td>{{requ.id}}</td>
+        <td>{{requ.prDate | date: 'mediumDate'}}</td>
+        <td>{{requ.requestedBy}}</td>
+         <td>{{requ.prStatus}}</td>
+        <td>
+            <button class="btn btn-warning m-1 p-1" (click)="getRequisitionById(requ.id!)">View</button>
+        </td>
+    </tr>
+</tbody>
+
+
+</table>
+
+</div>

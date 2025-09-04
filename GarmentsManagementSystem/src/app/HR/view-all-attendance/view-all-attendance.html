@@ -1,0 +1,58 @@
+<div class="container border rounded my-4 shadow-sm p-4">
+  <h1 class="text-center my-3 text-success fw-bold">All Attendance List</h1>
+
+  <!-- Buttons Row -->
+  <div class="d-flex justify-content-between mb-3">
+    <button class="btn btn-secondary" (click)="goBack()" title="Return">
+      <i class="fa-solid fa-arrow-left"></i> Return
+    </button>
+
+    <button class="btn btn-success" (click)="addAttendance()" title="Add Attendance">
+      <i class="fa-solid fa-plus"></i> Add Attendance
+    </button>
+  </div>
+
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-success">
+        <tr>
+          <th>ID</th>
+          <th>Employee ID</th>
+          <th>Employee Name</th>
+          <th>Attendance Date</th>
+          <th>Status</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of attendance | async">
+          <td>{{ a.id }}</td>
+          <td>{{ a.employee?.id }}</td>
+          <td>{{ a.employee?.name }}</td>
+          <td>{{ a.attDate | date: 'mediumDate' }}</td>
+          <td>
+            <span class="badge" [ngClass]="{
+                'bg-success': a.status === 'Present',
+                'bg-danger': a.status === 'Absent',
+                'bg-warning text-dark': a.status === 'Late',
+                'bg-secondary': !a.atten_status?.status
+              }">
+              {{ a.status || 'Unknown' }}
+            </span>
+          </td>
+          <td class="text-center">
+            <ng-container *ngIf="role === 'admin'">
+              <button class="btn btn-sm btn-warning me-2" title="Edit">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+            </ng-container>
+            <button class="btn btn-sm btn-danger" title="Delete">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

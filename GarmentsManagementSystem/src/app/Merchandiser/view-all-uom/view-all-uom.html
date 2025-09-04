@@ -1,0 +1,41 @@
+
+
+<div class="container border rounded my-3">
+    <h1 class="text-center my-3 text-success">UOM (Unit Of Measurement) </h1>
+    <table class="table table-striped">
+<thead>
+    <tr>
+        <th>ID</th>
+        <th>Product Name</th>
+        <th>Size</th>
+        <th>Body (m)</th>
+        <th>Sleeve (m)</th>
+        <th>Pocket (m)</th>
+        <th>Wastage %</th>
+        <th>Shrinkage %</th>
+        <th>Total Base Fabric (Meter)</th>
+        <th>Action</th>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor = "let u of uom | async">
+        <td>{{u.id}}</td>
+        <td>{{u.productName}}</td>
+         <td>{{u.size}}</td>
+        <td>{{u.body}}</td>
+        <td>{{u.sleeve}}</td>
+        <td>{{u.pocket}}</td>
+        <td>{{u.wastage}}</td>
+        <td>{{u.shrinkage}}</td>
+        <td>{{u.baseFabric}}</td>
+        <td>
+            <button class="btn btn-warning m-1 p-1">Edit</button>
+            <button class="btn btn-danger m-1 p-1" (click)="deleteUom(u.id)">Delete</button>
+        </td>
+    </tr>
+</tbody>
+
+
+</table>
+
+</div>

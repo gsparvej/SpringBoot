@@ -1,0 +1,37 @@
+<div class="container border rounded my-3">
+    <h1 class="text-center my-3 text-success">All Buyer List</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Company Name</th>
+                <th>Country</th>
+                <th>Contact Person</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Website</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let b of buyer | async">
+                <td>{{b.id}}</td>
+                <td>{{b.name}}</td>
+                <td>{{b.country}}</td>
+                <td>{{b.contactPerson}}</td>
+                <td>{{b.phone}}</td>
+                <td>{{b.email}}</td>
+                <td>{{b.address}}</td>
+                <td>{{b.website}}</td>
+                <td>
+                    <button class="btn btn-warning m-1 p-1" (click)="getBuyById(b.id)">Edit</button>
+                    <button class="btn btn-danger m-1 p-1">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+
+
+    </table>
+
+</div>

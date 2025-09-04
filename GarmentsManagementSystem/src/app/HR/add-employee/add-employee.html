@@ -1,0 +1,82 @@
+<!-- Form Container -->
+<div class="container mt-5">
+  <div class="form-section">
+    <h2><i class="bi bi-person-plus-fill"></i> Add Employee</h2>
+
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="row g-4">
+      <!-- Name -->
+      <div class="col-md-6">
+        <label class="form-label"><i class="bi bi-person-circle"></i> Name</label>
+        <input formControlName="name" class="form-control" placeholder="Full Name" />
+      </div>
+
+      <!-- Phone -->
+      <div class="col-md-6">
+        <label class="form-label"><i class="bi bi-telephone"></i> Phone Number</label>
+        <input type="text" formControlName="phoneNumber" class="form-control" placeholder="Phone Number" />
+      </div>
+
+      <!-- Email -->
+      <div class="col-md-6">
+        <label class="form-label"><i class="bi bi-envelope-at"></i> Email</label>
+        <input formControlName="email" type="email" class="form-control" placeholder="example@gmail.com" />
+      </div>
+
+      <!-- Join Date -->
+      <div class="col-md-6">
+        <label class="form-label"><i class="bi bi-calendar-event"></i> Joining Date</label>
+        <input formControlName="joinDate" type="date" class="form-control" />
+      </div>
+
+      <!-- Department -->
+      <!-- <div class="col-md-6">
+        <label class="form-label"><i class="bi bi-diagram-3"></i> Department</label>
+        <select formControlName="department" class="form-select">
+          <option value="">Select Department</option>
+          <option *ngFor="let depart of allDepartments" [value]="depart.id">{{ depart.name }}</option>
+        </select>
+      </div> -->
+
+      <!-- Designation -->
+      <!-- <div class="col-md-6">
+        <label class="form-label"><i class="bi bi-briefcase-fill"></i> Designation Title</label>
+        <select formControlName="designation" class="form-select">
+          <option value="">Select Designation</option>
+          <option *ngFor="let desig of filteredDesignations" [value]="desig.id">{{ desig.designationTitle }}</option>
+        </select>
+      </div> -->
+
+
+
+      <!-- department designation -->
+
+
+      <div class="form-group mb-2">
+        <label>Department</label>
+        <select class="form-select" formControlName="department" (change)="onDepartmentChange()">
+          <option value="">-- Select Department --</option>
+          <option *ngFor="let d of allDepartments" [value]="d.id">{{ d.name }}</option>
+        </select>
+      </div>
+
+      <div class="form-group mb-3">
+        <label>Designation</label>
+        <select class="form-select" formControlName="designation">
+          <option value="">-- Select Designation Title --</option>
+          <option *ngFor="let ps of allDesignations " [value]="ps.id">{{ ps.designationTitle }}</option>
+        </select>
+      </div>
+
+
+
+
+
+      <!-- Submit -->
+      <div class="col-md-12 text-end">
+        <button class="btn btn-success" type="submit" [disabled]="formGroup.invalid">
+          <i class="bi bi-check-circle me-1"></i> Add Employee
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

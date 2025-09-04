@@ -1,0 +1,93 @@
+<!-- <h3>Add Stock</h3>
+<input type="number" [(ngModel)]="stock.item.id" placeholder="Item ID">
+<input type="number" [(ngModel)]="stock.quantity" placeholder="Quantity">
+<button (click)="addStock()">Add Stock</button>
+<p>{{ message }}</p> -->
+
+
+
+<div class="container mt-4 p-4 shadow-sm bg-white rounded" style="max-width: 500px;">
+  <h3 class="text-center mb-4 text-primary">➕ Add Stock</h3>
+
+  <form (ngSubmit)="addStock()">
+    <!-- Item Dropdown -->
+    <div class="mb-3">
+      <label for="itemSelect" class="form-label">Select Item</label>
+      <select id="itemSelect" class="form-select" [(ngModel)]="stock.item.id" name="itemId" required>
+        <option [ngValue]="0" disabled>Select Item</option>
+        <option *ngFor="let item of items" [ngValue]="item.id">
+          {{ item.categoryName }} ({{ item.unit }})
+        </option>
+      </select>
+    </div>
+
+    <!-- Quantity Input -->
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input
+        type="number"
+        id="quantity"
+        class="form-control"
+        [(ngModel)]="stock.quantity"
+        name="quantity"
+        placeholder="Enter quantity"
+        required
+        min="1"
+      />
+    </div>
+
+    <!-- Submit Button -->
+    <div class="d-grid">
+      <button type="submit" class="btn btn-success">Add Stock</button>
+    </div>
+
+    <!-- Success/Error Message -->
+    <p class="mt-3 text-center" [ngClass]="{
+      'text-success': message.includes('successfully'),
+      'text-danger': !message.includes('successfully')
+    }">
+      {{ message }}
+    </p>
+  </form>
+</div>
+
+
+
+<hr>
+
+<!-- view stock table -->
+
+<div class="container mt-4 p-4 shadow-sm bg-white rounded">
+  <h3 class="text-center mb-4 text-primary">📦 Stock In List</h3>
+
+  
+
+  <div *ngIf="stockIn.length === 0">
+    <p>No stock in records found.</p>
+  </div>
+
+  <div *ngIf="stockIn.length > 0">
+    <table class="table table-bordered table-striped">
+      <thead class="table-primary">
+        <tr>
+          <th>#</th>
+          <th>Item Name</th>
+         
+          <th>Quantity</th>
+          <th>Date Added</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stockIn; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ stock.item.categoryName }}</td>
+         
+         
+          <td>{{ stock.quantity }}</td>
+          <td>{{ stock.receivedTransactionDate| date: 'medium' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

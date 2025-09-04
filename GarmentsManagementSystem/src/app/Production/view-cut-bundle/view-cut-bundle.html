@@ -1,0 +1,65 @@
+<div class="container my-5">
+  <h5>Search Cutting Plan by Order ID:</h5>
+
+  <div class="input-group mb-3">
+    <input
+      type="number"
+      class="form-control"
+      placeholder="Enter Order ID"
+      [(ngModel)]="searchOrderId"
+      name="searchOrderId"
+    />
+   
+  </div>
+  <div class="row">
+     <div class="col-md-4">
+      <button class="btn btn-outline-primary" type="button" (click)="searchByOrderId()">
+      Search
+    </button>
+     </div>
+     <div class="col-md-4">
+      <button class="btn btn-outline-primary" type="reset" (click)="reset()">
+      Reset
+    </button>
+     </div>
+  </div>
+
+  <h2 class="text-center fw-bold mb-4">Cut Bundles </h2>
+
+  <div *ngIf="filteredBundles.length === 0">
+    <p class="text-danger">No Cut Bundles found for this Cutting Plan ID.</p>
+  </div>
+
+  <div class="row g-4" *ngIf="filteredBundles.length > 0">
+    <div class="col-md-4" *ngFor="let bundle of filteredBundles">
+      <div class="card shadow-sm rounded-4 h-100 border border-primary-subtle">
+        <div class="card-body">
+          <h5 class="card-title fw-bold text-primary">
+            Cut Bundle #{{ bundle.id }}
+          </h5>
+          <p class="card-subtitle text-muted mb-2">
+            Bundle No: {{ bundle.bundleNo }}
+          </p>
+          <p class="card-subtitle text-muted mb-2">
+            Color: {{ bundle.color }}
+          </p>
+          <ul class="list-unstyled mb-3">
+            <li><strong>Plan Qty:</strong> {{ bundle.plannedQty }}</li>
+            <li><strong>Size:</strong> {{ bundle.size }}</li>
+            <li><strong>Cutting Plan Id:</strong> {{ bundle.cuttingPlan?.id }}</li>
+           
+          </ul>
+         
+        </div>
+        <div class="card-footer bg-transparent border-0 d-flex justify-content-between">
+          <button class="btn btn-sm btn-outline-info rounded-pill">
+            <i class="bi bi-pencil-square"></i> Edit
+          </button>
+          <button class="btn btn-sm btn-outline-danger rounded-pill">
+            <i class="bi bi-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

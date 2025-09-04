@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <h3 class="text-center mb-3">Cut Bundle Management</h3>
+
+  <!-- ✅ Cut Bundle  Form -->
+  <form [formGroup]="cutBundleForm" (ngSubmit)="addCutBundle()" class="card p-3 shadow-sm">
+    <div class="row g-3">
+      <!-- Marker No -->
+      <div class="col-md-4">
+        <label class="form-label">Bundle No</label>
+        <input type="text" class="form-control" formControlName="bundleNo" placeholder="Enter bundleNo No">
+      </div>
+
+      <!-- Fabric Width -->
+      <div class="col-md-4">
+        <label class="form-label">Color </label>
+        <input type="text" class="form-control" formControlName="color" placeholder="Enter color ">
+      </div>
+
+      <!-- Lay Count -->
+      <div class="col-md-4">
+        <label class="form-label">Planned Quantity</label>
+        <input type="number" class="form-control" formControlName="plannedQty" placeholder="Enter planned Qty">
+      </div>
+
+
+      <!-- Status -->
+      <div class="col-md-4">
+        <label class="form-label">Size</label>
+        <select class="form-select" formControlName="size">
+          <option value="">-- Select Size --</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+        </select>
+      </div>
+
+
+
+      <!-- Production Order Dropdown -->
+      <div class="col-md-4" formGroupName="cuttingPlan">
+        <label class="form-label">Cutting Plan Id :</label>
+        <select class="form-select" formControlName="id">
+          <option value="">-- Select Cutting Plan Id --</option>
+          <option *ngFor="let po of cuttingPlan" [value]="po.id">
+            {{ po.id }} 
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="mt-3">
+      <button type="submit" class="btn btn-success">
+        {{ editingOrder ? 'Update' : 'Add' }} Cut Bundle
+      </button>
+      <button type="button" class="btn btn-secondary ms-2" (click)="cutBundleForm.reset()">Reset</button>
+    </div>
+  </form>
+
+  
+</div>

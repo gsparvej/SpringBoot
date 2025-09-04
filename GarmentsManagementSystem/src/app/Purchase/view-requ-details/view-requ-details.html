@@ -1,0 +1,98 @@
+<div class="container my-5 p-4 shadow-lg rounded bg-white border">
+  <!-- Header -->
+  <div class="text-center mb-4">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="assets/images/Capture3.jpeg" alt="Company Logo" class="mb-3" style="height: 100px;">
+      </div>
+      <div class="col-md-6">
+        <h3 class="text-primary fw-bold mb-1">PARVEJ Garments Ltd.</h3>
+        <p class="mb-0">House #12, Road #34, Gulshan-1, Dhaka-1212</p>
+        <p class="mb-0">Phone: +8801XXXXXXXXX </p>
+      </div>
+    </div>
+    <hr />
+    <h4 class="text-secondary fw-bold">🧾 Requisition Latter</h4>
+  </div>
+
+  <!-- PO Details -->
+  <div class="row mb-4">
+    <div class="col-md-4 mb-2">
+      <label class="form-label fw-semibold">ID</label>
+      <div class="text-secondary border-bottom pb-1">{{ requi.id }}</div>
+    </div>
+    <div class="col-md-4 mb-2">
+      <label class="form-label fw-semibold">PR Date</label>
+      <div class="text-secondary border-bottom pb-1">{{ requi.prDate | date: 'dd MMMM, yyyy' }}</div>
+    </div>
+    <div class="col-md-4 mb-2">
+      <label class="form-label fw-semibold">Requested By </label>
+      <div class="text-secondary border-bottom pb-1">{{ requi.requestedBy}}</div>
+    </div>
+    <div class="col-md-4 mb-2">
+      <label class="form-label fw-semibold">Status  </label>
+      <div class="text-secondary border-bottom pb-1">{{ requi.prStatus}}</div>
+    </div>
+  </div>
+
+  <!-- Vendor Info -->
+  <h5 class="text-secondary fw-semibold mb-3">Requisistion Information</h5>
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <label class="form-label">Category Name</label>
+      <div class="text-secondary">{{ requi.item.categoryName }}</div>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Department</label>
+      <div class="text-secondary">{{ requi.department.name }}</div>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Order ID</label>
+      <div class="text-secondary">{{ requi.order.id }}</div>
+    </div>
+  </div>
+
+  <!-- Ordered Items Table -->
+  <h5 class="text-secondary fw-semibold mb-3">📦 Ordered Items</h5>
+  <div class="table-responsive mb-4">
+    <table class="table table-bordered text-center align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>SL</th>
+           <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr >
+          <td>{{  1 }}</td>
+           <td>{{ requi.item.categoryName }}</td>
+
+          <td>{{ requi.quantity| number:'1.2-2'}}  {{requi.item.unit}}</td>
+          <td>{{ requi.approxUnitPrice }}</td>
+          <td>{{ requi.totalEstPrice| number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+   <!-- Signature Section -->
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <p class="fw-semibold">Authorized By (Purchase):</p>
+      <div class="border-bottom mb-2" style="height: 40px;"></div>
+      <p class="mb-0"><strong>Md. Parvej Hossen</strong></p>
+      <p class="mb-0">Purchase Manager</p>
+      <p>Date: {{ requi.prDate| date:'dd MMMM, yyyy' }}</p>
+    </div>
+    <div class="col-md-6 text-end">
+      <p class="fw-semibold">Approved By (Admin):</p>
+      <div class="border-bottom mb-2" style="height: 40px;"></div>
+      <p class="mb-0"><strong>Admin Department</strong></p>
+      <p class="mb-0">ABC Garments Ltd.</p>
+    </div>
+  </div>
+</div>
