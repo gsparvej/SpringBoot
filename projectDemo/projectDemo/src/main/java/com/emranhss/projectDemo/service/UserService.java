@@ -1,4 +1,4 @@
-package com.emranhss.projectDemo.service;
+ package com.emranhss.projectDemo.service;
 
 import com.emranhss.projectDemo.entity.JobSeeker;
 import com.emranhss.projectDemo.entity.Role;
