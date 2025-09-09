@@ -1,5 +1,7 @@
 package com.gsparvej.angularWithSpringBoot.service;
 
+import com.gsparvej.angularWithSpringBoot.dto.RoleMerchandiserManagerResponseDTO;
+import com.gsparvej.angularWithSpringBoot.dto.RoleProductionManagerResponseDTO;
 import com.gsparvej.angularWithSpringBoot.entity.RoleMerchandiserManager;
 import com.gsparvej.angularWithSpringBoot.entity.RoleProductionManager;
 import com.gsparvej.angularWithSpringBoot.repository.IRoleProductionManagerRepo;
@@ -19,6 +21,26 @@ public class RoleProductionManagerService {
     }
 
 
+
+
+    public List<RoleProductionManagerResponseDTO> getAllProductionManagerResponseDTOS() {
+        return roleProductionManagerRepo.findAll().stream().map(manager -> {
+            RoleProductionManagerResponseDTO dto = new RoleProductionManagerResponseDTO();
+
+
+            dto.setId(manager.getId());
+            dto.setEmail(manager.getEmail());
+            dto.setName(manager.getName());
+            dto.setAddress(manager.getAddress());
+            dto.setPhone(manager.getPhone());
+            dto.setGender(manager.getGender());
+            dto.setPhoto(manager.getPhoto());
+            dto.setDateOfBirth(manager.getDateOfBirth());
+
+
+            return dto;
+        }).toList();
+    }
 
     public RoleProductionManager save(RoleProductionManager roleProductionManager) {
         return roleProductionManagerRepo.save(roleProductionManager);

@@ -86,7 +86,7 @@ public class AuthService {
     private void sendActivationEmail(User user) {
         String subject = "Welcome to Our Service – Confirm Your Registration";
 
-        String activationLink = "http://localhost:8082/api/user/active/" + user.getId();
+        String activationLink = "http://localhost:8080/api/user/active/" + user.getId();
 
         String mailText = "<!DOCTYPE html>"
                 + "<html>"
@@ -278,7 +278,7 @@ public class AuthService {
         saveUserToken(jwt, savedUser);
 
         // Send Activation Email
-        sendActivationEmail(savedUser);
+//        sendActivationEmail(savedUser);
     }
 
     // end Admin
@@ -339,7 +339,7 @@ public class AuthService {
         saveUserToken(jwt, savedUser);
 
         // Send Activation Email
-        sendActivationEmail(savedUser);
+//        sendActivationEmail(savedUser);
     }
 
 
@@ -406,7 +406,7 @@ public class AuthService {
         saveUserToken(jwt, savedUser);
 
         // Send Activation Email
-        sendActivationEmail(savedUser);
+//        sendActivationEmail(savedUser);
     }
 
 
@@ -469,7 +469,7 @@ public class AuthService {
         saveUserToken(jwt, savedUser);
 
         // Send Activation Email
-        sendActivationEmail(savedUser);
+//        sendActivationEmail(savedUser);
     }
 
 
@@ -531,7 +531,7 @@ public class AuthService {
         saveUserToken(jwt, savedUser);
 
         // Send Activation Email
-        sendActivationEmail(savedUser);
+//        sendActivationEmail(savedUser);
     }
 
 

@@ -2,14 +2,13 @@ package com.gsparvej.angularWithSpringBoot.restcontroller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gsparvej.angularWithSpringBoot.dto.RoleAdminResponseDTO;
-import com.gsparvej.angularWithSpringBoot.dto.RoleSuperAdminResponseDTO;
-import com.gsparvej.angularWithSpringBoot.entity.RoleAdmin;
-import com.gsparvej.angularWithSpringBoot.entity.RoleSuperAdmin;
+import com.gsparvej.angularWithSpringBoot.dto.RoleMerchandiserManagerResponseDTO;
+import com.gsparvej.angularWithSpringBoot.dto.RoleProductionManagerResponseDTO;
+import com.gsparvej.angularWithSpringBoot.entity.RoleMerchandiserManager;
+import com.gsparvej.angularWithSpringBoot.entity.RoleProductionManager;
 import com.gsparvej.angularWithSpringBoot.entity.User;
-import com.gsparvej.angularWithSpringBoot.repository.IUserRepo;
 import com.gsparvej.angularWithSpringBoot.service.AuthService;
-import com.gsparvej.angularWithSpringBoot.service.RoleAdminService;
+import com.gsparvej.angularWithSpringBoot.service.RoleProductionManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,26 +21,23 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/admin")
-public class RoleAdminRestController {
-
-
+@RequestMapping("/api/pro_manager")
+public class RoleProductionManagerRestController {
 
     @Autowired
     private AuthService authService;
 
     @Autowired
-    private RoleAdminService roleAdminService;
+    private RoleProductionManagerService roleProductionManagerService;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-
-    //  Admin Registration
+    // Production Manager Registration
 
     @PostMapping("/reg")
-    public ResponseEntity<Map<String, String>> saveAdmin(
+    public ResponseEntity<Map<String, String>> saveProductionManager(
             @RequestPart("user") String userJson,
-            @RequestPart("admin") String adminJson,
+            @RequestPart("proManager") String proManagerJson,
             @RequestPart(value = "photo", required = false) MultipartFile file
     ) throws JsonProcessingException {
 
@@ -50,12 +46,12 @@ public class RoleAdminRestController {
         try {
             // Deserialize JSON strings to Java objects
             User user = objectMapper.readValue(userJson, User.class);
-            RoleAdmin roleAdmin = objectMapper.readValue(adminJson, RoleAdmin.class);
+            RoleProductionManager roleProductionManager = objectMapper.readValue(proManagerJson, RoleProductionManager.class);
 
-            // Call service to register super admin
-            authService.registerAdmin(user, file, roleAdmin);
+            // Call service to register Production Manager
+            authService.registerProductionManager(user, file, roleProductionManager);
 
-            response.put("message", " Admin saved successfully");
+            response.put("message", " Production Manager saved successfully");
             return ResponseEntity.ok(response);
 
         } catch (AuthenticationException authEx) {
@@ -76,10 +72,10 @@ public class RoleAdminRestController {
         }
     }
 
-    // Get all admins
+    // Get all merchandiser manager
     @GetMapping("all")
-    public ResponseEntity<List<RoleAdminResponseDTO>> getAllAdminDTOs() {
-        List<RoleAdminResponseDTO> admins = roleAdminService.getAllRoleAdminResponseDTOS();
-        return ResponseEntity.ok(admins);
+    public ResponseEntity<List<RoleProductionManagerResponseDTO>> getAllProManagerResponseDTOs() {
+        List<RoleProductionManagerResponseDTO> manager = roleProductionManagerService.getAllProductionManagerResponseDTOS();
+        return ResponseEntity.ok(manager);
     }
 }

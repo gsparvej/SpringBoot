@@ -37,8 +37,14 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/api/user/login","/auth/login",  "/api/user/active/**", "/api/super_admin/reg").permitAll()
+                        .requestMatchers("/api/user/login","/auth/login",  "/api/user/active/**", "/api/super_admin/reg", "/api/super_admin/all", "/api/admin/reg",
+                                "/api/admin/all" , "/api/hr_admin/reg", "/api/merchan_manager/reg", "/api/pro_manager/reg", "/api/purchase_manager/reg").permitAll()
                         .requestMatchers("/api/super_admin/reg").hasRole("SUPERADMIN")
+                        .requestMatchers("/api/admin/reg").hasRole("ADMIN")
+                        .requestMatchers("/api/hr_admin/reg").hasRole("HRADMIN")
+                        .requestMatchers("/api/merchan_manager/reg").hasRole("MERCHANDISERMANAGER")
+                        .requestMatchers("/api/pro_manager/reg").hasRole("PRODUCTIONMANAGER")
+                        .requestMatchers("/api/purchase_manager/reg").hasRole("PURCHASEMANAGER")
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)

@@ -1,5 +1,7 @@
 package com.gsparvej.angularWithSpringBoot.service;
 
+import com.gsparvej.angularWithSpringBoot.dto.RoleAdminResponseDTO;
+import com.gsparvej.angularWithSpringBoot.dto.RoleHRAdminResponseDTO;
 import com.gsparvej.angularWithSpringBoot.entity.RoleAdmin;
 import com.gsparvej.angularWithSpringBoot.entity.RoleHRAdmin;
 import com.gsparvej.angularWithSpringBoot.repository.IRoleHRAdminRepo;
@@ -17,6 +19,26 @@ public class RoleHRAdminService {
 
     public List<RoleHRAdmin> getAll() {
         return roleHRAdminRepo.findAll();
+    }
+
+
+    public List<RoleHRAdminResponseDTO> getAllRoleHRAdminResponseDTOS() {
+        return roleHRAdminRepo.findAll().stream().map(admin -> {
+            RoleHRAdminResponseDTO dto = new RoleHRAdminResponseDTO();
+
+
+            dto.setId(admin.getId());
+            dto.setEmail(admin.getEmail());
+            dto.setName(admin.getName());
+            dto.setAddress(admin.getAddress());
+            dto.setPhone(admin.getPhone());
+            dto.setGender(admin.getGender());
+            dto.setPhoto(admin.getPhoto());
+            dto.setDateOfBirth(admin.getDateOfBirth());
+
+
+            return dto;
+        }).toList();
     }
 
 

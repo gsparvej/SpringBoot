@@ -2,14 +2,13 @@ package com.gsparvej.angularWithSpringBoot.restcontroller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gsparvej.angularWithSpringBoot.dto.RoleAdminResponseDTO;
-import com.gsparvej.angularWithSpringBoot.dto.RoleSuperAdminResponseDTO;
-import com.gsparvej.angularWithSpringBoot.entity.RoleAdmin;
-import com.gsparvej.angularWithSpringBoot.entity.RoleSuperAdmin;
+import com.gsparvej.angularWithSpringBoot.dto.RoleProductionManagerResponseDTO;
+import com.gsparvej.angularWithSpringBoot.dto.RolePurchaseManagerResponseDTO;
+import com.gsparvej.angularWithSpringBoot.entity.RoleProductionManager;
+import com.gsparvej.angularWithSpringBoot.entity.RolePurchaseManager;
 import com.gsparvej.angularWithSpringBoot.entity.User;
-import com.gsparvej.angularWithSpringBoot.repository.IUserRepo;
 import com.gsparvej.angularWithSpringBoot.service.AuthService;
-import com.gsparvej.angularWithSpringBoot.service.RoleAdminService;
+import com.gsparvej.angularWithSpringBoot.service.RolePurchaseManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,26 +21,24 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/admin")
-public class RoleAdminRestController {
-
-
+@RequestMapping("/api/purchase_manager")
+public class RolePurchaseManagerRestController {
 
     @Autowired
     private AuthService authService;
 
     @Autowired
-    private RoleAdminService roleAdminService;
+    private RolePurchaseManagerService rolePurchaseManagerService;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    //  Admin Registration
+    // Purchase Manager Registration
 
     @PostMapping("/reg")
-    public ResponseEntity<Map<String, String>> saveAdmin(
+    public ResponseEntity<Map<String, String>> savePurchaseManager(
             @RequestPart("user") String userJson,
-            @RequestPart("admin") String adminJson,
+            @RequestPart("purManager") String purManagerJson,
             @RequestPart(value = "photo", required = false) MultipartFile file
     ) throws JsonProcessingException {
 
@@ -50,12 +47,12 @@ public class RoleAdminRestController {
         try {
             // Deserialize JSON strings to Java objects
             User user = objectMapper.readValue(userJson, User.class);
-            RoleAdmin roleAdmin = objectMapper.readValue(adminJson, RoleAdmin.class);
+            RolePurchaseManager rolePurchaseManager = objectMapper.readValue(purManagerJson, RolePurchaseManager.class);
 
-            // Call service to register super admin
-            authService.registerAdmin(user, file, roleAdmin);
+            // Call service to register Purchase Manager
+            authService.registerPurchaseManager(user, file, rolePurchaseManager);
 
-            response.put("message", " Admin saved successfully");
+            response.put("message", " Purchase Manager saved successfully");
             return ResponseEntity.ok(response);
 
         } catch (AuthenticationException authEx) {
@@ -76,10 +73,10 @@ public class RoleAdminRestController {
         }
     }
 
-    // Get all admins
+    // Get all Purchase manager
     @GetMapping("all")
-    public ResponseEntity<List<RoleAdminResponseDTO>> getAllAdminDTOs() {
-        List<RoleAdminResponseDTO> admins = roleAdminService.getAllRoleAdminResponseDTOS();
-        return ResponseEntity.ok(admins);
+    public ResponseEntity<List<RolePurchaseManagerResponseDTO>> getAllPurManagerResponseDTOs() {
+        List<RolePurchaseManagerResponseDTO> manager = rolePurchaseManagerService.getAllPurchaseManagerResponseDTOS();
+        return ResponseEntity.ok(manager);
     }
 }
