@@ -66,7 +66,7 @@ public class AuthService {
 
         user.setRole(Role.SUPERADMIN);
         userRepo.save(user);
-        sendActivationEmail(user);
+//        sendActivationEmail(user);
     }
 
 
@@ -172,7 +172,7 @@ public class AuthService {
         // Encode password before saving User
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(Role.SUPERADMIN);
-        user.setActive(false);
+        user.setActive(true);
 
         // Save User FIRST and get persisted instance
         User savedUser = userRepo.save(user);
@@ -186,7 +186,7 @@ public class AuthService {
         saveUserToken(jwt, savedUser);
 
         // Send Activation Email
-        sendActivationEmail(savedUser);
+//        sendActivationEmail(savedUser);
     }
 
 

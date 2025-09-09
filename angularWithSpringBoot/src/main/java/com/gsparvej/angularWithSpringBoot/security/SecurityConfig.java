@@ -37,8 +37,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/api/user/login","/auth/login",  "/api/user/active/**").permitAll()
-                        .requestMatchers("/api/user/all", "/api/jobseeker/profile").hasRole("JOBSEEKER")
+                        .requestMatchers("/api/user/login","/auth/login",  "/api/user/active/**", "/api/super_admin/reg").permitAll()
+                        .requestMatchers("/api/super_admin/reg").hasRole("SUPERADMIN")
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)

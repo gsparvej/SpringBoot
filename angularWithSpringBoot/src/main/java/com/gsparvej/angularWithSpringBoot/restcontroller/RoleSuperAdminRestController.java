@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.security.sasl.AuthenticationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,20 +44,38 @@ public class RoleSuperAdminRestController {
             @RequestPart("superadmin") String superAdminJson,
             @RequestPart(value = "photo", required = false) MultipartFile file
     ) throws JsonProcessingException {
-        User user = objectMapper.readValue(userJson, User.class);
-        RoleSuperAdmin roleSuperAdmin = objectMapper.readValue(superAdminJson, RoleSuperAdmin.class);
+
+        Map<String, String> response = new HashMap<>();
 
         try {
+            // Deserialize JSON strings to Java objects
+            User user = objectMapper.readValue(userJson, User.class);
+            RoleSuperAdmin roleSuperAdmin = objectMapper.readValue(superAdminJson, RoleSuperAdmin.class);
+
+            // Call service to register super admin
             authService.registerSuperAdmin(user, file, roleSuperAdmin);
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "Super Admin Saved successfully");
+
+            response.put("message", "Super Admin saved successfully");
             return ResponseEntity.ok(response);
+
+        } catch (AuthenticationException authEx) {
+            // If there's an authentication issue, return 401 Unauthorized
+            response.put("message", "Authentication failed: " + authEx.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+
+        } catch (JsonProcessingException jsonEx) {
+            // Bad JSON format
+            response.put("message", "Invalid input data format: " + jsonEx.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
         } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("message", " Super Admin Saved failed: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+            // Unexpected server error
+            e.printStackTrace(); // Log full stack trace to console or log file
+            response.put("message", "Super Admin save failed: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+
 
 
     // Get all super admins
