@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface IRoleSuperAdminRepo extends JpaRepository<RoleSuperAdmin, Long> {
 
     Optional<RoleSuperAdmin> findByUserId(int userId);
+
+    Optional<RoleSuperAdmin> findByEmail(String email);
 }

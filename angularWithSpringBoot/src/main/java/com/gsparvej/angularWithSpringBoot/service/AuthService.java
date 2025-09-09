@@ -1,5 +1,6 @@
 package com.gsparvej.angularWithSpringBoot.service;
 
+import com.gsparvej.angularWithSpringBoot.dto.AuthenticationResponse;
 import com.gsparvej.angularWithSpringBoot.entity.*;
 import com.gsparvej.angularWithSpringBoot.jwt.JwtService;
 import com.gsparvej.angularWithSpringBoot.repository.ITokenRepo;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,44 +27,34 @@ import java.util.UUID;
 public class AuthService {
 
     @Autowired
+    RolePurchaseManagerService rolePurchaseManagerService;
+    @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private IUserRepo userRepo;
     @Autowired
     private ITokenRepo tokenRepo;
-
     @Autowired
     private EmailService emailService;
-
     @Autowired
     private JwtService jwtService;
-
     @Autowired
     private RoleSuperAdminService roleSuperAdminService;
-
     @Autowired
     private RoleHRAdminService roleHRAdminService;
-
     @Autowired
     private RoleAdminService roleAdminService;
-
     @Autowired
     private RoleMerchandiserManagerService roleMerchandiserManagerService;
 
-    @Autowired RolePurchaseManagerService rolePurchaseManagerService;
-
+    @Autowired
+    private RoleProductionManagerService roleProductionManagerService;
     @Autowired
     @Lazy
     private AuthenticationManager authenticationManager;
 
     @Value("src/main/resources/static/images")
     private String uploadDir;
-
-
-
-
-
 
 
     public void saveOrUpdate(User user, MultipartFile imageFile) {
@@ -90,11 +83,10 @@ public class AuthService {
     }
 
 
-
     private void sendActivationEmail(User user) {
         String subject = "Welcome to Our Service – Confirm Your Registration";
 
-        String activationLink="http://localhost:8082/api/user/active/"+user.getId();
+        String activationLink = "http://localhost:8082/api/user/active/" + user.getId();
 
         String mailText = "<!DOCTYPE html>"
                 + "<html>"
@@ -137,6 +129,75 @@ public class AuthService {
     }
 
 
+
+    // Super Admin Part start
+
+    public String saveImageForSuperAdmin(MultipartFile file, RoleSuperAdmin roleSuperAdmin) {
+
+        Path uploadPath = Paths.get(uploadDir + "/roleSuperAdmin");
+        if (!Files.exists(uploadPath)) {
+            try {
+                Files.createDirectory(uploadPath);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        String superAdminName = roleSuperAdmin.getName();
+        String fileName = superAdminName.trim().replaceAll("\\s+", "_");
+
+        String savedFileName = fileName + "_" + UUID.randomUUID().toString();
+
+        try {
+            Path filePath = uploadPath.resolve(savedFileName);
+            Files.copy(file.getInputStream(), filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return savedFileName;
+
+    }
+
+
+    public void registerSuperAdmin(User user, MultipartFile imageFile, RoleSuperAdmin superAdminData) throws IOException {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            // Save image for both User and Super Admin
+            String fileName = saveImage(imageFile, user);
+            String superAdminImage = saveImageForSuperAdmin(imageFile, superAdminData);
+            superAdminData.setPhoto(superAdminImage);
+            user.setPhoto(fileName);
+        }
+
+        // Encode password before saving User
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.SUPERADMIN);
+        user.setActive(false);
+
+        // Save User FIRST and get persisted instance
+        User savedUser = userRepo.save(user);
+
+        // Now, associate saved User with Super Admin
+        superAdminData.setUser(savedUser);
+        roleSuperAdminService.save(superAdminData);
+
+        // Now generate token and save Token associated with savedUser
+        String jwt = jwtService.generateToken(savedUser);
+        saveUserToken(jwt, savedUser);
+
+        // Send Activation Email
+        sendActivationEmail(savedUser);
+    }
+
+
+
+
+
+
+
+
+
+
     // for User folder
     public String saveImage(MultipartFile file, User user) {
 
@@ -163,7 +224,7 @@ public class AuthService {
 
     }
 
-
+// start Admin
     public String saveImageForAdmin(MultipartFile file, RoleAdmin roleAdmin) {
 
         Path uploadPath = Paths.get(uploadDir + "/roleAdmin");
@@ -223,10 +284,7 @@ public class AuthService {
     // end Admin
 
 
-
-
-
-// start HR Admin
+    // start HR Admin
 
     public String saveImageForHRAdmin(MultipartFile file, RoleHRAdmin roleHRAdmin) {
 
@@ -288,6 +346,199 @@ public class AuthService {
     // end HR Admin
 
 
+
+
+
+
+
+    // start Purchase Manager
+
+    public String saveImageForPurchaseManager(MultipartFile file, RolePurchaseManager rolePurchaseManager) {
+
+        Path uploadPath = Paths.get(uploadDir + "/rolePurchaseManager");
+        if (!Files.exists(uploadPath)) {
+            try {
+                Files.createDirectory(uploadPath);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        String purchaseManagerName = rolePurchaseManager.getName();
+        String fileName = purchaseManagerName.trim().replaceAll("\\s+", "_");
+
+        String savedFileName = fileName + "_" + UUID.randomUUID().toString();
+
+        try {
+            Path filePath = uploadPath.resolve(savedFileName);
+            Files.copy(file.getInputStream(), filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return savedFileName;
+
+    }
+
+    public void registerPurchaseManager(User user, MultipartFile imageFile, RolePurchaseManager purchaseManagerData) throws IOException {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            // Save image for both User and Purchase Manager
+            String fileName = saveImage(imageFile, user);
+            String purchaseManagerImage = saveImageForPurchaseManager(imageFile, purchaseManagerData);
+            purchaseManagerData.setPhoto(purchaseManagerImage);
+            user.setPhoto(fileName);
+        }
+
+        // Encode password before saving User
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.PURCHASEMANAGER);
+        user.setActive(false);
+
+        // Save User FIRST and get persisted instance
+        User savedUser = userRepo.save(user);
+
+        // Now, associate saved User with Purchase Manager
+        purchaseManagerData.setUser(savedUser);
+        rolePurchaseManagerService.save(purchaseManagerData);
+
+        // Now generate token and save Token associated with savedUser
+        String jwt = jwtService.generateToken(savedUser);
+        saveUserToken(jwt, savedUser);
+
+        // Send Activation Email
+        sendActivationEmail(savedUser);
+    }
+
+
+    // end Purchase Manager
+
+
+
+    // start Merchandiser Manager
+
+    public String saveImageForMerchandiserManager(MultipartFile file, RoleMerchandiserManager roleMerchandiserManager) {
+
+        Path uploadPath = Paths.get(uploadDir + "/roleMerchandiserManager");
+        if (!Files.exists(uploadPath)) {
+            try {
+                Files.createDirectory(uploadPath);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        String merchandiserManagerName = roleMerchandiserManager.getName();
+        String fileName = merchandiserManagerName.trim().replaceAll("\\s+", "_");
+
+        String savedFileName = fileName + "_" + UUID.randomUUID().toString();
+
+        try {
+            Path filePath = uploadPath.resolve(savedFileName);
+            Files.copy(file.getInputStream(), filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return savedFileName;
+
+    }
+
+    public void registerMerchandiserManager(User user, MultipartFile imageFile, RoleMerchandiserManager merchandiserManagerData) throws IOException {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            // Save image for both User and Merchandiser Manager
+            String fileName = saveImage(imageFile, user);
+            String merchandiserManagerImage = saveImageForMerchandiserManager(imageFile, merchandiserManagerData);
+            merchandiserManagerData.setPhoto(merchandiserManagerImage);
+            user.setPhoto(fileName);
+        }
+
+        // Encode password before saving User
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.MERCHANDISERMANAGER);
+        user.setActive(false);
+
+        // Save User FIRST and get persisted instance
+        User savedUser = userRepo.save(user);
+
+        // Now, associate saved User with Merchandiser Manager
+        merchandiserManagerData.setUser(savedUser);
+        roleMerchandiserManagerService.save(merchandiserManagerData);
+
+        // Now generate token and save Token associated with savedUser
+        String jwt = jwtService.generateToken(savedUser);
+        saveUserToken(jwt, savedUser);
+
+        // Send Activation Email
+        sendActivationEmail(savedUser);
+    }
+
+
+    // end Merchandiser Manager
+
+
+    // start Production Manager
+
+    public String saveImageForProductionManager(MultipartFile file, RoleProductionManager roleProductionManager) {
+
+        Path uploadPath = Paths.get(uploadDir + "/roleProductionManager");
+        if (!Files.exists(uploadPath)) {
+            try {
+                Files.createDirectory(uploadPath);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        String productionManagerName = roleProductionManager.getName();
+        String fileName = productionManagerName.trim().replaceAll("\\s+", "_");
+
+        String savedFileName = fileName + "_" + UUID.randomUUID().toString();
+
+        try {
+            Path filePath = uploadPath.resolve(savedFileName);
+            Files.copy(file.getInputStream(), filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return savedFileName;
+
+    }
+
+    public void registerProductionManager(User user, MultipartFile imageFile, RoleProductionManager productionManagerData) throws IOException {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            // Save image for both User and Production Manager
+            String fileName = saveImage(imageFile, user);
+            String productionManagerImage = saveImageForProductionManager(imageFile, productionManagerData);
+            productionManagerData.setPhoto(productionManagerImage);
+            user.setPhoto(fileName);
+        }
+
+        // Encode password before saving User
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.PRODUCTIONMANAGER);
+        user.setActive(false);
+
+        // Save User FIRST and get persisted instance
+        User savedUser = userRepo.save(user);
+
+        // Now, associate saved User with Production Manager
+        productionManagerData.setUser(savedUser);
+        roleProductionManagerService.save(productionManagerData);
+
+        // Now generate token and save Token associated with savedUser
+        String jwt = jwtService.generateToken(savedUser);
+        saveUserToken(jwt, savedUser);
+
+        // Send Activation Email
+        sendActivationEmail(savedUser);
+    }
+
+
+    // end Production Manager
+
+
+
     private void saveUserToken(String jwt, User user) {
         Token token = new Token();
         token.setToken(jwt);
@@ -312,6 +563,56 @@ public class AuthService {
     }
 
 
+    // It is Login Method
+    public AuthenticationResponse authenticate(User request) {
+        // Authenticate Username & Password
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getUsername(),
+                        request.getPassword()
+                )
+        );
+
+        // Fetch User from DB
+        User user = userRepo.findByEmail(request.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        // Check Activation Status
+        if (!user.isActive()) {
+            throw new RuntimeException("Account is not activated. Please check your email for activation link.");
+        }
+
+        // Generate JWT Token
+        String jwt = jwtService.generateToken(user);
+
+        // Remove Existing Tokens (Invalidate Old Sessions)
+        removeAllTokenByUser(user);
+
+        // Save New Token to DB (Optional if stateless)
+        saveUserToken(jwt, user);
+
+        // Return Authentication Response
+        return new AuthenticationResponse(jwt, "User Login Successful");
+    }
+
+
+
+    public  String activeUser(int id){
+
+        User user=userRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("User not Found with this ID "+id));
+
+        if(user !=null){
+            user.setActive(true);
+
+            userRepo.save(user);
+            return "User Activated Successfully!";
+
+        }else {
+            return  "Invalid Activation Token!";
+        }
+
+    }
 
 
 }

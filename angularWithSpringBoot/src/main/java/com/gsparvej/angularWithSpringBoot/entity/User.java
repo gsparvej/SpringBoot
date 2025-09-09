@@ -1,12 +1,16 @@
 package com.gsparvej.angularWithSpringBoot.entity;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
 
     @Id
@@ -76,6 +80,7 @@ public class User {
         return password;
     }
 
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -126,5 +131,38 @@ public class User {
 
     public void setLock(boolean lock) {
         isLock = lock;
+    }
+
+
+
+    // implements Methods ----------------------------------------------------
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return isLock;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
