@@ -1,6 +1,8 @@
 package com.gsparvej.angularWithSpringBoot.service;
 
 import com.gsparvej.angularWithSpringBoot.dto.AuthenticationResponse;
+import com.gsparvej.angularWithSpringBoot.dto.RoleSuperAdminResponseDTO;
+import com.gsparvej.angularWithSpringBoot.dto.UserResponseDTO;
 import com.gsparvej.angularWithSpringBoot.entity.*;
 import com.gsparvej.angularWithSpringBoot.jwt.JwtService;
 import com.gsparvej.angularWithSpringBoot.repository.ITokenRepo;
@@ -70,9 +72,30 @@ public class AuthService {
     }
 
 
-    public List<User> findAll() {
+    public List<User> findAllUsers() {
         return userRepo.findAll();
     }
+
+
+
+    public List<UserResponseDTO> getAllUsersResponseDTOS() {
+        return userRepo.findAll().stream().map(user -> {
+            UserResponseDTO dto = new UserResponseDTO();
+
+
+            dto.setId(user.getId());
+            dto.setEmail(user.getEmail());
+            dto.setName(user.getName());
+            dto.setPhoto(user.getPhoto());
+            dto.setPhone(user.getPhone());
+
+            return dto;
+        }).toList();
+    }
+
+
+
+
 
     public User findById(int id) {
         return userRepo.findById(id).get();

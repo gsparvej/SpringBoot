@@ -17,11 +17,11 @@ public class DayWiseProductionRestController {
     @Autowired
     private DayWiseProductionService dayWiseProductionService;
 
-    @GetMapping("all")
-    public List<DayWiseProduction> getAllPro() {
-        return dayWiseProductionService.getAllDayWise();
-    }
-    @GetMapping("")
+//    @GetMapping("/all")
+//    public List<DayWiseProduction> getAllPro() {
+//        return dayWiseProductionService.getAllDayWise();
+//    }
+    @GetMapping("/all")
     public List<DayWiseProductionResponseDTO> getDayWise() {
         return dayWiseProductionService.getAllDayWiseProductionResponseDTOS();
     }
