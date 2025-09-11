@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class UpdateUsers implements OnInit {
 
   id: string = '';
-  user: User = new User();
+  // user: User = new User();
 
   constructor(
     private userService: UserService,
@@ -31,22 +31,22 @@ export class UpdateUsers implements OnInit {
 
   loadUserById(): void {
     this.userService.getUserById(this.id).subscribe(data => {
-      this.user = data;
+      // this.user = data;
       this.cdr.detectChanges();
     });
   }
 
 
-   updateUser(): void {
-    this.userService.updateUser(this.id, this.user).subscribe({
-      next: (emp) => {
-        this.router.navigate(['/viewAllUser']);
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
-  }
+  //  updateUser(): void {
+  //   this.userService.updateUser(this.id, this.user).subscribe({
+  //     next: (emp) => {
+  //       this.router.navigate(['/viewAllUser']);
+  //       this.cdr.detectChanges();
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     }
+  //   })
+  // }
 
 }

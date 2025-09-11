@@ -1,0 +1,58 @@
+<div class="registration-form">
+
+  <h2>Register  Admin</h2>
+
+  <!-- User Information -->
+  <fieldset>
+    <legend>User Information</legend>
+
+    <label for="name">Name:</label>
+    <input id="name" type="text" [(ngModel)]="user.name" name="name" required />
+
+    <label for="email">Email:</label>
+    <input id="email" type="email" [(ngModel)]="user.email" name="email" required />
+
+    <label for="password">Password:</label>
+    <input id="password" type="password" [(ngModel)]="user.password" name="password" required />
+
+    <label for="phone">Phone:</label>
+    <input id="phone" type="tel" [(ngModel)]="user.phone" name="phone" required />
+  </fieldset>
+
+  <!--  Admin Details -->
+  <fieldset>
+    <legend> Admin Details</legend>
+
+    <label for="saName">Full Name:</label>
+    <input id="saName" type="text" [(ngModel)]="admin.name" name="superadminName" required />
+
+    <label for="saEmail">Email:</label>
+    <input id="saEmail" type="email" [(ngModel)]="admin.email" name="superadminEmail" required />
+
+    <label for="saPhone">Phone:</label>
+    <input id="saPhone" type="tel" [(ngModel)]="admin.phone" name="superadminPhone" required />
+
+    <label for="gender">Gender:</label>
+    <select id="gender" [(ngModel)]="admin.gender" name="gender" required>
+      <option value="">Select Gender</option>
+      <option value="MALE">Male</option>
+      <option value="FEMALE">Female</option>
+      <option value="OTHER">Other</option>
+    </select>
+
+    <label for="dob">Date of Birth:</label>
+    <input id="dob" type="date" [(ngModel)]="admin.dateOfBirth" name="dob" required />
+
+    <label for="address">Address:</label>
+    <textarea id="address" [(ngModel)]="admin.address" name="address" required></textarea>
+  </fieldset>
+
+  <!-- Photo Upload -->
+  <fieldset>
+    <legend>Upload Photo</legend>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+  </fieldset>
+
+  <button (click)="registerSuperAdmin()">Register</button>
+
+</div>

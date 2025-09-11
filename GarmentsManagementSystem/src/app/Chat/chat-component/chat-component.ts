@@ -20,11 +20,11 @@ export class ChatComponent implements OnInit{
   ngOnInit() {
     this.loadMessages();
 
-    // Get logged-in user's name or email or role here
-    const currentUser = this.authService.currentUserValue;
-    if (currentUser) {
-      this.currentUserName = currentUser.name || currentUser.email || currentUser.role || 'User';
-    }
+    
+    // const currentUser = this.authService.currentUserValue;
+    // if (currentUser) {
+    //   this.currentUserName = currentUser.name || currentUser.email || currentUser.role || 'User';
+    // }
   }
 
   loadMessages() {

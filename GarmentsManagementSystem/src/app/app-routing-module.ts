@@ -8,12 +8,11 @@ import { ViewAllAttendance } from './HR/view-all-attendance/view-all-attendance'
 import { AddAttendance } from './HR/add-attendance/add-attendance';
 import { ViewAllLeave } from './HR/view-all-leave/view-all-leave';
 import { AddLeave } from './HR/add-leave/add-leave';
-import { Registration } from './Auth/registration/registration';
-import { Login } from './Auth/login/login';
+
 import { Home } from './home/home';
 import { ViewAllBuyer } from './Merchandiser/view-all-buyer/view-all-buyer';
 import { AddBuyer } from './Merchandiser/add-buyer/add-buyer';
-import { UserProfile } from './Auth/user-profile/user-profile';
+
 import { Designation } from '../model/HR/designation.model';
 import { AddDesignation } from './HR/add-designation/add-designation';
 import { AddUom } from './Merchandiser/add-uom/add-uom';
@@ -43,20 +42,16 @@ import { ViewAllRequ } from './Purchase/view-all-requ/view-all-requ';
 import { ViewRequDetails } from './Purchase/view-requ-details/view-requ-details';
 import { UpdateBuyer } from './Merchandiser/update-buyer/update-buyer';
 import { UpdateLeave } from './HR/update-leave/update-leave';
-import { UserGuard } from './Guards/user-guard';
-import { AdminGuard } from './Guards/admin-guard';
-import { Logout } from './Auth/logout/logout';
-import { AdminProfile } from './Auth/admin-profile/admin-profile';
+
 import { ViewUsers } from './User/view-users/view-users';
 import { UpdateUsers } from './User/update-users/update-users';
 import { ChatComponent } from './Chat/chat-component/chat-component';
-import { SuperAdmin } from './Auth/super-admin/super-admin';
-import { HrExecutive } from './Auth/hr-executive/hr-executive';
-import { HrAdmin } from './Auth/hr-admin/hr-admin';
-import { MerchandiserJunior } from './Auth/merchandiser-junior/merchandiser-junior';
-import { MerchandiserManager } from './Auth/merchandiser-manager/merchandiser-manager';
-import { PurchaseExecutive } from './Auth/purchase-executive/purchase-executive';
-import { PurchaseManager } from './Auth/purchase-manager/purchase-manager';
+
+
+
+
+
+
 import { RawMaterialsCalc } from './Merchandiser/raw-materials-calc/raw-materials-calc';
 import { ProductionOrderComponenet } from './Production/production-order-componenet/production-order-componenet';
 import { ProductionOrderList } from './Production/production-order-list/production-order-list';
@@ -71,13 +66,14 @@ import { ViewDayWiseProduction } from './Production/view-day-wise-production/vie
 import { ViewRawMaterialsCalc } from './Merchandiser/view-raw-materials-calc/view-raw-materials-calc';
 import { ProductionSummaryCompo } from './Production/production-summary-compo/production-summary-compo';
 import { ProductionReport } from './Production/production-report/production-report';
+import { SuperAdmin } from './Registration/super-admin/super-admin';
+import { Admin } from './Registration/admin/admin';
+import { AdminProfile } from './Profile/admin-profile/admin-profile';
+import { Login } from './Registration/login/login';
 
 
 const routes: Routes = [
   { path: '', component: Home },
-  { path: 'reg', component: Registration },
-  { path: 'login', component: Login },
-
 
   { path: 'viewAllEmp', component: ViewAllEmployee },
   { path: 'addEmp', component: AddEmployee },
@@ -99,18 +95,6 @@ const routes: Routes = [
 
   { path: 'viewAllUser', component: ViewUsers },
   { path: 'updateUser/:id', component: UpdateUsers },
-
-  //role Profile
-  { path: 'userprofile', component: UserProfile },
-  { path: 'adminprofile', component: AdminProfile },
-  { path: 'superadmin', component: SuperAdmin },
-  { path: 'hrexecutive', component: HrExecutive },
-  { path: 'hradmin', component: HrAdmin },
-  { path: 'merchandiserjunior', component: MerchandiserJunior },
-  { path: 'merchandisermanager', component: MerchandiserManager },
-  { path: 'purchaseexecutive', component: PurchaseExecutive },
-  { path: 'purchasemanager', component: PurchaseManager },
-
 
 
   { path: 'addUom', component: AddUom },
@@ -157,7 +141,18 @@ const routes: Routes = [
   {path: 'addDayWisePro', component: AddDayWiseProduction},
   {path: 'viewDayWisePro', component: ViewDayWiseProduction},
   {path: 'proSumReport' , component: ProductionSummaryCompo},
-  {path: 'report', component: ProductionReport}
+  {path: 'report', component: ProductionReport},
+
+  // registration's component
+  {path: 'login' , component: Login},
+  {path: 'superAdminReg' , component: SuperAdmin},
+  {path: 'adminReg' , component: Admin},
+
+
+
+  // profile's 
+
+  {path: 'adminProfile' , component: AdminProfile}
 
 ];
 

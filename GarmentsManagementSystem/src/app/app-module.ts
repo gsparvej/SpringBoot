@@ -19,10 +19,7 @@ import { ViewAllAttendance } from './HR/view-all-attendance/view-all-attendance'
 import { AddAttendance } from './HR/add-attendance/add-attendance';
 import { ViewAllLeave } from './HR/view-all-leave/view-all-leave';
 import { AddLeave } from './HR/add-leave/add-leave';
-import { Login } from './Auth/login/login';
-import { Registration } from './Auth/registration/registration';
-import { UserProfile } from './Auth/user-profile/user-profile';
-import { Logout } from './Auth/logout/logout';
+
 import { Home } from './home/home';
 import { ViewAllBuyer } from './Merchandiser/view-all-buyer/view-all-buyer';
 import { AddBuyer } from './Merchandiser/add-buyer/add-buyer';
@@ -52,17 +49,15 @@ import { ViewAllRequ } from './Purchase/view-all-requ/view-all-requ';
 import { ViewRequDetails } from './Purchase/view-requ-details/view-requ-details';
 import { UpdateBuyer } from './Merchandiser/update-buyer/update-buyer';
 import { UpdateLeave } from './HR/update-leave/update-leave';
-import { AdminProfile } from './Auth/admin-profile/admin-profile';
+
 import { ViewUsers } from './User/view-users/view-users';
 import { UpdateUsers } from './User/update-users/update-users';
 import { ChatComponent } from './Chat/chat-component/chat-component';
-import { SuperAdmin } from './Auth/super-admin/super-admin';
-import { HrExecutive } from './Auth/hr-executive/hr-executive';
-import { HrAdmin } from './Auth/hr-admin/hr-admin';
-import { MerchandiserJunior } from './Auth/merchandiser-junior/merchandiser-junior';
-import { MerchandiserManager } from './Auth/merchandiser-manager/merchandiser-manager';
-import { PurchaseExecutive } from './Auth/purchase-executive/purchase-executive';
-import { PurchaseManager } from './Auth/purchase-manager/purchase-manager';
+
+
+
+
+
 import { RawMaterialsCalc } from './Merchandiser/raw-materials-calc/raw-materials-calc';
 import { ProductionOrderComponenet } from './Production/production-order-componenet/production-order-componenet';
 import { ProductionOrderList } from './Production/production-order-list/production-order-list';
@@ -77,6 +72,11 @@ import { ViewDayWiseProduction } from './Production/view-day-wise-production/vie
 import { ViewRawMaterialsCalc } from './Merchandiser/view-raw-materials-calc/view-raw-materials-calc';
 import { ProductionSummaryCompo } from './Production/production-summary-compo/production-summary-compo';
 import { ProductionReport } from './Production/production-report/production-report';
+import { Admin } from './Registration/admin/admin';
+import { SuperAdmin } from './Registration/super-admin/super-admin';
+import { Login } from './Registration/login/login';
+import { AdminProfile } from './Profile/admin-profile/admin-profile';
+import { SuperAdminProfile } from './Profile/super-admin-profile/super-admin-profile';
 
 
 @NgModule({
@@ -85,7 +85,7 @@ import { ProductionReport } from './Production/production-report/production-repo
     ViewAllEmployee,
     AddEmployee,
     Header,
-  
+
     AddDepartment,
     ViewAllDepartment,
     UpdateEmployee,
@@ -96,10 +96,9 @@ import { ProductionReport } from './Production/production-report/production-repo
     AddAttendance,
     ViewAllLeave,
     AddLeave,
-    Login,
-    Registration,
-    UserProfile,
-    Logout,
+  
+
+   
     Home,
     ViewAllBuyer,
     AddBuyer,
@@ -129,17 +128,12 @@ import { ProductionReport } from './Production/production-report/production-repo
     ViewRequDetails,
     UpdateBuyer,
     UpdateLeave,
-    AdminProfile,
+   
     ViewUsers,
     UpdateUsers,
     ChatComponent,
-    SuperAdmin,
-    HrExecutive,
-    HrAdmin,
-    MerchandiserJunior,
-    MerchandiserManager,
-    PurchaseExecutive,
-    PurchaseManager,
+  
+
     RawMaterialsCalc,
     ProductionOrderComponenet,
     ProductionOrderList,
@@ -154,6 +148,11 @@ import { ProductionReport } from './Production/production-report/production-repo
     ViewRawMaterialsCalc,
     ProductionSummaryCompo,
     ProductionReport,
+    Admin,
+    SuperAdmin,
+    Login,
+    AdminProfile,
+    SuperAdminProfile
 
   ],
   imports: [

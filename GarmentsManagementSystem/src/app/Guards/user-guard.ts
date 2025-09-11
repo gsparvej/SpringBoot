@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 
-export class UserGuard implements CanActivate {
+export class UserGuard  {
 
 constructor(
     private authService: AuthService,
@@ -15,12 +15,12 @@ constructor(
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
-  canActivate(): boolean | UrlTree | Observable<boolean | UrlTree> {
-    if (this.authService.isAuthenticated() && this.authService.isUser()) {
-      return true;
-    }
-    return this.router.createUrlTree(['/login']);
-  }
+  // canActivate(): boolean | UrlTree | Observable<boolean | UrlTree> {
+  //   if (this.authService.isAuthenticated() && this.authService.isUser()) {
+  //     return true;
+  //   }
+  //   return this.router.createUrlTree(['/login']);
+  // }
 
  
 };

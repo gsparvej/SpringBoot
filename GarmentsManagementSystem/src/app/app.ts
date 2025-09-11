@@ -21,10 +21,10 @@ export class App implements OnInit{
 
 
    ngOnInit(): void {
-    this.authService.currentUser$.subscribe(user=>{
-      this.currentUser = user;
-      this.userRole = user?.role || null;
+    // this.authService.currentUser$.subscribe(user=>{
+    //   this.currentUser = user;
+      
 
-    });
+    // });
   }
 }

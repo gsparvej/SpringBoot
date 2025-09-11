@@ -38,10 +38,10 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/api/auth/login", "/api/auth/logout","/api/auth/active/**","/api/auth/all","/api/super_admin/reg", "/api/super_admin/all", "/api/admin/reg",
-                                "/api/admin/all" , "/api/hr_admin/reg", "/api/merchan_manager/reg", "/api/pro_manager/reg", "/api/purchase_manager/reg"
+                                "/api/admin/all" , "/api/hr_admin/reg", "/api/merchan_manager/reg", "/api/pro_manager/reg", "/api/purchase_manager/reg", "/api/admin/profile"
                                 ).permitAll()
                         .requestMatchers("/api/super_admin/reg").hasRole("SUPERADMIN")
-                        .requestMatchers("/api/admin/reg","/api/dayWisePro/**" , "/api/admin/profile").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/reg","/api/dayWisePro/**" , "/api/admin/profile" , "/api/auth/login").hasRole("ADMIN")
                         .requestMatchers("/api/hr_admin/reg").hasRole("HRADMIN")
                         .requestMatchers("/api/merchan_manager/reg").hasRole("MERCHANDISERMANAGER")
                         .requestMatchers("/api/pro_manager/reg").hasRole("PRODUCTIONMANAGER")

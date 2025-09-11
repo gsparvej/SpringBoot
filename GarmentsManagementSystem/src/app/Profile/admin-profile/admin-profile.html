@@ -1,0 +1,36 @@
+<div class="profile-container" *ngIf="!loading; else loadingTemplate">
+
+  <h2>Admin Profile</h2>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="profile" class="profile-card">
+
+    <!-- Profile Photo -->
+    <div class="profile-photo">
+      <img [src]="imageUrl+profile.photo" alt="Admin Photo" *ngIf="profile.photo; else noPhoto" />
+      <ng-template #noPhoto>
+        <div class="placeholder-photo">No Photo</div>
+      </ng-template>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="profile-details">
+      <p><strong>Name:</strong> {{ profile.name }}</p>
+      <p><strong>Email:</strong> {{ profile.email }}</p>
+      <p><strong>Phone:</strong> {{ profile.phone }}</p>
+      <p><strong>Gender:</strong> {{ profile.gender }}</p>
+      <p><strong>Date of Birth:</strong> {{ profile.dateOfBirth | date: 'longDate' }}</p>
+      <p><strong>Address:</strong> {{ profile.address }}</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Loading Template -->
+<ng-template #loadingTemplate>
+  <div class="loading">Loading profile...</div>
+</ng-template>
