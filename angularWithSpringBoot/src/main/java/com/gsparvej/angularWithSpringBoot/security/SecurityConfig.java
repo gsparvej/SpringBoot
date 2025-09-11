@@ -41,7 +41,7 @@ public class SecurityConfig {
                                 "/api/admin/all" , "/api/hr_admin/reg", "/api/merchan_manager/reg", "/api/pro_manager/reg", "/api/purchase_manager/reg"
                                 ).permitAll()
                         .requestMatchers("/api/super_admin/reg").hasRole("SUPERADMIN")
-                        .requestMatchers("/api/admin/reg","/api/dayWisePro/**").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/reg","/api/dayWisePro/**" , "/api/admin/profile").hasRole("ADMIN")
                         .requestMatchers("/api/hr_admin/reg").hasRole("HRADMIN")
                         .requestMatchers("/api/merchan_manager/reg").hasRole("MERCHANDISERMANAGER")
                         .requestMatchers("/api/pro_manager/reg").hasRole("PRODUCTIONMANAGER")

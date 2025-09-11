@@ -4,7 +4,7 @@ import { User } from '../../../model/Auth/user.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthResponse } from '../../../model/Auth/authResponse';
-import { AdminModel } from '../../../model/Auth/admin.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -116,7 +116,7 @@ storeToken(token: string): void {
 
 
   getUserRole(): any {
-    return this.currentUserValue?.role;
+    return this.currentUserValue?.email;
   }
   
   public get currentUserValue(): User | null {

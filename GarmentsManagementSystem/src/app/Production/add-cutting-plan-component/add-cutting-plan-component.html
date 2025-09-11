@@ -51,21 +51,21 @@
         <input type="date" class="form-control" formControlName="cuttingDate">
       </div>
 
-     <!-- UOM Dropdown + Size -->
-<div formGroupName="uom" class="row">
-  <div class="col-md-4">
-    <label class="form-label">UOM (Base Fabric)</label>
-    <select class="form-select" formControlName="id">
-      <option value="">-- Select UOM --</option>
-      <option *ngFor="let u of uom" [value]="u.id">{{ u.baseFabric }}</option>
-    </select>
-  </div>
+      <!-- UOM Dropdown + Size -->
+      <div formGroupName="uom" class="row">
+        <div class="col-md-4">
+          <label class="form-label">UOM (Base Fabric)</label>
+          <select class="form-select" formControlName="id">
+            <option value="">-- Select UOM --</option>
+            <option *ngFor="let u of uom" [value]="u.id">{{ u.baseFabric }}</option>
+          </select>
+        </div>
 
-  <div class="col-md-4">
-    <label class="form-label fw-semibold">Size</label>
-    <input type="text" class="form-control" [value]="selectedBaseFabric" readonly />
-  </div>
-</div>
+        <div class="col-md-4">
+          <label class="form-label fw-semibold">Size</label>
+          <input type="text" class="form-control" [value]="selectedBaseFabric" readonly />
+        </div>
+      </div>
 
 
       <!-- Production Order Dropdown -->
@@ -74,7 +74,7 @@
         <select class="form-select" formControlName="id">
           <option value="">-- Select Production Order --</option>
           <option *ngFor="let po of productionOrder" [value]="po.id">
-            {{ po.id }} 
+            {{ po.id }}
           </option>
         </select>
       </div>
@@ -89,5 +89,5 @@
     </div>
   </form>
 
-  
+
 </div>

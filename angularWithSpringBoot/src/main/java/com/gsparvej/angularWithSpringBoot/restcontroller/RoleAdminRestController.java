@@ -1,5 +1,6 @@
 package com.gsparvej.angularWithSpringBoot.restcontroller;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gsparvej.angularWithSpringBoot.dto.RoleAdminResponseDTO;
@@ -13,6 +14,7 @@ import com.gsparvej.angularWithSpringBoot.service.RoleAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,11 +22,16 @@ import javax.security.sasl.AuthenticationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admin")
+@JsonIgnoreProperties
 public class RoleAdminRestController {
 
+
+    @Autowired
+    private IUserRepo userRepo;
 
 
     @Autowired
@@ -75,6 +82,20 @@ public class RoleAdminRestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile(Authentication authentication) {
+        System.out.println("Authenticated User: " + authentication.getName());
+        System.out.println("Authorities: " + authentication.getAuthorities());
+        String email = authentication.getName();
+        Optional<User> user =userRepo.findByEmail(email);
+        RoleAdmin roleAdmin = roleAdminService.getProfileByUserId(user.get().getId());
+        return ResponseEntity.ok(roleAdmin);
+
+    }
+
+
 
     // Get all admins
     @GetMapping("all")

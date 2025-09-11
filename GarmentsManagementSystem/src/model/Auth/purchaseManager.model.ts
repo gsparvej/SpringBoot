@@ -1,4 +1,4 @@
-export interface RoleAdmin {
+export interface RolePurchaseManager {
 
     id: number;
     name: string;
@@ -8,5 +8,4 @@ export interface RoleAdmin {
     address: string;
     dateOfBirth: Date;
     photo: string;
-
 }
