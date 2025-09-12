@@ -41,9 +41,11 @@ public class SecurityConfig {
                                 "/api/admin/all" , "/api/hr_admin/reg", "/api/merchan_manager/reg", "/api/pro_manager/reg", "/api/purchase_manager/reg", "/api/admin/profile"
                                 ).permitAll()
                         .requestMatchers("/api/super_admin/reg").hasRole("SUPERADMIN")
-                        .requestMatchers("/api/admin/reg","/api/dayWisePro/**" , "/api/admin/profile" , "/api/auth/login").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/reg", "/api/admin/profile","/api/department" ,"/api/department/**", "/api/designation/by-department/**",
+                                "/api/designation").hasRole("ADMIN")
                         .requestMatchers("/api/hr_admin/reg").hasRole("HRADMIN")
-                        .requestMatchers("/api/merchan_manager/reg").hasRole("MERCHANDISERMANAGER")
+                        .requestMatchers("/api/order/**", "/api/bom/style/**" ,"/api/buyer", "/api/buyer/**", "/api/bomstyle", "/api/bomstyle/**", "/api/uom", "/api/uom/**",
+                                "/api/raw_materials").hasRole("MERCHANDISERMANAGER")
                         .requestMatchers("/api/pro_manager/reg").hasRole("PRODUCTIONMANAGER")
                         .requestMatchers("/api/purchase_manager/reg").hasRole("PURCHASEMANAGER")
                         .anyRequest().authenticated()
@@ -88,4 +90,20 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+
+
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+////        configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://192.168.88.250:4200"));
+//        configuration.setAllowedOrigins(List.of("*"));
+//        configuration.setAllowedMethods(List.of("GET", "POST", "DELETE", "PUT", "OPTIONS"));
+//        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+//        configuration.setAllowCredentials(true);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 }

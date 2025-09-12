@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Buyer } from '../../../model/Merchandiser/buyer.model';
 import { Uom } from '../../../model/Merchandiser/uom.model';
@@ -10,6 +10,7 @@ import { RawMaterialsModel } from '../../../model/Merchandiser/raw.model';
 import { environment } from '../../environments/environment';
 import { BomResponseDTO } from '../../../model/bomResponseDTO';
 import { FullOrderViewResponseDTO } from '../../../model/orderResponseDTO';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -41,34 +42,77 @@ export class MerchandiserService {
 
 
 
- 
 
 
 
-  constructor(private http: HttpClient) { }
+
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
 
 
   // buyer add, update, delete ,view start
   getAllBuyer(): Observable<any> {
 
-    return this.http.get(this.baseUrlBuyer);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.get(this.baseUrlBuyer, { headers });
 
   }
 
   saveBuyer(buy: Buyer): Observable<any> {
 
-    return this.http.post(this.baseUrlBuyer, buy);
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.post(this.baseUrlBuyer, buy, { headers });
   }
 
 
 
   getBuyerById(id: string): Observable<any> {
 
-    return this.http.get(this.baseUrlBuyer + '/' + id);
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.get(this.baseUrlBuyer + '/' + id, { headers });
   }
+
+
   updateBuyer(id: string, buy: Buyer): Observable<any> {
 
-    return this.http.put(this.baseUrlBuyer + '/' + id, buy);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.put(this.baseUrlBuyer + '/' + id, buy, { headers });
   }
 
 
@@ -79,25 +123,70 @@ export class MerchandiserService {
 
   getAllUom(): Observable<any> {
 
-    return this.http.get(this.baseUrlUOM);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.get(this.baseUrlUOM, { headers });
   }
 
   saveUom(uom: Uom): Observable<any> {
 
-    return this.http.post(this.baseUrlUOM, uom);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.post(this.baseUrlUOM, uom, { headers });
   }
   deleteUom(id: string): Observable<any> {
 
-    return this.http.delete(this.baseUrlUOM + '/' + id);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.delete(this.baseUrlUOM + '/' + id, { headers });
   }
 
   getUomById(id: string): Observable<any> {
 
-    return this.http.get(this.baseUrlUOM + '/' + id);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.get(this.baseUrlUOM + '/' + id, { headers });
   }
   updateManagement(id: string, uom: Uom): Observable<any> {
 
-    return this.http.put(this.baseUrlUOM + '/' + id, uom);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.put(this.baseUrlUOM + '/' + id, uom, { headers });
   }
 
 
@@ -109,12 +198,30 @@ export class MerchandiserService {
 
   getAllBom(): Observable<any> {
 
-    return this.http.get(this.baseUrlBom);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.get(this.baseUrlBom, { headers });
   }
 
   saveBom(bom: BomStyle): Observable<any> {
 
-    return this.http.post(this.baseUrlBom, bom);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.post(this.baseUrlBom, bom, { headers });
   }
 
   // BOM add, update , delete , view end
@@ -123,16 +230,45 @@ export class MerchandiserService {
 
   getAllBomView(): Observable<any> {
 
-    return this.http.get(this.baseUrlBomView);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.get(this.baseUrlBomView, { headers });
   }
 
   saveBomView(bomview: Bomview): Observable<any> {
 
-    return this.http.post(this.baseUrlBomView, bomview);
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+
+    return this.http.post(this.baseUrlBomView, bomview, { headers });
   }
 
   getBomByStyle(styleCode: string): Observable<any> {
-    return this.http.get(this.baseUrlBomView + "?bom.styleCode=" + styleCode);
+
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get(this.baseUrlBomView + "?bom.styleCode=" + styleCode, { headers });
   }
 
   // BOMBOMVIEW add, update , delete , view end
@@ -141,10 +277,30 @@ export class MerchandiserService {
 
 
   getAllOrder(): Observable<any> {
-    return this.http.get(this.baseUrlOrder);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get(this.baseUrlOrder, { headers });
   }
+
+
   saveOder(order: Order): Observable<any> {
-    return this.http.post(this.baseUrlOrder, order);
+
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.post(this.baseUrlOrder, order, { headers });
   }
 
 
@@ -153,28 +309,63 @@ export class MerchandiserService {
 
 
   getOrderByStyle(styleCode: string): Observable<FullOrderViewResponseDTO[]> {
-    return this.http.get<FullOrderViewResponseDTO[]>(`${this.baseUrlOrder}/by-style/${styleCode}`);
+
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get<FullOrderViewResponseDTO[]>(`${this.baseUrlOrder}/by-style/${styleCode}`, { headers });
   }
 
-  // OrderStatus add, update, delete, view start
-
-
-
-  // OrderStatus add, update, delete, view end
 
 
   viewFullOrder(id: number): Observable<any> {
-    return this.http.get(this.baseUrlOrder + '/' + id);
+
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get(this.baseUrlOrder + '/' + id, { headers });
   }
 
   // raw materials /////////////////
 
 
   getAllRawMaterials(): Observable<any> {
-    return this.http.get(this.baseUrlRawMaterials);
+
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get(this.baseUrlRawMaterials, { headers });
   }
   saveRawMaterials(raw: RawMaterialsModel): Observable<any> {
-    return this.http.post(this.baseUrlRawMaterials, raw);
+
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.post(this.baseUrlRawMaterials, raw, { headers });
   }
 
 
@@ -182,12 +373,32 @@ export class MerchandiserService {
 
 
   getBomsByStyleCode(styleCode: string): Observable<BomResponseDTO[]> {
-    return this.http.get<BomResponseDTO[]>(`http://localhost:8080/api/bom/style/${styleCode}`);
+
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get<BomResponseDTO[]>(`http://localhost:8080/api/bom/style/${styleCode}`, { headers });
   }
 
 
   getFullOrderById(id: number): Observable<FullOrderViewResponseDTO> {
-    return this.http.get<FullOrderViewResponseDTO>(`http://localhost:8080/api/order/${id}`);
+
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get<FullOrderViewResponseDTO>(`http://localhost:8080/api/order/${id}`, { headers });
   }
 
 

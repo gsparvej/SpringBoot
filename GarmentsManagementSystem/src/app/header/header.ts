@@ -25,6 +25,8 @@ export class Header implements OnInit{
         // this.userRole = user?.role || null;
   
       // });
+
+      this.userRole = this.authService.getUserRole();
     }
 
 

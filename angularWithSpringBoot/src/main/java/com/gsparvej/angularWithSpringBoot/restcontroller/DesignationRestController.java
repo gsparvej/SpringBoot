@@ -52,7 +52,7 @@ public class DesignationRestController {
     public void deleteById(@PathVariable Integer id) {
         designationService.delete(id);
     }
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public Designation update(@PathVariable Integer id, @RequestBody Designation designation) {
         return designationService.update(id, designation);
     }

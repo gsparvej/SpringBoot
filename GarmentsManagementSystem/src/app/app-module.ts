@@ -6,7 +6,7 @@ import { App } from './app';
 import { ViewAllEmployee } from './HR/view-all-employee/view-all-employee';
 import { AddEmployee } from './HR/add-employee/add-employee';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
 import { Header } from './header/header';
 
 import { AddDepartment } from './HR/add-department/add-department';
@@ -77,6 +77,7 @@ import { SuperAdmin } from './Registration/super-admin/super-admin';
 import { Login } from './Registration/login/login';
 import { AdminProfile } from './Profile/admin-profile/admin-profile';
 import { SuperAdminProfile } from './Profile/super-admin-profile/super-admin-profile';
+import { AuthInterceptor } from './service/Auth/auth-interceptor';
 
 
 @NgModule({
@@ -165,7 +166,9 @@ import { SuperAdminProfile } from './Profile/super-admin-profile/super-admin-pro
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [App]
 })

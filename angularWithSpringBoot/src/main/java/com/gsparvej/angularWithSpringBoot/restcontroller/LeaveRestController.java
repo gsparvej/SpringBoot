@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/leave")
-@CrossOrigin("*")
+
 public class LeaveRestController {
     @Autowired
     private LeaveService leaveService;

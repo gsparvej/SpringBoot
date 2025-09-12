@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/bomstyle")
-@CrossOrigin("*")
+
 public class BomStyleRestController {
 
     @Autowired

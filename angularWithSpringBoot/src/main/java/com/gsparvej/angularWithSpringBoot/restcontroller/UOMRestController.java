@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/uom")
-@CrossOrigin("*")
+
 public class UOMRestController {
 
     @Autowired

@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/proSummaryorder")
-@CrossOrigin("*")
 public class ProductionSummaryRestController {
 
     @Autowired

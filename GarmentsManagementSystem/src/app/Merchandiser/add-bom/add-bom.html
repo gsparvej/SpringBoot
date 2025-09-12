@@ -1,31 +1,60 @@
-<div class="container border rounded my-3">
-    <h1 class="text-center text-success">BOM Style </h1>
+<div class="container my-5">
+  <div class="card shadow-lg border-0 rounded-4 p-4 bg-white">
+    <h2 class="text-center text-success fw-bold mb-4">BOM Style</h2>
 
     <form [formGroup]="formBom" method="post">
- <div class="row">
-    <div class="col-md-6">
-     <label for="" class="form-label">Style Code </label>
-    <input type="text" class="form-control" id="name" formControlName="styleCode" placeholder="**ABC**">
-  </div>
+      <div class="row g-4">
 
-  <div class="col-md-6">
-     <label for="" class="form-label">Style Type </label>
-    <input type="text" class="form-control" id="name" formControlName="styleType" placeholder="Casual">
-  </div>
-
-  <div class="col-md-6">
-    <label for="" class="form-label">Description</label>
-    <input type="text" class="form-control" id="description" formControlName="description" placeholder="**Shirt**">
-  </div>
- </div>
-    <div class="row mt-3 text-center">
-            <div class="col-md-6">
-                <button type="submit" class="btn btn-success text-center mb-2"  (click)="addBom()">Save</button>
-            </div>
-            <div class="col-md-6">
-                <button type="reset" class="btn btn-danger text-center mb-2" >Reset</button>
-            </div>
+        <!-- Style Code -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Style Code</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="styleCode"
+            formControlName="styleCode"
+            placeholder="Enter style code e.g. ABC123"
+          />
         </div>
-</form>
 
+        <!-- Style Type -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Style Type</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="styleType"
+            formControlName="styleType"
+            placeholder="e.g. Casual, Formal"
+          />
+        </div>
+
+        <!-- Description -->
+        <div class="col-md-12">
+          <label class="form-label fw-semibold">Description</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="description"
+            formControlName="description"
+            placeholder="Short description of the style"
+          />
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="row mt-5">
+        <div class="col-md-6 d-grid">
+          <button type="submit" class="btn btn-success btn-lg" (click)="addBom()">
+            <i class="bi bi-check-circle me-2"></i> Save
+          </button>
+        </div>
+        <div class="col-md-6 d-grid">
+          <button type="reset" class="btn btn-outline-danger btn-lg">
+            <i class="bi bi-arrow-counterclockwise me-2"></i> Reset
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

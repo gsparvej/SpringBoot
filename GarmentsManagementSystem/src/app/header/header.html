@@ -22,7 +22,8 @@
 
       <!-- Attendance -->
        <!-- <ng-container ngIf=""> -->
-      <li class="nav-item">
+       @if(userRole==='ADMIN' || userRole===''){
+        <li class="nav-item">
         <a class="nav-link text-white" data-bs-toggle="collapse" href="#attendanceMenu" role="button">
           <i class="fas fa-calendar-check me-1 text-warning"></i> Attendance
         </a>
@@ -32,6 +33,7 @@
             Leave</a>
         </div>
       </li>
+       }
       <!-- </ng-container> -->
 
       <!-- Merchandise -->
