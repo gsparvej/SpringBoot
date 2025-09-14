@@ -70,6 +70,14 @@ import { SuperAdmin } from './Registration/super-admin/super-admin';
 import { Admin } from './Registration/admin/admin';
 import { AdminProfile } from './Profile/admin-profile/admin-profile';
 import { Login } from './Registration/login/login';
+import { MerchandiserManagerProfile } from './Profile/merchandiser-manager-profile/merchandiser-manager-profile';
+import { ProductionManagerProfile } from './Profile/production-manager-profile/production-manager-profile';
+import { PurchaseManagerProfile } from './Profile/purchase-manager-profile/purchase-manager-profile';
+import { SuperAdminProfile } from './Profile/super-admin-profile/super-admin-profile';
+import { HrAdmin } from './Registration/hr-admin/hr-admin';
+import { MerchandiserManager } from './Registration/merchandiser-manager/merchandiser-manager';
+import { PurchaseManager } from './Registration/purchase-manager/purchase-manager';
+import { ProductionManager } from './Registration/production-manager/production-manager';
 
 
 const routes: Routes = [
@@ -147,12 +155,21 @@ const routes: Routes = [
   {path: 'login' , component: Login},
   {path: 'superAdminReg' , component: SuperAdmin},
   {path: 'adminReg' , component: Admin},
+  {path: 'hrAdminReg' , component: HrAdmin},
+  {path: 'merchandiserManagerReg', component: MerchandiserManager},
+  {path: 'purchaseManagerReg' , component: PurchaseManager},
+  {path: 'productionManagerReg' , component: ProductionManager},
+
 
 
 
   // profile's 
 
-  {path: 'adminProfile' , component: AdminProfile}
+  {path: 'superAdminProfile' , component: SuperAdminProfile},
+  {path: 'adminProfile' , component: AdminProfile},
+  {path: 'merchanProfile' , component: MerchandiserManagerProfile},
+  {path: 'proManagerProfile', component: ProductionManagerProfile},
+  {path: 'purchaseManagerProfile' , component: PurchaseManagerProfile}
 
 ];
 

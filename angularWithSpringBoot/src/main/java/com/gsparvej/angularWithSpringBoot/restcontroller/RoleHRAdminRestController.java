@@ -13,6 +13,7 @@ import com.gsparvej.angularWithSpringBoot.service.RoleHRAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,7 @@ import javax.security.sasl.AuthenticationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/hr_admin")
@@ -29,6 +31,8 @@ public class RoleHRAdminRestController {
 
     @Autowired
     private AuthService authService;
+    @Autowired
+    private IUserRepo userRepo;
 
     @Autowired
     private RoleHRAdminService roleHRAdminService;
@@ -74,6 +78,17 @@ public class RoleHRAdminRestController {
             response.put("message", "Admin save failed: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile(Authentication authentication) {
+        System.out.println("Authenticated User: " + authentication.getName());
+        System.out.println("Authorities: " + authentication.getAuthorities());
+        String email = authentication.getName();
+        Optional<User> user =userRepo.findByEmail(email);
+        RoleHRAdmin roleHRAdmin = roleHRAdminService.getProfileByUserId(user.get().getId());
+        return ResponseEntity.ok(roleHRAdmin);
+
     }
 
     // Get all hr admins

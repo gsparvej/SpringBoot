@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { SuperAdminService } from '../../service/Auth/super-admin-service';
 
 @Component({
   selector: 'app-super-admin-profile',
@@ -6,6 +7,36 @@ import { Component } from '@angular/core';
   templateUrl: './super-admin-profile.html',
   styleUrl: './super-admin-profile.css'
 })
-export class SuperAdminProfile {
+export class SuperAdminProfile implements OnInit{
+  
+  
+  profile: any = null;
+  loading = true;
+  error = '';
+
+  
+
+  constructor(private superAdminService: SuperAdminService,
+    private cdr: ChangeDetectorRef
+  ) { }
+
+  ngOnInit(): void {
+    this.getProfile();
+  }
+
+  getProfile() {
+    this.superAdminService.getProfile().subscribe({
+      next: (data) => {
+        this.profile = data;
+        this.cdr.markForCheck();
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load profile ❌';
+        console.error(err);
+        this.loading = false;
+      }
+    });
+  }
 
 }

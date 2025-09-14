@@ -43,6 +43,6 @@ export class SuperAdminService {
       }
     }
 
-    return this.http.get<RoleSuperAdmin>(`${environment.apiBaseUrl}/profile`, { headers });
+    return this.http.get<RoleSuperAdmin>(`${environment.apiBaseUrl}/super_admin/profile`, { headers });
   }
 }

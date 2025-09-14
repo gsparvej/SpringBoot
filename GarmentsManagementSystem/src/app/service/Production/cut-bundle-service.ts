@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CutBundle } from '../../../model/Production/cutBundle.model';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -10,25 +11,74 @@ import { CutBundle } from '../../../model/Production/cutBundle.model';
 export class CutBundleService {
   private baseUrl = environment.apiBaseUrl + '/cutBundle';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
 
   getAllCutBundle(): Observable<CutBundle[]> {
-      return this.http.get<CutBundle[]>(`${this.baseUrl}`);
+
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
     }
-  
-    getById(id: number): Observable<CutBundle> {
-      return this.http.get<CutBundle>(`${this.baseUrl}/${id}`);
+    return this.http.get<CutBundle[]>(`${this.baseUrl}`, { headers });
+  }
+
+  getById(id: number): Observable<CutBundle> {
+    
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
     }
-  
-    createCutBundle(cutBundle: CutBundle): Observable<CutBundle> {
-      return this.http.post<CutBundle>(`${this.baseUrl}`, cutBundle);
+
+    return this.http.get<CutBundle>(`${this.baseUrl}/${id}` ,{ headers});
+  }
+
+  createCutBundle(cutBundle: CutBundle): Observable<CutBundle> {
+    
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
     }
-  
-    updateCutBundle(id: number, cutBundle: CutBundle): Observable<CutBundle> {
-      return this.http.put<CutBundle>(`${this.baseUrl}/${id}`, cutBundle);
+    return this.http.post<CutBundle>(`${this.baseUrl}`, cutBundle , {headers});
+  }
+
+  updateCutBundle(id: number, cutBundle: CutBundle): Observable<CutBundle> {
+    
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
     }
-  
-    deleteCutBundle(id: number): Observable<void> {
-      return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.put<CutBundle>(`${this.baseUrl}/${id}`, cutBundle , {headers});
+  }
+
+  deleteCutBundle(id: number): Observable<void> {
+    
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
     }
+    return this.http.delete<void>(`${this.baseUrl}/${id}` , {headers});
+  }
 }

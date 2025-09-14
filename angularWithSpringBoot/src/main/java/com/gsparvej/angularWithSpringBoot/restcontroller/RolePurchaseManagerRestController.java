@@ -6,12 +6,15 @@ import com.gsparvej.angularWithSpringBoot.dto.RoleProductionManagerResponseDTO;
 import com.gsparvej.angularWithSpringBoot.dto.RolePurchaseManagerResponseDTO;
 import com.gsparvej.angularWithSpringBoot.entity.RoleProductionManager;
 import com.gsparvej.angularWithSpringBoot.entity.RolePurchaseManager;
+import com.gsparvej.angularWithSpringBoot.entity.RoleSuperAdmin;
 import com.gsparvej.angularWithSpringBoot.entity.User;
+import com.gsparvej.angularWithSpringBoot.repository.IUserRepo;
 import com.gsparvej.angularWithSpringBoot.service.AuthService;
 import com.gsparvej.angularWithSpringBoot.service.RolePurchaseManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +22,7 @@ import javax.security.sasl.AuthenticationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/purchase_manager")
@@ -26,6 +30,9 @@ public class RolePurchaseManagerRestController {
 
     @Autowired
     private AuthService authService;
+    @Autowired
+    private IUserRepo userRepo;
+
 
     @Autowired
     private RolePurchaseManagerService rolePurchaseManagerService;
@@ -72,6 +79,18 @@ public class RolePurchaseManagerRestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile(Authentication authentication) {
+        System.out.println("Authenticated User: " + authentication.getName());
+        System.out.println("Authorities: " + authentication.getAuthorities());
+        String email = authentication.getName();
+        Optional<User> user =userRepo.findByEmail(email);
+        RolePurchaseManager rolePurchaseManager = rolePurchaseManagerService.getProfileByUserId(user.get().getId());
+        return ResponseEntity.ok(rolePurchaseManager);
+
+    }
+
 
     // Get all Purchase manager
     @GetMapping("all")

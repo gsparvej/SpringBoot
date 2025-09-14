@@ -8,22 +8,60 @@
         <a class="nav-link text-white" routerLink="/home"><i class="fas fa-home me-1 text-primary"></i> Home</a>
       </li>
 
-
+      @if(userRole === 'SUPERADMIN') {
+        
       <li class="nav-item">
+        <!-- Trigger for Collapsible Menu -->
+        <a class="nav-link text-white" data-bs-toggle="collapse" href="#registrationMenu">
+          <i class="fas fa-home me-1 text-primary"></i> Registration
+        </a>
+        <!-- Collapsible Menu for Subcategories -->
+        <div class="collapse ps-3" id="registrationMenu">
+          <a class="nav-link text-white" routerLink="/adminReg">
+            <i class="fas fa-user-shield me-1"></i> Admin Registration
+          </a>
+          <a class="nav-link text-white" routerLink="/hrAdminReg">
+            <i class="fas fa-users-cog me-1"></i> HR Admin Registration
+          </a>
+          <a class="nav-link text-white" routerLink="/merchandiserManagerReg">
+            <i class="fas fa-user-tie me-1"></i> Merchandiser Manager Registration
+          </a>
+          <a class="nav-link text-white" routerLink="/purchaseManagerReg">
+            <i class="fas fa-box-open me-1"></i> Purchase Manager Registration
+          </a>
+          <a class="nav-link text-white" routerLink="/productionManagerReg">
+            <i class="fas fa-industry me-1"></i> Production Manager Registration
+          </a>
+        </div>
+      </li>
+      }
+
+
+
+
+      @if (userRole=== 'SUPERADMIN' || userRole === 'ADMIN'  || userRole === 'HRADMIN') {
+        <li class="nav-item">
         <a class="nav-link text-white" routerLink="/addEmp"><i class="fas fa-user-plus me-1 text-info"></i> Add
           Employee</a>
       </li>
-
-
-      <li class="nav-item">
+      }
+      @if (userRole=== 'SUPERADMIN' || userRole === 'ADMIN'  || userRole === 'HRADMIN') {
+        <li class="nav-item">
         <a class="nav-link text-white" routerLink="/viewAllEmp"><i class="fas fa-users me-1 text-info"></i> View All
           Employees</a>
       </li>
 
+      }
+
+
+
+
+
+     
       <!-- Attendance -->
-       <!-- <ng-container ngIf=""> -->
-       @if(userRole==='ADMIN' || userRole===''){
-        <li class="nav-item">
+      <!-- <ng-container ngIf=""> -->
+      @if(userRole==='ADMIN' || userRole === 'SUPERADMIN'){
+      <li class="nav-item">
         <a class="nav-link text-white" data-bs-toggle="collapse" href="#attendanceMenu" role="button">
           <i class="fas fa-calendar-check me-1 text-warning"></i> Attendance
         </a>
@@ -33,11 +71,12 @@
             Leave</a>
         </div>
       </li>
-       }
+      }
       <!-- </ng-container> -->
 
       <!-- Merchandise -->
-      <li class="nav-item">
+     @if (userRole === 'SUPERADMIN' || userRole === 'MERCHANDISERMANAGER') {
+       <li class="nav-item">
         <a class="nav-link text-white" data-bs-toggle="collapse" href="#merchMenu" role="button">
           <i class="fas fa-tags me-1 text-success"></i> Merchandise
         </a>
@@ -63,9 +102,11 @@
           </a>
         </div>
       </li>
+     }
 
       <!-- Purchase -->
-      <li class="nav-item">
+      @if (userRole === 'SUPERADMIN' || userRole === 'PURCHASEMANAGER') {
+        <li class="nav-item">
         <a class="nav-link text-white" data-bs-toggle="collapse" href="#purchaseMenu" role="button">
           <i class="fas fa-shopping-cart me-1 text-danger"></i> Purchase
         </a>
@@ -86,68 +127,75 @@
           <a class="nav-link text-white" routerLink="/viewAllItem"><i class="fas fa-cubes me-1"></i> View Items</a>
         </div>
       </li>
+      }
 
       <!-- Production -->
 
 
 
       <!-- production planning -->
-<!-- 👷 Production Planning & Control -->
-<li class="nav-item">
-  <a class="nav-link text-white" data-bs-toggle="collapse" href="#productionPlanMenu" role="button">
-    <i class="fas fa-industry me-1 text-info"></i> Production Planning & Control
-  </a>
-  <div class="collapse ps-3" id="productionPlanMenu">
+      <!-- 👷 Production Planning & Control -->
+     @if (userRole === 'SUPERADMIN' || userRole === 'PRODUCTIONMANAGER') {
+       <li class="nav-item">
+        <a class="nav-link text-white" data-bs-toggle="collapse" href="#productionPlanMenu" role="button">
+          <i class="fas fa-industry me-1 text-info"></i> Production Planning & Control
+        </a>
+        <div class="collapse ps-3" id="productionPlanMenu">
 
-    <a class="nav-link text-white" routerLink="/proSumReport">
-      <i class="fas fa-file-alt me-1 text-success"></i> Production Summary
-    </a>
-    <a class="nav-link text-white" routerLink="/productionOrder">
-      <i class="fas fa-file-alt me-1 text-success"></i> Add Production Order
-    </a>
-    <a class="nav-link text-white" routerLink="/addDayWisePro">
-      <i class="fas fa-calendar-day me-1 text-success"></i> Add Day Wise Production
-    </a>
-    <a class="nav-link text-white" routerLink="/lineList">
-      <i class="fas fa-stream me-1 text-primary"></i> Line List
-    </a>
-    <a class="nav-link text-white" routerLink="/machineList">
-      <i class="fas fa-tools me-1 text-warning"></i> Machine List
-    </a>
-    <hr>
-    <a class="nav-link text-white" routerLink="/productionorderList">
-      <i class="fas fa-list-alt me-1 text-info"></i> View Production Orders
-    </a>
-    <a class="nav-link text-white" routerLink="/viewDayWisePro">
-      <i class="fas fa-calendar-check me-1 text-info"></i> View Day Wise Production
-    </a>
-  </div>
-</li>
+          <a class="nav-link text-white" routerLink="/proSumReport">
+            <i class="fas fa-file-alt me-1 text-success"></i> Production Summary
+          </a>
+          <a class="nav-link text-white" routerLink="/productionOrder">
+            <i class="fas fa-file-alt me-1 text-success"></i> Add Production Order
+          </a>
+          <a class="nav-link text-white" routerLink="/addDayWisePro">
+            <i class="fas fa-calendar-day me-1 text-success"></i> Add Day Wise Production
+          </a>
+          <a class="nav-link text-white" routerLink="/lineList">
+            <i class="fas fa-stream me-1 text-primary"></i> Line List
+          </a>
+          <a class="nav-link text-white" routerLink="/machineList">
+            <i class="fas fa-tools me-1 text-warning"></i> Machine List
+          </a>
+          <hr>
+          <a class="nav-link text-white" routerLink="/productionorderList">
+            <i class="fas fa-list-alt me-1 text-info"></i> View Production Orders
+          </a>
+          <a class="nav-link text-white" routerLink="/viewDayWisePro">
+            <i class="fas fa-calendar-check me-1 text-info"></i> View Day Wise Production
+          </a>
+        </div>
+      </li>
+     }
 
-<!-- ✂️ Cutting -->
-<li class="nav-item">
-  <a class="nav-link text-white" data-bs-toggle="collapse" href="#CuttingMenu" role="button">
-    <i class="fas fa-cut me-1 text-warning"></i> Cutting
-  </a>
-  <div class="collapse ps-3" id="CuttingMenu">
-    <a class="nav-link text-white" routerLink="/addCuttingPlan">
-      <i class="fas fa-project-diagram me-1 text-success"></i> Add Cutting Plan
-    </a>
-    <a class="nav-link text-white" routerLink="/addCutBundle">
-      <i class="fas fa-boxes-stacked me-1 text-success"></i> Add Cut Bundle
-    </a>
-    <hr>
-    <a class="nav-link text-white" routerLink="/viewCuttingPlan">
-      <i class="fas fa-eye me-1 text-info"></i> View Cutting Plan
-    </a>
-    <a class="nav-link text-white" routerLink="/viewCutBundle">
-      <i class="fas fa-box-open me-1 text-info"></i> View Cut Bundle
-    </a>
-  </div>
-</li>
+      <!-- ✂️ Cutting -->
+     
+      @if (userRole === 'SUPERADMIN' || userRole === 'PRODUCTIONMANAGER') {
+         <li class="nav-item">
+        <a class="nav-link text-white" data-bs-toggle="collapse" href="#CuttingMenu" role="button">
+          <i class="fas fa-cut me-1 text-warning"></i> Cutting
+        </a>
+        <div class="collapse ps-3" id="CuttingMenu">
+          <a class="nav-link text-white" routerLink="/addCuttingPlan">
+            <i class="fas fa-project-diagram me-1 text-success"></i> Add Cutting Plan
+          </a>
+          <a class="nav-link text-white" routerLink="/addCutBundle">
+            <i class="fas fa-boxes-stacked me-1 text-success"></i> Add Cut Bundle
+          </a>
+          <hr>
+          <a class="nav-link text-white" routerLink="/viewCuttingPlan">
+            <i class="fas fa-eye me-1 text-info"></i> View Cutting Plan
+          </a>
+          <a class="nav-link text-white" routerLink="/viewCutBundle">
+            <i class="fas fa-box-open me-1 text-info"></i> View Cut Bundle
+          </a>
+        </div>
+      </li>
+      }
 
 
-      <li class="nav-item">
+      @if (userRole=== 'SUPERADMIN' || userRole=== 'PRODUCTIONMANAGER') {
+        <li class="nav-item">
         <a class="nav-link text-white" data-bs-toggle="collapse" href="#SewingMenu" role="button">
           <i class="fas fa-tshirt me-1 text-success"></i> Sewing
         </a>
@@ -160,10 +208,12 @@
           </a>
         </div>
       </li>
+      }
 
 
       <!-- Department -->
-      <li class="nav-item">
+     @if (userRole=== 'SUPERADMIN' || userRole=== 'ADMIN' || userRole=== 'HRADMIN') {
+       <li class="nav-item">
         <a class="nav-link text-white" data-bs-toggle="collapse" href="#deptMenu" role="button">
           <i class="fas fa-building me-1 text-secondary"></i> Department
         </a>
@@ -177,9 +227,11 @@
             Departments</a>
         </div>
       </li>
+     }
 
       <!-- Managers -->
-      <li class="nav-item">
+      @if (userRole === 'SUPERADMIN' || userRole=== 'PURCHASEMANAGER' || userRole=== 'MERCHANDISERMANAGER' || userRole=== 'PRODUCTIONMANAGER') {
+        <li class="nav-item">
         <a class="nav-link text-white" data-bs-toggle="collapse" href="#managersMenu" role="button">
           <i class="fas fa-user-shield me-1 text-warning"></i> Managers
         </a>
@@ -187,6 +239,8 @@
           <a class="nav-link text-white" routerLink="/chatBox"><i class="fas fa-comments me-1"></i> Chat Box</a>
         </div>
       </li>
+      }
+
     </ul>
   </nav>
 

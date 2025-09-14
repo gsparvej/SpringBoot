@@ -4,14 +4,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gsparvej.angularWithSpringBoot.dto.RoleMerchandiserManagerResponseDTO;
 import com.gsparvej.angularWithSpringBoot.dto.RoleProductionManagerResponseDTO;
+import com.gsparvej.angularWithSpringBoot.entity.RoleAdmin;
 import com.gsparvej.angularWithSpringBoot.entity.RoleMerchandiserManager;
 import com.gsparvej.angularWithSpringBoot.entity.RoleProductionManager;
 import com.gsparvej.angularWithSpringBoot.entity.User;
+import com.gsparvej.angularWithSpringBoot.repository.IUserRepo;
 import com.gsparvej.angularWithSpringBoot.service.AuthService;
 import com.gsparvej.angularWithSpringBoot.service.RoleProductionManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +22,7 @@ import javax.security.sasl.AuthenticationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/pro_manager")
@@ -26,6 +30,8 @@ public class RoleProductionManagerRestController {
 
     @Autowired
     private AuthService authService;
+    @Autowired
+    private IUserRepo userRepo;
 
     @Autowired
     private RoleProductionManagerService roleProductionManagerService;
@@ -70,6 +76,16 @@ public class RoleProductionManagerRestController {
             response.put("message", "Admin save failed: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+    }
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile(Authentication authentication) {
+        System.out.println("Authenticated User: " + authentication.getName());
+        System.out.println("Authorities: " + authentication.getAuthorities());
+        String email = authentication.getName();
+        Optional<User> user =userRepo.findByEmail(email);
+        RoleProductionManager roleProductionManager = roleProductionManagerService.getProfileByUserId(user.get().getId());
+        return ResponseEntity.ok(roleProductionManager);
+
     }
 
     // Get all merchandiser manager

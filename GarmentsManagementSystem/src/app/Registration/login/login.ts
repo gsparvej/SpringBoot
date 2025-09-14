@@ -45,12 +45,22 @@ export class Login {
         const role = this.authService.getUserRole();
 
         if (role === 'SUPERADMIN') {
-          this.router.navigate(['/jobsekpro']);
+          this.router.navigate(['/superAdminProfile']);
         } else if (role === 'HRADMIN') {
           this.router.navigate(['/empPprofile']);
         } else if (role === 'ADMIN') {
           this.router.navigate(['/adminProfile']);
-        } else {
+        }
+         else if (role === 'MERCHANDISERMANAGER') {
+          this.router.navigate(['/merchanProfile']);
+        } 
+         else if (role === 'PURCHASEMANAGER') {
+          this.router.navigate(['/purchaseManagerProfile']);
+        } 
+         else if (role === 'PRODUCTIONMANAGER') {
+          this.router.navigate(['/proManagerProfile']);
+        } 
+        else {
           this.router.navigate(['/']); // fallback
         }
       },

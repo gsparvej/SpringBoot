@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Line } from '../../../model/Production/line.model';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -10,25 +11,68 @@ import { Line } from '../../../model/Production/line.model';
 export class LineService {
   private baseUrl = environment.apiBaseUrl + '/line';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
 
-   getAllLine(): Observable<Line[]> {
-    return this.http.get<Line[]>(this.baseUrl);
+  getAllLine(): Observable<Line[]> {
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get<Line[]>(this.baseUrl, { headers });
   }
 
   getLineById(id: number): Observable<Line> {
-    return this.http.get<Line>(`${this.baseUrl}/${id}`);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.get<Line>(`${this.baseUrl}/${id}`, { headers });
   }
 
   createLine(line: Line): Observable<Line> {
-    return this.http.post<Line>(this.baseUrl, line);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.post<Line>(this.baseUrl, line, { headers });
   }
 
   updateLine(id: number, line: Line): Observable<Line> {
-    return this.http.put<Line>(`${this.baseUrl}/${id}`, line);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.put<Line>(`${this.baseUrl}/${id}`, line, { headers });
   }
 
   deleteLine(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    let headers = new HttpHeaders();
+
+    if (isPlatformBrowser(this.platformId)) {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        headers = headers.set('Authorization', 'Bearer ' + token);
+      }
+    }
+    return this.http.delete<void>(`${this.baseUrl}/${id}`, { headers });
   }
 }

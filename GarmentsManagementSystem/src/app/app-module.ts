@@ -78,6 +78,13 @@ import { Login } from './Registration/login/login';
 import { AdminProfile } from './Profile/admin-profile/admin-profile';
 import { SuperAdminProfile } from './Profile/super-admin-profile/super-admin-profile';
 import { AuthInterceptor } from './service/Auth/auth-interceptor';
+import { MerchandiserManagerProfile } from './Profile/merchandiser-manager-profile/merchandiser-manager-profile';
+import { ProductionManagerProfile } from './Profile/production-manager-profile/production-manager-profile';
+import { PurchaseManagerProfile } from './Profile/purchase-manager-profile/purchase-manager-profile';
+import { HrAdmin } from './Registration/hr-admin/hr-admin';
+import { MerchandiserManager } from './Registration/merchandiser-manager/merchandiser-manager';
+import { PurchaseManager } from './Registration/purchase-manager/purchase-manager';
+import { ProductionManager } from './Registration/production-manager/production-manager';
 
 
 @NgModule({
@@ -153,7 +160,14 @@ import { AuthInterceptor } from './service/Auth/auth-interceptor';
     SuperAdmin,
     Login,
     AdminProfile,
-    SuperAdminProfile
+    SuperAdminProfile,
+    MerchandiserManagerProfile,
+    ProductionManagerProfile,
+    PurchaseManagerProfile,
+    HrAdmin,
+    MerchandiserManager,
+    PurchaseManager,
+    ProductionManager
 
   ],
   imports: [
