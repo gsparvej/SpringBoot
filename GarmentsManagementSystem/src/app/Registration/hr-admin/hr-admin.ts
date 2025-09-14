@@ -49,7 +49,8 @@ export class HrAdmin {
     this.hrAdminService.registerHRAdmin(this.user, this.hradmin, this.photoFile)
       .subscribe({
         next: (res) => {
-          alert("Admin registered successfully ✅");
+          alert(" HR Admin registered successfully ");
+          this.resetForm();
           console.log(res);
         },
         error: (err) => {
@@ -58,4 +59,37 @@ export class HrAdmin {
         }
       });
   }
+
+
+   resetForm() {
+  // Reset user fields
+  this.user = {
+    name: '',
+    email: '',
+    password: '',
+    phone: '',
+    photo: '',
+    role: 'HRADMIN'
+  };
+
+  // Reset admin fields
+  this.hradmin = {
+    name: '',
+    email: '',
+    phone: '',
+    gender: '',
+    address: '',
+    dateOfBirth: '',
+    photo: ''
+  };
+
+  // Reset photo file
+  this.photoFile = null;
+
+  // Also clear the file input element value if you want
+  const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+  if (fileInput) {
+    fileInput.value = '';
+  }
+}
 }

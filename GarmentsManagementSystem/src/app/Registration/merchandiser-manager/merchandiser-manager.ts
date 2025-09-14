@@ -49,7 +49,8 @@ export class MerchandiserManager {
     this.merchandiserManagerService.registerMerchandiserManager(this.user, this.merchandiser, this.photoFile)
       .subscribe({
         next: (res) => {
-          alert("Merchandiser Manager registered successfully ✅");
+          alert("Merchandiser Manager registered successfully ");
+          this.resetForm();
           console.log(res);
         },
         error: (err) => {
@@ -58,4 +59,36 @@ export class MerchandiserManager {
         }
       });
   }
+
+   resetForm() {
+  // Reset user fields
+  this.user = {
+    name: '',
+    email: '',
+    password: '',
+    phone: '',
+    photo: '',
+    role: 'MERCHANDISERMANAGER'
+  };
+
+  // Reset admin fields
+  this.merchandiser = {
+    name: '',
+    email: '',
+    phone: '',
+    gender: '',
+    address: '',
+    dateOfBirth: '',
+    photo: ''
+  };
+
+  // Reset photo file
+  this.photoFile = null;
+
+  // Also clear the file input element value if you want
+  const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+  if (fileInput) {
+    fileInput.value = '';
+  }
+}
 }

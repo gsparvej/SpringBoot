@@ -51,6 +51,7 @@ export class Admin {
         .subscribe({
           next: (res) => {
             alert("Admin registered successfully ✅");
+            this.resetForm();
             console.log(res);
           },
           error: (err) => {
@@ -59,4 +60,40 @@ export class Admin {
           }
         });
     }
+
+
+
+
+    resetForm() {
+  // Reset user fields
+  this.user = {
+    name: '',
+    email: '',
+    password: '',
+    phone: '',
+    photo: '',
+    role: 'ADMIN'
+  };
+
+  // Reset admin fields
+  this.admin = {
+    name: '',
+    email: '',
+    phone: '',
+    gender: '',
+    address: '',
+    dateOfBirth: '',
+    photo: ''
+  };
+
+  // Reset photo file
+  this.photoFile = null;
+
+  // Also clear the file input element value if you want
+  const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+  if (fileInput) {
+    fileInput.value = '';
+  }
+}
+
 }
