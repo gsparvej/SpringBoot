@@ -13,7 +13,7 @@ export class ProductionManagerProfile implements OnInit{
   loading = true;
   error = '';
 
-  
+  imageUrl: string = "http://localhost:8080/images/roleProductionManager/";
 
   constructor(private productionManagerService: ProductionManagerService,
     private cdr: ChangeDetectorRef

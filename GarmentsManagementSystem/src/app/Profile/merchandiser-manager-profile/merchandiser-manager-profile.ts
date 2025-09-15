@@ -16,7 +16,7 @@ export class MerchandiserManagerProfile implements OnInit{
   loading = true;
   error = '';
 
-  
+  imageUrl: string = "http://localhost:8080/images/roleMerchandiserManager/";
 
   constructor(private merchandiserService: MerchandiserManagerService,
     private cdr: ChangeDetectorRef 

@@ -10,7 +10,7 @@
 
     <!-- Profile Photo -->
     <div class="profile-photo">
-      <img [src]="profile.photo" alt="Admin Photo" *ngIf="profile.photo; else noPhoto" />
+      <img [src]="imageUrl+profile.photo" alt="Merchandiser Manager Photo" *ngIf="profile.photo; else noPhoto" />
       <ng-template #noPhoto>
         <div class="placeholder-photo">No Photo</div>
       </ng-template>

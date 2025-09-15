@@ -1,6 +1,6 @@
 <div class="profile-container" *ngIf="!loading; else loadingTemplate">
 
-  <h2>Production Manager Profile</h2>
+  <h2 class="title">Production Manager Profile</h2>
 
   <div *ngIf="error" class="error-message">
     {{ error }}
@@ -10,7 +10,9 @@
 
     <!-- Profile Photo -->
     <div class="profile-photo">
-      <img [src]="profile.photo" alt="Admin Photo" *ngIf="profile.photo; else noPhoto" />
+      <ng-container *ngIf="profile.photo; else noPhoto">
+        <img [src]="imageUrl + profile.photo" alt="Production Manager Photo" />
+      </ng-container>
       <ng-template #noPhoto>
         <div class="placeholder-photo">No Photo</div>
       </ng-template>
@@ -18,12 +20,12 @@
 
     <!-- Profile Details -->
     <div class="profile-details">
-      <p><strong>Name:</strong> {{ profile.name }}</p>
-      <p><strong>Email:</strong> {{ profile.email }}</p>
-      <p><strong>Phone:</strong> {{ profile.phone }}</p>
-      <p><strong>Gender:</strong> {{ profile.gender }}</p>
-      <p><strong>Date of Birth:</strong> {{ profile.dateOfBirth | date: 'longDate' }}</p>
-      <p><strong>Address:</strong> {{ profile.address }}</p>
+      <div class="detail-row"><span>Name:</span> {{ profile.name }}</div>
+      <div class="detail-row"><span>Email:</span> {{ profile.email }}</div>
+      <div class="detail-row"><span>Phone:</span> {{ profile.phone }}</div>
+      <div class="detail-row"><span>Gender:</span> {{ profile.gender }}</div>
+      <div class="detail-row"><span>Date of Birth:</span> {{ profile.dateOfBirth | date: 'longDate' }}</div>
+      <div class="detail-row"><span>Address:</span> {{ profile.address }}</div>
     </div>
 
   </div>
