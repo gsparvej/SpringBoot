@@ -14,7 +14,7 @@ export class SuperAdminProfile implements OnInit{
   loading = true;
   error = '';
 
-  
+  imageUrl: string = "http://localhost:8080/images/roleSuperAdmin/";
 
   constructor(private superAdminService: SuperAdminService,
     private cdr: ChangeDetectorRef
