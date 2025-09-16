@@ -47,7 +47,7 @@ export class Login {
         if (role === 'SUPERADMIN') {
           this.router.navigate(['/superAdminProfile']);
         } else if (role === 'HRADMIN') {
-          this.router.navigate(['/empPprofile']);
+          this.router.navigate(['/hrAdminProfile']);
         } else if (role === 'ADMIN') {
           this.router.navigate(['/adminProfile']);
         }

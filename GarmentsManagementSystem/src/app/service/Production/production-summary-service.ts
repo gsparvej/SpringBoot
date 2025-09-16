@@ -52,6 +52,21 @@ export class ProductionSummaryService {
   return this.http.get(`${this.baseUrl}/production-summary`, { headers, params });
 }
 
+getProductionSummaryAll(orderId: number): Observable<any> {
+  let headers = new HttpHeaders();
+
+  if (isPlatformBrowser(this.platformId)) {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+  }
+
+  return this.http.get(`${this.baseUrl}/production-summaryAll`, {
+    headers: headers,          // <-- include headers here
+    params: { orderId: orderId.toString() }
+  });
+}
 
 
 }

@@ -37,27 +37,86 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/api/auth/login", "/api/auth/logout","/api/auth/active/**","/api/auth/all","/api/super_admin/reg", "/api/super_admin/all", "/api/admin/reg",
-                                "/api/admin/all" , "/api/hr_admin/reg", "/api/merchan_manager/reg", "/api/pro_manager/reg", "/api/purchase_manager/reg", "/images/**"
+                        .requestMatchers("/api/auth/login",
+                                "/api/auth/logout",
+                                "/api/auth/active/**",
+                                "/api/auth/all",
+                                "/api/super_admin/reg",
+                                "/api/super_admin/all",
+                                "/api/admin/reg",
+                                "/api/admin/all" ,
+                                "/api/hr_admin/reg",
+                                "/api/merchan_manager/reg",
+                                "/api/pro_manager/reg",
+                                "/api/purchase_manager/reg",
+                                "/images/**"
                                 ).permitAll()
 
-                        .requestMatchers("/api/super_admin/reg","/api/super_admin/profile", "/api/pro_manager/reg","/api/purchase_manager/reg").hasRole("SUPERADMIN")
+                        .requestMatchers("/api/super_admin/reg",
+                                "/api/super_admin/profile",
+                                "/api/pro_manager/reg",
+                                "/api/purchase_manager/reg")
+                        .hasRole("SUPERADMIN")
 
-                        .requestMatchers("/api/admin/reg", "/api/admin/profile","/api/department" ,"/api/department/**", "/api/designation/by-department/**",
-                                "/api/designation").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/reg",
+                                "/api/admin/profile",
+                                "/api/department",
+                                "/api/designation/by-department/**",
+                                "/api/designation")
+                        .hasRole("ADMIN")
 
-                        .requestMatchers("/api/hr_admin/reg").hasRole("HRADMIN")
+                        .requestMatchers("/api/hr_admin/reg")
+                        .hasRole("HRADMIN")
 
-                        .requestMatchers("/api/merchan_manager/**","/api/merchan_manager/profile", "/api/bom/style/**" ,"/api/buyer", "/api/buyer/**", "/api/bomstyle", "/api/bomstyle/**", "/api/uom", "/api/uom/**",
-                                "/api/raw_materials").hasRole("MERCHANDISERMANAGER")
+                        .requestMatchers("/api/merchan_manager/**",
+                                "/api/merchan_manager/profile",
+                                "/api/bom/style/**" ,
+                                "/api/buyer",
+                                "/api/buyer/**",
+                                "/api/raw_materials")
+                        .hasRole("MERCHANDISERMANAGER")
 
-                        .requestMatchers("/api/pro_manager/**", "/api/pro_manager/profile","/api/dayWisePro", "/api/dayWisePro/**", "/api/line", "/api/machine" , "/api/production_order", "/api/production_order/production_OrderId/**",
-                                "/api/proSummaryorder", "/api/proSummaryorder/production-summary","/api/cutBundle", "/api/cutting_plan", "/api/cutting_plan/production_OrderId/**" ).hasRole("PRODUCTIONMANAGER")
+                        .requestMatchers("/api/pro_manager/**",
+                                "/api/pro_manager/profile",
+                                "/api/dayWisePro",
+                                "/api/dayWisePro/**",
+                                "/api/line",
+                                "/api/machine" ,
+                                "/api/production_order",
+                                "/api/production_order/production_OrderId/**",
+                                "/api/proSummaryorder",
+                                "/api/proSummaryorder/production-summary",
+                                "/api/proSummaryorder/production-summaryAll",
+                                "/api/cutBundle",
+                                "/api/cutting_plan",
+                                "/api/cutting_plan/production_OrderId/**" )
+                        .hasRole("PRODUCTIONMANAGER")
 
-                        .requestMatchers("/api/purchase_manager/**","/api/purchase_manager/profile", "/api/vendor", "/api/vendor/**" , "/api/item", "/api/stock_in", "/api/stock_out", "/api/inventory", "/api/inventory/add", "/api/inventory/remove" ,
-                                "/api/requisition" , "/api/requisition/**", "/api/requisition/id/**", "/api/po" ,"/api/po/id/**").hasRole("PURCHASEMANAGER")
+                        .requestMatchers("/api/purchase_manager/**",
+                                "/api/purchase_manager/profile",
+                                "/api/vendor",
+                                "/api/vendor/**" ,
+                                "/api/item",
+                                "/api/stock_in",
+                                "/api/stock_out",
+                                "/api/inventory",
+                                "/api/inventory/add",
+                                "/api/inventory/remove" ,
+                                "/api/requisition" ,
+                                "/api/requisition/**",
+                                "/api/requisition/id/**",
+                                "/api/po" ,
+                                "/api/po/id/**")
+                        .hasRole("PURCHASEMANAGER")
 
-                        .requestMatchers("/api/order/**").hasAnyRole("PRODUCTIONMANAGER", "MERCHANDISERMANAGER")
+                        .requestMatchers("/api/order/**",
+                                "/api/bomstyle",
+                                "/api/bomstyle/**",
+                                "/api/uom",
+                                "/api/uom/**")
+                        .hasAnyRole("PRODUCTIONMANAGER", "MERCHANDISERMANAGER")
+                        .requestMatchers("/api/order/**", "/api/department/**")
+                        .hasAnyRole("MERCHANDISERMANAGER" , "PURCHASEMANAGER", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)

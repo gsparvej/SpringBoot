@@ -27,5 +27,11 @@ public class ProductionSummaryRestController {
         return productionSummaryService.findByOrder(order);
     }
 
+    //    its works perfectly
+    @GetMapping("/production-summaryAll")
+    public ReportDTO getProductionSummaryAll(@RequestParam Integer orderId) {
+        return productionSummaryService.findByOrderId(orderId);
+    }
+
 
 }

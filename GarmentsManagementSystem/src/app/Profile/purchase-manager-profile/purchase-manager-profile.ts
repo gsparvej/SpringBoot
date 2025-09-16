@@ -14,7 +14,7 @@ export class PurchaseManagerProfile implements OnInit{
   loading = true;
   error = '';
 
-  
+  imageUrl: string = "http://localhost:8080/images/rolePurchaseManager/";
 
   constructor(private purchaseManagerService: PurchaseManagerService,
     private cdr: ChangeDetectorRef

@@ -3,65 +3,96 @@
     <i class="fas fa-industry me-2"></i>Production Summary Report
   </h3>
 
-  <ng-container *ngIf="orders.length > 0; else noData">
-    <div *ngFor="let order of orders" class="mb-5">
-      <h5 class="text-secondary">
-        <i class="fas fa-hashtag me-2"></i>Order ID: {{ order.id }}
-      </h5>
+  <!-- 🔍 Search Input -->
+<div class="row justify-content-center mb-4">
+  <div class="col-md-6">
+    <div class="input-group shadow-sm">
+      <span class="input-group-text bg-primary text-white">
+        <i class="fas fa-search"></i>
+      </span>
+      <input
+        type="number"
+        [(ngModel)]="searchOrderId"
+        placeholder="Enter Order ID"
+        class="form-control"
+        style="border-left: none;"
+      />
+      <button class="btn btn-success" (click)="searchOrder()" title="Search by Order ID">
+        <i class="fas fa-search me-1"></i>Search
+      </button>
+      <button
+        class="btn btn-outline-secondary"
+        (click)="resetSearch()"
+        *ngIf="searchOrderId"
+        title="Reset"
+      >
+        <i class="fas fa-undo"></i>
+      </button>
+    </div>
+  </div>
+</div>
 
-      <ng-container *ngIf="orderSummaries[order.id]; else noSummary">
-        <table class="table table-bordered table-hover shadow-sm">
-          <thead class="table-dark text-center">
-            <tr>
-              <th>Type</th>
-              <th><i class="fas fa-cube"></i> Quantity</th>
-            </tr>
-          </thead>
-          <tbody class="text-center align-middle">
-            <tr>
-              <td>Short S</td>
-              <td>{{ orderSummaries[order.id].shortSTotal }}</td>
-            </tr>
-            <tr>
-              <td>Short M</td>
-              <td>{{ orderSummaries[order.id].shortMTotal }}</td>
-            </tr>
-            <tr>
-              <td>Short L</td>
-              <td>{{ orderSummaries[order.id].shortLTotal }}</td>
-            </tr>
-            <tr>
-              <td>Short XL</td>
-              <td>{{ orderSummaries[order.id].shortXLTotal }}</td>
-            </tr>
-            <tr>
-              <td>Full S</td>
-              <td>{{ orderSummaries[order.id].fullSTotal }}</td>
-            </tr>
-            <tr>
-              <td>Full M</td>
-              <td>{{ orderSummaries[order.id].fullMTotal }}</td>
-            </tr>
-            <tr>
-              <td>Full L</td>
-              <td>{{ orderSummaries[order.id].fullLTotal }}</td>
-            </tr>
-            <tr>
-              <td>Full XL</td>
-              <td>{{ orderSummaries[order.id].fullXLTotal }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </ng-container>
 
-      <ng-template #noSummary>
-        <div class="alert alert-warning text-center">
-          <i class="fas fa-info-circle me-2"></i>No summary data for this order.
-        </div>
-      </ng-template>
+  <!-- ❌ Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger text-center">
+    <i class="fas fa-exclamation-circle me-2"></i>{{ errorMessage }}
+  </div>
+
+  <!-- ✅ Orders Display -->
+  <ng-container *ngIf="filteredOrders.length > 0; else noData">
+    <div *ngFor="let order of filteredOrders" class="card mb-4 shadow-sm">
+      <div class="card-header bg-primary text-white d-flex justify-content-between">
+        <span><i class="fas fa-receipt me-2"></i>Order ID: {{ order.id }}</span>
+      </div>
+
+      <div class="card-body p-3">
+        <ng-container *ngIf="orderSummaries[order.id]; else noSummary">
+          <div class="row">
+            <!-- Short Sizes -->
+            <div class="col-md-6 mb-3">
+              <h5 class="text-success text-center mb-2">Short Sizes</h5>
+              <table class="table table-sm table-bordered text-center">
+                <thead class="table-success">
+                  <tr><th>Size</th><th>Produced</th><th>Remaining</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>S</td><td>{{ orderSummaries[order.id].shortSTotal }}</td><td>{{ orderSummaries[order.id].remainingShortSQty }}</td></tr>
+                  <tr><td>M</td><td>{{ orderSummaries[order.id].shortMTotal }}</td><td>{{ orderSummaries[order.id].remainingShortMQty }}</td></tr>
+                  <tr><td>L</td><td>{{ orderSummaries[order.id].shortLTotal }}</td><td>{{ orderSummaries[order.id].remainingShortLQty }}</td></tr>
+                  <tr><td>XL</td><td>{{ orderSummaries[order.id].shortXLTotal }}</td><td>{{ orderSummaries[order.id].remainingShortXLQty }}</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Full Sizes -->
+            <div class="col-md-6 mb-3">
+              <h5 class="text-info text-center mb-2">Full Sizes</h5>
+              <table class="table table-sm table-bordered text-center">
+                <thead class="table-info">
+                  <tr><th>Size</th><th>Produced</th><th>Remaining</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>S</td><td>{{ orderSummaries[order.id].fullSTotal }}</td><td>{{ orderSummaries[order.id].remainingFullSQty }}</td></tr>
+                  <tr><td>M</td><td>{{ orderSummaries[order.id].fullMTotal }}</td><td>{{ orderSummaries[order.id].remainingFullMQty }}</td></tr>
+                  <tr><td>L</td><td>{{ orderSummaries[order.id].fullLTotal }}</td><td>{{ orderSummaries[order.id].remainingFullLQty }}</td></tr>
+                  <tr><td>XL</td><td>{{ orderSummaries[order.id].fullXLTotal }}</td><td>{{ orderSummaries[order.id].remainingFullXLQty }}</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- যদি summary না থাকে -->
+        <ng-template #noSummary>
+          <div class="alert alert-warning text-center">
+            <i class="fas fa-exclamation-circle me-2"></i>No production summary found for this order.
+          </div>
+        </ng-template>
+      </div>
     </div>
   </ng-container>
 
+  <!-- যদি কোনো order না থাকে -->
   <ng-template #noData>
     <div class="alert alert-info text-center">
       <i class="fas fa-info-circle me-2"></i>No orders available to display.

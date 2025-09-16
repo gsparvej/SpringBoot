@@ -1,21 +1,22 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { AdminService } from '../../service/Auth/admin-service';
+import { HrAdminService } from '../../service/Auth/hr-admin-service';
 
 @Component({
-  selector: 'app-admin-profile',
+  selector: 'app-hr-admin-profile',
   standalone: false,
-  templateUrl: './admin-profile.html',
-  styleUrl: './admin-profile.css'
+  templateUrl: './hr-admin-profile.html',
+  styleUrl: './hr-admin-profile.css'
 })
-export class AdminProfile implements OnInit {
+export class HrAdminProfile implements OnInit {
+
 
   profile: any = null;
   loading = true;
   error = '';
 
-  imageUrl: string = "http://localhost:8080/images/roleAdmin/";
+  imageUrl: string = "http://localhost:8080/images/roleHRAdmin/";
 
-  constructor(private adminService: AdminService,
+  constructor(private hrAdminService: HrAdminService,
     private cdr: ChangeDetectorRef
   ) { }
 
@@ -24,7 +25,7 @@ export class AdminProfile implements OnInit {
   }
 
   getProfile() {
-    this.adminService.getProfile().subscribe({
+    this.hrAdminService.getProfile().subscribe({
       next: (data) => {
         this.profile = data;
         this.cdr.markForCheck();
@@ -37,4 +38,5 @@ export class AdminProfile implements OnInit {
       }
     });
   }
+
 }

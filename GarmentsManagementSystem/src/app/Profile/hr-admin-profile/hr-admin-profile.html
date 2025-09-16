@@ -1,5 +1,7 @@
+
 <div class="profile-container" *ngIf="!loading; else loadingTemplate">
-  <h2>Purchase Manager Profile</h2>
+
+  <h2> HR Admin Profile</h2>
 
   <div *ngIf="error" class="error-message">
     {{ error }}
@@ -9,7 +11,7 @@
 
     <!-- Profile Photo -->
     <div class="profile-photo">
-      <img [src]="imageUrl+profile.photo" alt="Purchase Manager Photo" *ngIf="profile.photo; else noPhoto" />
+      <img [src]="imageUrl+profile.photo" alt=" HR Admin Photo" *ngIf="profile.photo; else noPhoto" />
       <ng-template #noPhoto>
         <div class="placeholder-photo">No Photo</div>
       </ng-template>
@@ -26,6 +28,7 @@
     </div>
 
   </div>
+
 </div>
 
 <!-- Loading Template -->

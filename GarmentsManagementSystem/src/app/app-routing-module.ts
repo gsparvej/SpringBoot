@@ -78,6 +78,7 @@ import { HrAdmin } from './Registration/hr-admin/hr-admin';
 import { MerchandiserManager } from './Registration/merchandiser-manager/merchandiser-manager';
 import { PurchaseManager } from './Registration/purchase-manager/purchase-manager';
 import { ProductionManager } from './Registration/production-manager/production-manager';
+import { HrAdminProfile } from './Profile/hr-admin-profile/hr-admin-profile';
 
 
 const routes: Routes = [
@@ -167,6 +168,7 @@ const routes: Routes = [
 
   {path: 'superAdminProfile' , component: SuperAdminProfile},
   {path: 'adminProfile' , component: AdminProfile},
+  {path: 'hrAdminProfile' , component: HrAdminProfile},
   {path: 'merchanProfile' , component: MerchandiserManagerProfile},
   {path: 'proManagerProfile', component: ProductionManagerProfile},
   {path: 'purchaseManagerProfile' , component: PurchaseManagerProfile}
