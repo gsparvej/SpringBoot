@@ -7,24 +7,26 @@ import { AuthService } from '../../service/Auth/auth-service';
   selector: 'app-chat-component',
   standalone: false,
   templateUrl: './chat-component.html',
-  styleUrl: './chat-component.css'
+  styleUrls: ['./chat-component.css']
 })
-export class ChatComponent implements OnInit{
+export class ChatComponent implements OnInit {
 
   messages: ChatMessage[] = [];
   newMessage: string = '';
   currentUserName: string = 'Guest'; // fallback name
 
-  constructor(private chatService: ChatBox, private authService: AuthService) { }
+  constructor(
+    private chatService: ChatBox,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.loadMessages();
 
-    
-    // const currentUser = this.authService.currentUserValue;
-    // if (currentUser) {
-    //   this.currentUserName = currentUser.name || currentUser.email || currentUser.role || 'User';
-    // }
+    const role = this.authService.getUserRole();
+    if (role) {
+      this.currentUserName = role; // 👈 আপনি চাইলে এখানে email বা name রাখতে পারেন
+    }
   }
 
   loadMessages() {
@@ -36,7 +38,7 @@ export class ChatComponent implements OnInit{
   sendMessage() {
     if (this.newMessage.trim()) {
       const message: ChatMessage = {
-        sender: this.currentUserName,
+        sender: this.currentUserName, // 👈 set from decoded role
         content: this.newMessage,
         timestamp: new Date()
       };

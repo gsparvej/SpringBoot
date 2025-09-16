@@ -49,7 +49,8 @@ public class SecurityConfig {
                                 "/api/merchan_manager/reg",
                                 "/api/pro_manager/reg",
                                 "/api/purchase_manager/reg",
-                                "/images/**"
+                                "/images/**",
+                                "/api/order/**", "/api/department/**"
                                 ).permitAll()
 
                         .requestMatchers("/api/super_admin/reg",
@@ -115,8 +116,7 @@ public class SecurityConfig {
                                 "/api/uom",
                                 "/api/uom/**")
                         .hasAnyRole("PRODUCTIONMANAGER", "MERCHANDISERMANAGER")
-                        .requestMatchers("/api/order/**", "/api/department/**")
-                        .hasAnyRole("MERCHANDISERMANAGER" , "PURCHASEMANAGER", "ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)
