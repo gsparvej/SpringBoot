@@ -1,2 +1,17 @@
-<app-header/>
-<router-outlet />
+<!-- Wrapper: Sidebar + Content -->
+<div class="d-flex">
+
+  <!-- Sidebar -->
+  <app-header *ngIf="showHeader"></app-header>
+
+  <!-- Main Section -->
+  <div class="flex-grow-1">
+
+    <app-navbar></app-navbar>
+
+    <!-- Page Content -->
+    <div class="p-4">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

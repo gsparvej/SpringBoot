@@ -86,6 +86,7 @@ import { MerchandiserManager } from './Registration/merchandiser-manager/merchan
 import { PurchaseManager } from './Registration/purchase-manager/purchase-manager';
 import { ProductionManager } from './Registration/production-manager/production-manager';
 import { HrAdminProfile } from './Profile/hr-admin-profile/hr-admin-profile';
+import { Navbar } from './navbar/navbar';
 
 
 @NgModule({
@@ -169,7 +170,8 @@ import { HrAdminProfile } from './Profile/hr-admin-profile/hr-admin-profile';
     MerchandiserManager,
     PurchaseManager,
     ProductionManager,
-    HrAdminProfile
+    HrAdminProfile,
+    Navbar
 
   ],
   imports: [

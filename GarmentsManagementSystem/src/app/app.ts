@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../model/Auth/user.model';
 import { AuthService } from './service/Auth/auth-service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,23 +9,35 @@ import { AuthService } from './service/Auth/auth-service';
   standalone: false,
   styleUrl: './app.css'
 })
-export class App implements OnInit{
+export class App {
 
   protected title = 'GarmentsManagementSystem';
 
    userRole: string | null = '';
   currentUser: User | null = null;
 
+    showHeader = true;
   constructor(
-    private authService: AuthService
-  ){}
+    private authService: AuthService,
+    private router: Router
+  ){
+     this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const hiddenRoutes = ['/', '/login'];
+
+        // Add dynamic check for product details
+        const isProductDetails = event.url.startsWith('/productdetails/');
+
+        this.showHeader = !(
+          hiddenRoutes.includes(event.url) || isProductDetails
+        );
+      }
+    });
 
 
-   ngOnInit(): void {
-    // this.authService.currentUser$.subscribe(user=>{
-    //   this.currentUser = user;
-      
-
-    // });
   }
-}
+  }
+
+
+   
+

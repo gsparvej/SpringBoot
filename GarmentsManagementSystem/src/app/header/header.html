@@ -1,7 +1,4 @@
-<!-- Wrapper: Sidebar + Content -->
-<div class="d-flex">
-
-  <!-- Sidebar -->
+<!-- Sidebar -->
   <nav id="sidebar" class="bg-dark text-white p-3" style="width: 250px;">
     <ul class="nav flex-column">
       <li class="nav-item">
@@ -243,28 +240,3 @@
 
     </ul>
   </nav>
-
-  <!-- Main Section -->
-  <div class="flex-grow-1">
-
-    <!-- Top Navbar -->
-    <nav class="navbar navbar-dark bg-dark px-3">
-      <a class="navbar-brand fw-bold text-light" href="#">
-        <i class="fas fa-tshirt me-2 text-warning"></i> RMG System
-      </a>
-      <div class="d-flex">
-        <button class="btn btn-outline-light me-2 rounded-pill px-3" routerLink="/login">
-          <i class="fas fa-sign-in-alt me-1"></i> Login
-        </button>
-        <button class="btn btn-outline-warning rounded-pill px-3" routerLink="/login">
-          <i class="fas fa-sign-out-alt me-1"></i> Logout
-        </button>
-      </div>
-    </nav>
-
-    <!-- Page Content -->
-    <div class="p-4">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div>
