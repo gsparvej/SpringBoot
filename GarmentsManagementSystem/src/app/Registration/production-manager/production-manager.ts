@@ -8,6 +8,9 @@ import { ProductionManagerService } from '../../service/Auth/production-manager-
   styleUrl: './production-manager.css'
 })
 export class ProductionManager {
+resetForm() {
+throw new Error('Method not implemented.');
+}
 
   
   

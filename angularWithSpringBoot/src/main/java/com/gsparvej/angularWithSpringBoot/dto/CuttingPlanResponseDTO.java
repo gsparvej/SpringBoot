@@ -13,13 +13,20 @@ public class CuttingPlanResponseDTO {
     private String status;
     private Date cuttingDate;
 
+    private float actualPcs;
+    private float markerEfficiency;
+    private float fabricLength;
+    private int markerCount;
+    private String remarks;
+    private String createdBy;
+
     private UomResponseDTO uom;
     private ProductionOrderResponseDTO productionOrder;
 
     public CuttingPlanResponseDTO() {
     }
 
-    public CuttingPlanResponseDTO(int id, String markerNo, float fabricWidth, int layCount, float plannedPcs, float fabricUsed, String status, Date cuttingDate, UomResponseDTO uom, ProductionOrderResponseDTO productionOrder) {
+    public CuttingPlanResponseDTO(int id, String markerNo, float fabricWidth, int layCount, float plannedPcs, float fabricUsed, String status, Date cuttingDate, float actualPcs, float markerEfficiency, float fabricLength, int markerCount, String remarks, String createdBy, UomResponseDTO uom, ProductionOrderResponseDTO productionOrder) {
         this.id = id;
         this.markerNo = markerNo;
         this.fabricWidth = fabricWidth;
@@ -28,6 +35,12 @@ public class CuttingPlanResponseDTO {
         this.fabricUsed = fabricUsed;
         this.status = status;
         this.cuttingDate = cuttingDate;
+        this.actualPcs = actualPcs;
+        this.markerEfficiency = markerEfficiency;
+        this.fabricLength = fabricLength;
+        this.markerCount = markerCount;
+        this.remarks = remarks;
+        this.createdBy = createdBy;
         this.uom = uom;
         this.productionOrder = productionOrder;
     }
@@ -94,6 +107,54 @@ public class CuttingPlanResponseDTO {
 
     public void setCuttingDate(Date cuttingDate) {
         this.cuttingDate = cuttingDate;
+    }
+
+    public float getActualPcs() {
+        return actualPcs;
+    }
+
+    public void setActualPcs(float actualPcs) {
+        this.actualPcs = actualPcs;
+    }
+
+    public float getMarkerEfficiency() {
+        return markerEfficiency;
+    }
+
+    public void setMarkerEfficiency(float markerEfficiency) {
+        this.markerEfficiency = markerEfficiency;
+    }
+
+    public float getFabricLength() {
+        return fabricLength;
+    }
+
+    public void setFabricLength(float fabricLength) {
+        this.fabricLength = fabricLength;
+    }
+
+    public int getMarkerCount() {
+        return markerCount;
+    }
+
+    public void setMarkerCount(int markerCount) {
+        this.markerCount = markerCount;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
     public UomResponseDTO getUom() {

@@ -44,3 +44,21 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+/* Custom purple theme */
+.bg-purple {
+  background-color: #6f42c1 !important;
+}
+
+.text-purple {
+  color: #6f42c1 !important;
+}
+
+.btn-purple {
+  background-color: #6f42c1;
+  border-color: #6f42c1;
+}
+
+.btn-purple:hover {
+  background-color: #5936a0;
+  border-color: #5936a0;
+}

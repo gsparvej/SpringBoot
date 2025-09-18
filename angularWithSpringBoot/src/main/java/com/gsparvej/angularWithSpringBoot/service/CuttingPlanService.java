@@ -60,6 +60,14 @@ public class CuttingPlanService {
             dto.setMarkerNo(cutting.getMarkerNo());
             dto.setStatus(cutting.getStatus());
 
+            dto.setActualPcs(cutting.getActualPcs());
+            dto.setCreatedBy(cutting.getCreatedBy());
+            dto.setFabricLength(cutting.getFabricLength());
+            dto.setMarkerEfficiency(cutting.getMarkerEfficiency());
+            dto.setRemarks(cutting.getRemarks());
+            dto.setMarkerCount(cutting.getMarkerCount());
+
+
 
 
             ProductionOrder order = cutting.getProductionOrder();
@@ -126,6 +134,13 @@ public class CuttingPlanService {
             cuttingPlanResponseDTO.setFabricUsed(cut.getFabricUsed());
             cuttingPlanResponseDTO.setStatus(cut.getStatus());
             cuttingPlanResponseDTO.setCuttingDate(cut.getCuttingDate());
+
+            cuttingPlanResponseDTO.setActualPcs(cut.getActualPcs());
+            cuttingPlanResponseDTO.setCreatedBy(cut.getCreatedBy());
+            cuttingPlanResponseDTO.setFabricLength(cut.getFabricLength());
+            cuttingPlanResponseDTO.setMarkerEfficiency(cut.getMarkerEfficiency());
+            cuttingPlanResponseDTO.setRemarks(cut.getRemarks());
+            cuttingPlanResponseDTO.setMarkerCount(cut.getMarkerCount());
 
 
 

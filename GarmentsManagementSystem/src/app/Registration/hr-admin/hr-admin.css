@@ -44,3 +44,17 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+/* Add this to styles.css or component styles */
+input.form-control,
+select.form-select,
+textarea.form-control {
+  border-radius: 0.4rem;
+  transition: box-shadow 0.2s ease;
+}
+
+input.form-control:focus,
+select.form-select:focus,
+textarea.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+  border-color: #198754;
+}

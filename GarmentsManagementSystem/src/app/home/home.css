@@ -1,35 +1,150 @@
-
-
-
+/* ======== General Styles ======== */
 .home-page {
-  padding: 30px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #f0f4f7, #ffffff);
+  padding: 30px 0;
   min-height: 100vh;
 }
 
-.carousel img {
-  max-height: 450px;
+/* ======== Header ======== */
+.home-page .container.text-center h1 {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.03em;
+}
+
+.home-page .container.text-center p.lead {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: auto;
+}
+
+/* ======== Carousel ======== */
+#garmentsCarousel {
+  border-radius: 1.25rem;
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+#garmentsCarousel img {
+  height: 400px;
   object-fit: cover;
-  border-radius: 12px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: drop-shadow(0 0 0.25rem rgba(0, 0, 0, 0.4));
+}
+
+.carousel-indicators button {
+  background-color: #0d6efd;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-indicators .active {
+  opacity: 1;
+}
+
+/* ======== Cards ======== */
+.card {
+  border: none;
+  border-radius: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .card-img-top {
   height: 220px;
   object-fit: cover;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
 }
 
-.card-title {
+.card-body h5 {
+  letter-spacing: 0.05em;
   color: #0d6efd;
 }
 
-.card {
-  border: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.card-body p {
+  font-size: 0.95rem;
+  color: #6c757d;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+.card-body a.btn {
+  padding: 0.45rem 1.5rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.btn-outline-success:hover {
+  background-color: #198754;
+  color: #fff;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* ======== Services ======== */
+.home-page .p-4 {
+  transition: transform 0.3s ease;
+}
+
+.home-page .p-4:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.display-4 {
+  font-weight: 700;
+}
+
+/* ======== About Us ======== */
+.home-page img.img-fluid {
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+
+/* ======== Contact Form ======== */
+form.p-4 {
+  border: none;
+  padding: 2rem !important;
+}
+
+input.form-control,
+textarea.form-control {
+  box-shadow: 0 0 10px rgba(13, 110, 253, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+input.form-control:focus,
+textarea.form-control:focus {
+  box-shadow: 0 0 12px rgba(13, 110, 253, 0.4);
+}
+
+button.btn-success {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0.5rem 1rem rgba(25, 135, 84, 0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+button.btn-success:hover {
+  box-shadow: 0 0.75rem 1.5rem rgba(25, 135, 84, 0.7);
+}
+
+/* ======== Footer ======== */
+footer.bg-dark {
+  border-radius: 0 0 1.5rem 1.5rem;
+  box-shadow: inset 0 4px 6px rgba(255, 255, 255, 0.1);
+  width: 100%;
 }

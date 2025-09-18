@@ -44,3 +44,21 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+/* Custom Orange Theme */
+.bg-orange {
+  background-color: #fd7e14 !important;
+}
+
+.text-orange {
+  color: #fd7e14 !important;
+}
+
+.btn-orange {
+  background-color: #fd7e14;
+  border-color: #fd7e14;
+}
+
+.btn-orange:hover {
+  background-color: #e46c0a;
+  border-color: #e46c0a;
+}

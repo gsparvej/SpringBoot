@@ -57,7 +57,7 @@
           <label class="form-label">UOM (Base Fabric)</label>
           <select class="form-select" formControlName="id">
             <option value="">-- Select UOM --</option>
-            <option *ngFor="let u of uom" [value]="u.id">{{ u.baseFabric }}</option>
+            <!-- <option *ngFor="let u of uom" [value]="u.id">{{ u.baseFabric }}</option> -->
           </select>
         </div>
 
@@ -73,7 +73,7 @@
         <label class="form-label">Production Order</label>
         <select class="form-select" formControlName="id">
           <option value="">-- Select Production Order --</option>
-          <option *ngFor="let po of productionOrder" [value]="po.id">
+          <option *ngFor="let po of productionOrders" [value]="po.id">
             {{ po.id }}
           </option>
         </select>
@@ -82,9 +82,9 @@
 
     <!-- Buttons -->
     <div class="mt-3">
-      <button type="submit" class="btn btn-success">
+      <!-- <button type="submit" class="btn btn-success">
         {{ editingOrder ? 'Update' : 'Add' }} Cutting Plan
-      </button>
+      </button> -->
       <button type="button" class="btn btn-secondary ms-2" (click)="cuttingForm.reset()">Reset</button>
     </div>
   </form>

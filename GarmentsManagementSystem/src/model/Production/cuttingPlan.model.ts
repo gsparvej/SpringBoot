@@ -11,6 +11,13 @@ export class CuttingPlan {
     status!: 'Planned' | 'Running' | 'Completed';
     cuttingDate!: Date;
 
+    actualPcs!: number;
+    markerEfficiency!: number;
+    fabricLength!: number;
+    markerCount!: number;
+    remarks!: string;
+    createdBy!: string;
+
 
     uom!: Uom;
     productionOrder!: ProductionOrder;

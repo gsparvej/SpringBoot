@@ -8,6 +8,9 @@ import { PurchaseManagerService } from '../../service/Auth/purchase-manager-serv
   styleUrl: './purchase-manager.css'
 })
 export class PurchaseManager {
+resetForm() {
+throw new Error('Method not implemented.');
+}
 
   
   
