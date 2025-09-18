@@ -66,6 +66,8 @@ public class CuttingPlanService {
             dto.setMarkerEfficiency(cutting.getMarkerEfficiency());
             dto.setRemarks(cutting.getRemarks());
             dto.setMarkerCount(cutting.getMarkerCount());
+            dto.setDescription(cutting.getDescription());
+            dto.setMarkerOutput(cutting.getMarkerOutput());
 
 
 
@@ -141,6 +143,8 @@ public class CuttingPlanService {
             cuttingPlanResponseDTO.setMarkerEfficiency(cut.getMarkerEfficiency());
             cuttingPlanResponseDTO.setRemarks(cut.getRemarks());
             cuttingPlanResponseDTO.setMarkerCount(cut.getMarkerCount());
+            cuttingPlanResponseDTO.setDescription(cut.getDescription());
+            cuttingPlanResponseDTO.setMarkerOutput(cut.getMarkerOutput());
 
 
 

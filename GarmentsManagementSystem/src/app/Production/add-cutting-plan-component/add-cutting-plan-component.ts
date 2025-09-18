@@ -38,14 +38,13 @@ export class AddCuttingPlanComponent implements OnInit {
     this.setupFormListeners();
   }
 
-  // 👉 Initialize form with all controls and default values
   private initializeForm(): void {
     this.cuttingForm = this.fb.group({
       markerNo: ['', Validators.required],
       fabricWidth: [0, [Validators.required, Validators.min(1)]],
       layCount: [0, [Validators.required, Validators.min(1)]],
       plannedPcs: [0, [Validators.required, Validators.min(1)]],
-      fabricUsed: [0, [Validators.required, Validators.min(0)]],
+      fabricUsed: [{ value: 0, disabled: true }],
       status: ['', Validators.required],
       cuttingDate: ['', Validators.required],
 
@@ -53,36 +52,76 @@ export class AddCuttingPlanComponent implements OnInit {
       markerEfficiency: [{ value: 0, disabled: true }],
       fabricLength: [0],
       markerCount: [0],
+      markerOutput: [0],
       remarks: [''],
       createdBy: [''],
+      description: [''],
 
       uom: this.fb.group({
-        id: ['', Validators.required]
+        id: ['', Validators.required],
+        baseFabric: [''],
+        size: ['']
       }),
+
       productionOrder: this.fb.group({
         id: ['', Validators.required]
       })
     });
   }
 
-  // 👉 Listen to form changes for dynamic behaviors
   private setupFormListeners(): void {
-    // Auto-calculate efficiency on actual or planned change
     this.cuttingForm.get('actualPcs')?.valueChanges.subscribe(() => {
       this.calculateEfficiency();
     });
 
     this.cuttingForm.get('plannedPcs')?.valueChanges.subscribe(() => {
+      this.calculateMarkerCount();
+      this.calculateFabricLength();
+      this.calculateFabricUsed();
       this.calculateEfficiency();
     });
 
-    // Show selected UOM size
-    this.cuttingForm.get('uom.id')?.valueChanges.subscribe((id: number) => {
-      const selected = this.uomList.find(u => u.id === +id);
-      this.selectedBaseFabric = selected?.size || '';
+    this.cuttingForm.get('markerOutput')?.valueChanges.subscribe(() => {
+      this.calculateMarkerCount();
+      this.calculateFabricLength();
+      this.calculateFabricUsed();
     });
 
-    // Make actualPcs required if status is 'Completed'
+    this.cuttingForm.get('markerCount')?.valueChanges.subscribe(() => {
+      this.calculateFabricLength();
+      this.calculateFabricUsed();
+    });
+
+    this.cuttingForm.get('fabricLength')?.valueChanges.subscribe(() => {
+      this.calculateFabricUsed();
+    });
+
+    this.cuttingForm.get('layCount')?.valueChanges.subscribe(() => {
+      this.calculateFabricUsed();
+    });
+
+    this.cuttingForm.get('fabricWidth')?.valueChanges.subscribe(() => {
+      this.calculateFabricUsed();
+    });
+
+    this.cuttingForm.get('uom.size')?.valueChanges.subscribe((size: string) => {
+      const selected = this.uomList.find(u => u.size === size);
+      const uomGroup = this.cuttingForm.get('uom') as FormGroup;
+
+      if (selected) {
+        uomGroup.patchValue({
+          id: selected.id,
+          baseFabric: selected.baseFabric
+        });
+        this.selectedBaseFabric = selected.baseFabric.toString();
+      } else {
+        uomGroup.patchValue({ id: '', baseFabric: '' });
+        this.selectedBaseFabric = '';
+      }
+
+      this.calculateFabricUsed();
+    });
+
     this.cuttingForm.get('status')?.valueChanges.subscribe((status: string) => {
       const actualPcsControl = this.cuttingForm.get('actualPcs');
       if (status === 'Completed') {
@@ -94,29 +133,6 @@ export class AddCuttingPlanComponent implements OnInit {
     });
   }
 
-  // 👉 Load UOM from API
-  private loadUoms(): void {
-    this.merchandiserService.getAllUom().subscribe({
-      next: (data) => {
-        this.uomList = data;
-        this.cdr.detectChanges();
-      },
-      error: (err) => console.error('Error loading UOMs:', err)
-    });
-  }
-
-  // 👉 Load Production Orders
-  private loadProductionOrders(): void {
-    this.productionOrderService.getAllProductionOrder().subscribe({
-      next: (data) => {
-        this.productionOrders = data;
-        this.cdr.detectChanges();
-      },
-      error: (err) => console.error('Error loading production orders:', err)
-    });
-  }
-
-  // 👉 Calculate marker efficiency
   private calculateEfficiency(): void {
     const actual = +this.cuttingForm.get('actualPcs')?.value || 0;
     const planned = +this.cuttingForm.get('plannedPcs')?.value || 0;
@@ -129,15 +145,63 @@ export class AddCuttingPlanComponent implements OnInit {
     }
   }
 
-  // 👉 Submit form data to backend
+  private calculateMarkerCount(): void {
+    const plannedPcs = +this.cuttingForm.get('plannedPcs')?.value || 0;
+    const markerOutput = +this.cuttingForm.get('markerOutput')?.value || 0;
+
+    if (markerOutput > 0) {
+      const markerCount = Math.ceil(plannedPcs / markerOutput);
+      this.cuttingForm.get('markerCount')?.setValue(markerCount, { emitEvent: false });
+    } else {
+      this.cuttingForm.get('markerCount')?.setValue(0, { emitEvent: false });
+    }
+  }
+
+  private calculateFabricLength(): void {
+    const markerCount = +this.cuttingForm.get('markerCount')?.value || 0;
+    const baseFabric = +this.cuttingForm.get('uom.baseFabric')?.value || 0;
+
+    const fabricLength = markerCount * baseFabric;
+    this.cuttingForm.get('fabricLength')?.setValue(+fabricLength.toFixed(2), { emitEvent: false });
+  }
+
+  private calculateFabricUsed(): void {
+    const fabricLength = +this.cuttingForm.get('fabricLength')?.value || 0;
+    const layCount = +this.cuttingForm.get('layCount')?.value || 0;
+    const fabricWidth = +this.cuttingForm.get('fabricWidth')?.value || 0;
+
+    const fabricUsed = (fabricLength * layCount * fabricWidth) / 100;
+    this.cuttingForm.get('fabricUsed')?.setValue(+fabricUsed.toFixed(2), { emitEvent: false });
+  }
+
+  private loadUoms(): void {
+    this.merchandiserService.getAllUom().subscribe({
+      next: (data) => {
+        this.uomList = data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error('Error loading UOMs:', err)
+    });
+  }
+
+  private loadProductionOrders(): void {
+    this.productionOrderService.getAllProductionOrder().subscribe({
+      next: (data) => {
+        this.productionOrders = data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error('Error loading production orders:', err)
+    });
+  }
+
   addCuttingPlan(): void {
     if (this.cuttingForm.invalid) {
       this.cuttingForm.markAllAsTouched();
       return;
     }
 
-    // Enable markerEfficiency to include it in form.value
     this.cuttingForm.get('markerEfficiency')?.enable();
+    this.cuttingForm.get('fabricUsed')?.enable();
 
     const cuttingPlan: CuttingPlan = this.cuttingForm.value;
 
@@ -153,7 +217,6 @@ export class AddCuttingPlanComponent implements OnInit {
     });
   }
 
-  // 👉 Reset the form to defaults
   private resetForm(): void {
     this.cuttingForm.reset({
       markerNo: '',
@@ -167,207 +230,18 @@ export class AddCuttingPlanComponent implements OnInit {
       markerEfficiency: 0,
       fabricLength: 0,
       markerCount: 0,
+      markerOutput: 0,
       remarks: '',
       createdBy: '',
-      uom: { id: '' },
+      description: '',
+      uom: { id: '', baseFabric: '', size: '' },
       productionOrder: { id: '' }
     });
 
-    // Disable efficiency again
     this.cuttingForm.get('markerEfficiency')?.disable();
+    this.cuttingForm.get('fabricUsed')?.disable();
+
     this.selectedBaseFabric = '';
     this.cdr.detectChanges();
   }
-
-  // 👉 Optional Edit method (if using edit mode)
-  edit(plan: CuttingPlan): void {
-    this.cuttingForm.patchValue(plan);
-    this.selectedBaseFabric = plan.uom?.size || '';
-  }
-
-  // 👉 Delete Cutting Plan
-  delete(id: number): void {
-    if (confirm('Are you sure to delete this Cutting Plan?')) {
-      this.cuttingPlanService.deleteCuttingPlan(id).subscribe(() => {
-        console.log('🗑️ Deleted Cutting Plan:', id);
-        this.loadUoms();
-        this.loadProductionOrders();
-      });
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // cuttingPlans: CuttingPlan[] = [];
-
-  // uom: Uom[] = [];
-  // productionOrder: ProductionOrder[] = [];
-
-  // selectedBaseFabric: string = '';
-
-
-  // cuttingForm!: FormGroup;
-  // editingOrder: CuttingPlan | null = null;
-
-  // constructor(
-  //   private fb: FormBuilder,
-  //   private cuttingPlanService: CuttingPlanService,
-  //   private merchandiserService: MerchandiserService,
-  //   private productionService: ProductionOrderService,
-  //   private cdr: ChangeDetectorRef,
-  //   private router: Router
-  // ) { }
-
-  // ngOnInit(): void {
-
-
-  //   this.cuttingForm = this.fb.group({
-  //     markerNo: ['', Validators.required],
-  //     fabricWidth: ['', Validators.required],
-  //     layCount: ['', Validators.required],
-  //     plannedPcs: ['', Validators.required],
-  //     fabricUsed: ['', Validators.required],
-  //     status: ['', Validators.required],
-  //     cuttingDate: ['', Validators.required],
-
-  //     uom: this.fb.group({
-
-  //       id: ['', Validators.required],
-
-  //     }),
-  //     productionOrder: this.fb.group({
-  //       id: ['', Validators.required]
-  //     })
-  //   });
-  //   this.cuttingForm.get('uom.id')?.valueChanges.subscribe((id: number) => {
-  //     const selected = this.uom.find(i => i.id === +id);
-  //     if (selected) {
-  //       this.selectedBaseFabric = selected.size;
-  //       console.log('Selected size:', selected.size);
-  //     } else {
-  //       this.selectedBaseFabric = '';
-  //     }
-  //   });
-
-  //   this.cuttingForm.get('productionOrder')?.get('id')?.valueChanges.subscribe(id => {
-  //     const selectedOrder = this.productionOrder.find(b => b.id === +id);
-  //     if (selectedOrder) {
-  //       console.log('Selected Production Order:', selectedOrder);
-  //     }
-  //   });
-
-  //   this.loadBaseFabric();
-  //   this.loadProductionOrder();
-
-
-
-  // }
-
-
-
-  // loadBaseFabric(): void {
-  //   this.merchandiserService.getAllUom().subscribe({
-  //     next: (baseFabric) => {
-  //       this.uom = baseFabric;
-  //       this.cdr.detectChanges();
-
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     }
-  //   });
-  // }
-
-  // loadProductionOrder(): void {
-  //   this.productionService.getAllProductionOrder().subscribe({
-  //     next: (order) => {
-  //       this.productionOrder = order;
-  //       this.cdr.detectChanges();
-
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     }
-  //   });
-  // }
-
-
-
-
-  // addCuttingPlan(): void {
-  //   // ✅ Directly use form value
-  //   const cutting: CuttingPlan = this.cuttingForm.value;
-
-  //   this.cuttingPlanService.createCuttingPlan(cutting).subscribe({
-  //     next: (or) => {
-  //       console.log(or, 'Cutting Successfully !');
-  //       this.loadBaseFabric();
-  //       this.loadProductionOrder();
-  //       this.cuttingForm.reset({
-  //         markerNo: '',
-  //         fabricWidth: '',
-  //         layCount: '',
-  //         plannedPcs: '',
-  //         fabricUsed: '',
-  //         status: '',
-  //         cuttingDate: '',
-  //         uom: { id: '' },
-  //         productionOrder: { id: '' }
-  //       });
-
-  //       this.router.navigate(['productionorderList']);
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     }
-  //   });
-  // }
-
-  // edit(cut: CuttingPlan): void {
-  //   this.editingOrder = cut;
-  //   this.cuttingForm.patchValue(cut);
-  // }
-
-  // delete(id: number): void {
-  //   if (confirm('Are you sure to delete this Cutting Plan?')) {
-  //     this.cuttingPlanService.deleteCuttingPlan(id).subscribe(() => {
-  //       this.loadBaseFabric();
-  //       this.loadProductionOrder();
-  //     });
-  //   }
-  // }
-
-
 }

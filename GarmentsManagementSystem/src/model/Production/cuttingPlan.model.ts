@@ -17,6 +17,9 @@ export class CuttingPlan {
     markerCount!: number;
     remarks!: string;
     createdBy!: string;
+    
+    markerOutput!: number;
+    description!: 'Short Sleeve Shirt' | 'Full Sleeve Shirt';
 
 
     uom!: Uom;

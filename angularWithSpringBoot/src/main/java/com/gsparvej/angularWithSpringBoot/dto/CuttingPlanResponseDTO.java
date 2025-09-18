@@ -19,6 +19,8 @@ public class CuttingPlanResponseDTO {
     private int markerCount;
     private String remarks;
     private String createdBy;
+    private String description;
+    private int markerOutput;
 
     private UomResponseDTO uom;
     private ProductionOrderResponseDTO productionOrder;
@@ -26,7 +28,7 @@ public class CuttingPlanResponseDTO {
     public CuttingPlanResponseDTO() {
     }
 
-    public CuttingPlanResponseDTO(int id, String markerNo, float fabricWidth, int layCount, float plannedPcs, float fabricUsed, String status, Date cuttingDate, float actualPcs, float markerEfficiency, float fabricLength, int markerCount, String remarks, String createdBy, UomResponseDTO uom, ProductionOrderResponseDTO productionOrder) {
+    public CuttingPlanResponseDTO(int id, String markerNo, float fabricWidth, int layCount, float plannedPcs, float fabricUsed, String status, Date cuttingDate, float actualPcs, float markerEfficiency, float fabricLength, int markerCount, String remarks, String createdBy, String description, int markerOutput, UomResponseDTO uom, ProductionOrderResponseDTO productionOrder) {
         this.id = id;
         this.markerNo = markerNo;
         this.fabricWidth = fabricWidth;
@@ -41,6 +43,8 @@ public class CuttingPlanResponseDTO {
         this.markerCount = markerCount;
         this.remarks = remarks;
         this.createdBy = createdBy;
+        this.description = description;
+        this.markerOutput = markerOutput;
         this.uom = uom;
         this.productionOrder = productionOrder;
     }
@@ -171,5 +175,21 @@ public class CuttingPlanResponseDTO {
 
     public void setProductionOrder(ProductionOrderResponseDTO productionOrder) {
         this.productionOrder = productionOrder;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getMarkerOutput() {
+        return markerOutput;
+    }
+
+    public void setMarkerOutput(int markerOutput) {
+        this.markerOutput = markerOutput;
     }
 }

@@ -25,6 +25,8 @@ public class CuttingPlan {
     private int markerCount;
     private String remarks;
     private String createdBy;
+    private String description;
+    private int markerOutput;
 
 
 
@@ -41,7 +43,7 @@ public class CuttingPlan {
     public CuttingPlan() {
     }
 
-    public CuttingPlan(int id, String markerNo, float fabricWidth, int layCount, float plannedPcs, float fabricUsed, String status, Date cuttingDate, float actualPcs, float markerEfficiency, float fabricLength, int markerCount, String remarks, String createdBy, UOM uom, ProductionOrder productionOrder) {
+    public CuttingPlan(int id, String markerNo, float fabricWidth, int layCount, float plannedPcs, float fabricUsed, String status, Date cuttingDate, float actualPcs, float markerEfficiency, float fabricLength, int markerCount, String remarks, String createdBy, String description, int markerOutput, UOM uom, ProductionOrder productionOrder) {
         this.id = id;
         this.markerNo = markerNo;
         this.fabricWidth = fabricWidth;
@@ -56,6 +58,8 @@ public class CuttingPlan {
         this.markerCount = markerCount;
         this.remarks = remarks;
         this.createdBy = createdBy;
+        this.description = description;
+        this.markerOutput = markerOutput;
         this.uom = uom;
         this.productionOrder = productionOrder;
     }
@@ -186,5 +190,21 @@ public class CuttingPlan {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getMarkerOutput() {
+        return markerOutput;
+    }
+
+    public void setMarkerOutput(int markerOutput) {
+        this.markerOutput = markerOutput;
     }
 }
