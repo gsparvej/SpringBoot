@@ -1,187 +1,104 @@
-<!-- Include Bootstrap Icons CDN in your index.html -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> -->
-
 <div class="container my-5">
-  <h2 class="mb-4 text-center fw-bold">Create New Order</h2>
+  <h2 class="text-center fw-bold mb-4">🧾 Create New Order</h2>
 
   <div class="card shadow rounded-4 p-4">
     <form [formGroup]="orderForm" (ngSubmit)="addOrder()">
 
-      <!-- Order Info Section -->
-      <div class="row g-3 mb-4">
+      <!-- Order Info -->
+      <div class="row g-4 mb-4">
 
         <!-- Style Code -->
-        <div class="row">
-          <div class="col-md-4" formGroupName="bomStyle">
-            <label class="form-label">Style Code:</label>
-            <select class="form-select" formControlName="id">
-              <option *ngFor="let s of bomStyle" [ngValue]="s.id">{{ s.styleCode }}</option>
-            </select>
-          </div>
-
-          <div class="col-md-4">
-            <label for="orderStatus">Order Status:</label>
-            <select id="orderStatus" formControlName="orderStatus">
-              <option value="Pending">Pending</option>
-              <option value="Confirmed">Confirmed</option>
-            </select>
-
-          </div>
-
-
-          <!-- <div class="col-md-4">
-            <label class="form-label">Order Status</label>
-            <input type="text" class="form-control rounded-pill" formControlName="orderStatus" placeholder="Pending">
-          </div> -->
-
-
-
+        <div class="col-md-4" formGroupName="bomStyle">
+          <label class="form-label">Style Code</label>
+          <select class="form-select rounded-pill" formControlName="id">
+            <option *ngFor="let s of bomStyle" [ngValue]="s.id">{{ s.styleCode }}</option>
+          </select>
         </div>
 
-        <div class="row">
-          <!-- Buyer Organization -->
-          <div class="col-md-4" formGroupName="buyer">
-            <label class="form-label">Buyer Name:</label>
-            <select class="form-select" formControlName="id">
-              <option *ngFor="let b of buyer" [value]="b.id">{{ b.name }}</option>
-            </select>
-          </div>
+        <!-- Order Status -->
+        <div class="col-md-4">
+          <label class="form-label">Order Status</label>
+          <select class="form-select rounded-pill" formControlName="orderStatus">
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+          </select>
+        </div>
 
-          <!-- Shipping Address -->
-          <div class="col-md-4">
-            <label class="form-label fw-semibold">Shipping Address</label>
-            <input type="text" class="form-control" [value]="selectedBuyerAddress" readonly />
-          </div>
+        <!-- Buyer Name -->
+        <div class="col-md-4" formGroupName="buyer">
+          <label class="form-label">Buyer Name</label>
+          <select class="form-select rounded-pill" formControlName="id">
+            <option *ngFor="let b of buyer" [value]="b.id">{{ b.name }}</option>
+          </select>
+        </div>
 
+        <!-- Shipping Address -->
+        <div class="col-md-6">
+          <label class="form-label">Shipping Address</label>
+          <input type="text" class="form-control rounded-pill" [value]="selectedBuyerAddress" readonly>
         </div>
 
         <!-- Order Date -->
-        <div class="col-md-4">
-          <label class="form-label fw-semibold">Order Date</label>
+        <div class="col-md-3">
+          <label class="form-label">Order Date</label>
           <input type="date" class="form-control rounded-pill" formControlName="orderDate">
         </div>
 
         <!-- Delivery Date -->
-        <div class="col-md-4">
-          <label class="form-label fw-semibold">Delivery Date</label>
+        <div class="col-md-3">
+          <label class="form-label">Delivery Date</label>
           <input type="date" class="form-control rounded-pill" formControlName="deliveryDate">
         </div>
       </div>
 
       <hr class="my-4">
 
-      <!-- Order Calculation Section -->
       <div class="row g-4">
-
-        <!-- Left: Shirt Calculations -->
+        <!-- Left Column: Calculations -->
         <div class="col-md-8">
-
           <div class="card p-4 shadow-sm rounded-4">
-            <h5 class="mb-3 fw-semibold">Order Calculation</h5>
+            <h5 class="fw-semibold mb-3">Order Calculation</h5>
 
-            <!-- Short Sleeve Section -->
-            <h4 class="text-primary">Short Sleeve Shirt’s</h4>
-            <div class="row g-3">
-
-              <!-- Small Size -->
-              <div class="col-md-6">
-                <label class="form-label">Small Size (Qty)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="shortSmallSize" placeholder="0">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Small Size Price (Per Piece)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="shortSPrice" placeholder="0.00">
-              </div>
-
-              <!-- Medium Size -->
-              <div class="col-md-6">
-                <label class="form-label">Medium Size (Qty)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="shortMediumSize"
-                  placeholder="0">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Medium Size Price (Per Piece)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="shortMPrice" placeholder="0.00">
-              </div>
-
-              <!-- Large Size -->
-              <div class="col-md-6">
-                <label class="form-label">Large Size (Qty)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="shortLargeSize" placeholder="0">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Large Size Price (Per Piece)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="shortLPrice" placeholder="0.00">
-              </div>
-
-              <!-- XL Size -->
-              <div class="col-md-6">
-                <label class="form-label">XL Size (Qty)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="shortXLSize" placeholder="0">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">XL Size Price (Per Piece)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="shortXLPrice"
-                  placeholder="0.00">
-              </div>
+            <!-- Short Sleeve Shirts -->
+            <h6 class="text-primary fw-semibold">👕 Short Sleeve Shirt</h6>
+            <div class="row g-3 mb-4">
+              <ng-container *ngFor="let size of ['Small','Medium','Large','XL']; let i = index">
+                <div class="col-md-6">
+                  <label class="form-label">{{ size }} Size (Qty)</label>
+                  <input type="number" class="form-control rounded-pill" [formControlName]="'short' + size + 'Size'" placeholder="0">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">{{ size }} Size Price (Per Piece)</label>
+                  <input type="number" class="form-control rounded-pill" [formControlName]="'short' + size.charAt(0) + 'Price'" placeholder="0.00">
+                </div>
+              </ng-container>
             </div>
 
-            <hr />
+            <hr>
 
-            <!-- Full Sleeve Section -->
-            <h4 class="text-primary mt-4">Full Sleeve Shirt’s</h4>
+            <!-- Full Sleeve Shirts -->
+            <h6 class="text-primary fw-semibold mt-4">👔 Full Sleeve Shirt</h6>
             <div class="row g-3">
-              <!-- Small -->
-              <div class="col-md-6">
-                <label class="form-label">Small Size (Qty)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="fullSmallSize" placeholder="0">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Small Size Price (Per Piece)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="fullSPrice" placeholder="0.00">
-              </div>
-
-              <!-- Medium -->
-              <div class="col-md-6">
-                <label class="form-label">Medium Size (Qty)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="fullMediumSize" placeholder="0">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Medium Size Price (Per Piece)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="fullMPrice" placeholder="0.00">
-              </div>
-
-              <!-- Large -->
-              <div class="col-md-6">
-                <label class="form-label">Large Size (Qty)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="fullLargeSize" placeholder="0">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Large Size Price (Per Piece)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="fullLPrice" placeholder="0.00">
-              </div>
-
-              <!-- XL -->
-              <div class="col-md-6">
-                <label class="form-label">XL Size (Qty)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="fullXLSize" placeholder="0">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">XL Size Price (Per Piece)</label>
-                <input type="number" class="form-control rounded-pill" formControlName="fullXLPrice" placeholder="0.00">
-              </div>
+              <ng-container *ngFor="let size of ['Small','Medium','Large','XL']; let i = index">
+                <div class="col-md-6">
+                  <label class="form-label">{{ size }} Size (Qty)</label>
+                  <input type="number" class="form-control rounded-pill" [formControlName]="'full' + size + 'Size'" placeholder="0">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">{{ size }} Size Price (Per Piece)</label>
+                  <input type="number" class="form-control rounded-pill" [formControlName]="'full' + size.charAt(0) + 'Price'" placeholder="0.00">
+                </div>
+              </ng-container>
 
               <!-- Remarks -->
-              <div class="col-md-12">
+              <div class="col-12 mt-3">
                 <label class="form-label">Remarks</label>
-                <input type="text" class="form-control rounded-pill" formControlName="remarks"
-                  placeholder="Any remarks">
+                <input type="text" class="form-control rounded-pill" formControlName="remarks" placeholder="Any remarks">
               </div>
 
               <!-- Calculate Button -->
-              <div class="col-12 text-center mt-3">
-                <button type="button" class="btn btn-outline-primary rounded-pill px-5 shadow"
-                  (click)="subTotalCalculation()">
+              <div class="col-12 text-center mt-4">
+                <button type="button" class="btn btn-outline-primary rounded-pill px-5" (click)="subTotalCalculation()">
                   <i class="bi bi-calculator me-2"></i>Calculate
                 </button>
               </div>
@@ -189,40 +106,36 @@
           </div>
         </div>
 
-        <!-- Right: Order Summary -->
+        <!-- Right Column: Summary -->
         <div class="col-md-4">
           <div class="card p-4 shadow-sm rounded-4 bg-light border border-primary-subtle">
-            <h5 class="fw-semibold mb-3 text-center">Order Summary</h5>
+            <h5 class="text-center fw-semibold mb-3">📊 Order Summary</h5>
 
             <div class="mb-3">
               <label class="form-label">Subtotal</label>
-              <input type="number" class="form-control rounded-pill" [value]="subTotal" formControlName="subTotal"
-                placeholder="0.00">
+              <input type="number" class="form-control rounded-pill" [value]="subTotal" formControlName="subTotal">
             </div>
             <div class="mb-3">
               <label class="form-label">VAT</label>
-              <input type="number" class="form-control rounded-pill" formControlName="vat" placeholder="0.00">
+              <input type="number" class="form-control rounded-pill" formControlName="vat">
             </div>
             <div class="mb-3">
               <label class="form-label">Paid Amount</label>
-              <input type="number" class="form-control rounded-pill" formControlName="paidAmount" (blur)="onFocusLost()"
-                placeholder="0.00">
+              <input type="number" class="form-control rounded-pill" formControlName="paidAmount" (blur)="onFocusLost()">
             </div>
             <div class="mb-3">
               <label class="form-label">Due Amount</label>
-              <input type="number" class="form-control rounded-pill" [value]="dueAmount" formControlName="dueAmount"
-                placeholder="0.00">
+              <input type="number" class="form-control rounded-pill" [value]="dueAmount" formControlName="dueAmount">
             </div>
             <div class="mb-3">
               <label class="form-label fw-bold">Total</label>
-              <input type="number" class="form-control rounded-pill fw-bold fs-5 text-end" [value]="total"
-                formControlName="total" placeholder="0.00">
+              <input type="number" class="form-control rounded-pill text-end fw-bold fs-5" [value]="total" formControlName="total">
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Buttons -->
+      <!-- Action Buttons -->
       <div class="d-flex justify-content-between align-items-center mt-5">
         <button type="submit" class="btn btn-success px-5 py-2 rounded-pill shadow-lg fw-bold">
           <i class="bi bi-check-circle me-2"></i>Submit Order
@@ -231,6 +144,7 @@
           <i class="bi bi-printer me-2"></i>Print
         </button>
       </div>
+
     </form>
   </div>
 </div>

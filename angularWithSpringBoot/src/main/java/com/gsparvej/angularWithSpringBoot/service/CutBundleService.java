@@ -55,6 +55,7 @@ public class CutBundleService {
             dto.setSize(cutting.getSize());
             dto.setColor(cutting.getColor());
             dto.setPlannedQty(cutting.getPlannedQty());
+            dto.setCutBundleDate(cutting.getCutBundleDate());
 
             CuttingPlan cut = cutting.getCuttingPlan();
             if (cut != null) {

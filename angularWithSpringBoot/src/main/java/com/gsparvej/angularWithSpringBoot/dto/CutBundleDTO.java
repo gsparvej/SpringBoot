@@ -1,5 +1,7 @@
 package com.gsparvej.angularWithSpringBoot.dto;
 
+import java.util.Date;
+
 public class CutBundleDTO {
 
     private int id;
@@ -8,18 +10,20 @@ public class CutBundleDTO {
     private String size;
     private String color;
     private int plannedQty;
+    private Date cutBundleDate;
 
     private CuttingPlanResponseDTO cuttingPlan;
 
     public CutBundleDTO() {
     }
 
-    public CutBundleDTO(int id, String bundleNo, String size, String color, int plannedQty, CuttingPlanResponseDTO cuttingPlan) {
+    public CutBundleDTO(int id, String bundleNo, String size, String color, int plannedQty, Date cutBundleDate, CuttingPlanResponseDTO cuttingPlan) {
         this.id = id;
         this.bundleNo = bundleNo;
         this.size = size;
         this.color = color;
         this.plannedQty = plannedQty;
+        this.cutBundleDate = cutBundleDate;
         this.cuttingPlan = cuttingPlan;
     }
 
@@ -69,5 +73,13 @@ public class CutBundleDTO {
 
     public void setCuttingPlan(CuttingPlanResponseDTO cuttingPlan) {
         this.cuttingPlan = cuttingPlan;
+    }
+
+    public Date getCutBundleDate() {
+        return cutBundleDate;
+    }
+
+    public void setCutBundleDate(Date cutBundleDate) {
+        this.cutBundleDate = cutBundleDate;
     }
 }

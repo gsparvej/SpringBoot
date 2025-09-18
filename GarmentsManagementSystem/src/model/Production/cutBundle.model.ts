@@ -5,6 +5,7 @@ export class CutBundle {
   bundleNo!: string;
   color!: string;
   plannedQty!: number;
+  cutBundleDate!: Date;
   size!: 'S' | 'M' | 'L' | 'XL' ;
 
   cuttingPlan?: CuttingPlan;   

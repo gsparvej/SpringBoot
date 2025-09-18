@@ -1,0 +1,38 @@
+
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+  }
+
+  .form-label {
+    font-weight: 600;
+  }
+
+  .rounded-pill {
+    border-radius: 2rem !important;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: white;
+  }
+
+  .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+  }
+
+  .card {
+    background-color: white;
+    border: none;
+  }
+
+  .shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  }
+
+  .fw-semibold {
+    font-weight: 600;
+  }
+

@@ -2,6 +2,8 @@ package com.gsparvej.angularWithSpringBoot.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "cutBundles")
 public class CutBundle {
@@ -14,6 +16,7 @@ public class CutBundle {
     private String size;
     private String color;
     private int plannedQty;
+    private Date cutBundleDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cuttingPlan_id")
@@ -22,12 +25,13 @@ public class CutBundle {
     public CutBundle() {
     }
 
-    public CutBundle(int id, String bundleNo, String size, String color, int plannedQty, CuttingPlan cuttingPlan) {
+    public CutBundle(int id, String bundleNo, String size, String color, int plannedQty, Date cutBundleDate, CuttingPlan cuttingPlan) {
         this.id = id;
         this.bundleNo = bundleNo;
         this.size = size;
         this.color = color;
         this.plannedQty = plannedQty;
+        this.cutBundleDate = cutBundleDate;
         this.cuttingPlan = cuttingPlan;
     }
 
@@ -77,5 +81,13 @@ public class CutBundle {
 
     public void setCuttingPlan(CuttingPlan cuttingPlan) {
         this.cuttingPlan = cuttingPlan;
+    }
+
+    public Date getCutBundleDate() {
+        return cutBundleDate;
+    }
+
+    public void setCutBundleDate(Date cutBundleDate) {
+        this.cutBundleDate = cutBundleDate;
     }
 }
