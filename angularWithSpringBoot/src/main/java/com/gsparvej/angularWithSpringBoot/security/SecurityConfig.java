@@ -80,7 +80,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/pro_manager/**",
                                 "/api/pro_manager/profile",
                                 "/api/dayWisePro",
-                                "/api/dayWisePro/**",
+                                "/api/dayWisePro/all",
                                 "/api/line",
                                 "/api/machine" ,
                                 "/api/production_order",

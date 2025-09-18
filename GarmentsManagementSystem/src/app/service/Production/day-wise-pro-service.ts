@@ -27,7 +27,7 @@ export class DayWiseProService {
         headers = headers.set('Authorization', 'Bearer ' + token);
       }
     }
-    return this.http.get<DayWiseProduction[]>(this.baseUrl, { headers });
+    return this.http.get<DayWiseProduction[]>(this.baseUrl+"/all", { headers });
   }
 
   getDayWiseProById(id: number): Observable<DayWiseProduction> {
