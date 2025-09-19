@@ -1,6 +1,8 @@
 package com.gsparvej.angularWithSpringBoot.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -25,6 +27,7 @@ public class Vendor {
 
 
     @OneToMany(mappedBy = "vendor" , cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<PurchaseOrder> purchaseOrders;
 
     public Vendor() {

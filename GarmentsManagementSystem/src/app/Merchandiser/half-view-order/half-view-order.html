@@ -19,7 +19,7 @@
         <td>{{l.buyer.name}}</td>
        
         <td>{{l.bomStyle.styleCode}}</td>
-         <td>{{l.deliveryDate }}</td>
+         <td>{{l.deliveryDate | date:'mediumDate' }}</td>
       
         <td>
             <button class="btn btn-warning m-1 p-1" (click)="getFullOrderById(l.id)">View</button>
