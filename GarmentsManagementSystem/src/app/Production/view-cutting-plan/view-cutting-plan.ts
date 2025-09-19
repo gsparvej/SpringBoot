@@ -14,10 +14,13 @@ export class ViewCuttingPlan implements OnInit {
   filteredCuttingPlans: CuttingPlan[] = [];
   searchOrderId!: number;
 
+  fromDate!: Date;
+  toDate!: Date;
+
   constructor(
     private cuttingPlanService: CuttingPlanService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadCuttingPlans();
@@ -47,11 +50,35 @@ export class ViewCuttingPlan implements OnInit {
     }
   }
 
-  reset(): void {
-    this.searchOrderId = null as any;
+
+  searchByDateRange(): void {
+  if (this.fromDate && this.toDate) {
+    const from = new Date(this.fromDate);
+    const to = new Date(this.toDate);
+
+    // Include full day for "toDate"
+    to.setHours(23, 59, 59, 999);
+
+    this.filteredCuttingPlans = this.cuttingPlans.filter(plan => {
+      const planDate = new Date(plan.cuttingDate);
+      return planDate >= from && planDate <= to;
+    });
+  } else {
     this.filteredCuttingPlans = [...this.cuttingPlans];
-    this.cdr.detectChanges();
   }
+
+  this.cdr.detectChanges();
+}
+
+
+  reset(): void {
+  this.searchOrderId = null as any;
+  this.fromDate = null as any;
+  this.toDate = null as any;
+  this.filteredCuttingPlans = [...this.cuttingPlans];
+  this.cdr.detectChanges();
+}
+
 
   deleteCuttingPlan(id: number): void {
     if (confirm('Are you sure to delete this Cutting Plan?')) {

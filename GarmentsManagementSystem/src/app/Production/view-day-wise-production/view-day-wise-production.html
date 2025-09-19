@@ -1,23 +1,70 @@
 <div class="container my-5">
-  <h5>Search Production Orders by Order ID:</h5>
+  <div class="container my-5">
+  <h4 class="mb-4 text-primary fw-bold">Search Day-Wise Production</h4>
 
-  <div class="input-group mb-3">
-    <input type="number" class="form-control" placeholder="Enter Order ID" [(ngModel)]="searchOrderId"
-      name="searchOrderId" />
+  <div class="row g-4 mb-4 flex-nowrap overflow-auto">
+
+    <!-- Left: Search by Order ID -->
+    <div class="col-12 col-sm-6 col-md-5" style="min-width: 350px;">
+      <div class="border rounded p-3 shadow-sm h-100">
+        <h6 class="mb-3">Search by Order ID</h6>
+
+        <div class="input-group mb-3">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Enter Order ID"
+            [(ngModel)]="searchOrderId"
+            name="searchOrderId"
+          />
+        </div>
+
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-primary w-100" (click)="searchByOrderId()">Search</button>
+          <button class="btn btn-outline-secondary w-100" (click)="reset()">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Search by Production Date -->
+    <div class="col-12 col-sm-6 col-md-7" style="min-width: 450px;">
+      <div class="border rounded p-3 shadow-sm h-100">
+        <h6 class="mb-3">Search by Production Date</h6>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <label for="fromDate" class="form-label">From Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="fromDate"
+              [(ngModel)]="fromDate"
+              name="fromDate"
+            />
+          </div>
+
+          <div class="col-6">
+            <label for="toDate" class="form-label">To Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="toDate"
+              [(ngModel)]="toDate"
+              name="toDate"
+            />
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+          <button class="btn btn-outline-success w-100" (click)="searchByDateRange()">Search by Date</button>
+          <button class="btn btn-outline-secondary w-100" (click)="reset()">Reset</button>
+        </div>
+      </div>
+    </div>
 
   </div>
-  <div class="row">
-    <div class="col-md-4">
-      <button class="btn btn-outline-primary" type="button" (click)="searchByOrderId()">
-        Search
-      </button>
-    </div>
-    <div class="col-md-4">
-      <button class="btn btn-outline-primary" type="reset" (click)="reset()">
-        Reset
-      </button>
-    </div>
-  </div>
+</div>
+
 
   <h2 class="text-center fw-bold mb-4">Day Wise Production</h2>
 

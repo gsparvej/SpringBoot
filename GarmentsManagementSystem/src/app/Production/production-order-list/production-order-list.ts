@@ -14,6 +14,8 @@ export class ProductionOrderList implements OnInit{
   filteredOrders: ProductionOrder[] = [];
 
   searchOrderId!: number;
+  fromDate!: Date;
+  toDate!: Date;
 
   constructor(
     private productionOrderService: ProductionOrderService,
@@ -44,10 +46,31 @@ export class ProductionOrderList implements OnInit{
     }
   }
 
-   reset(): void {
+
+  searchByDateRange(): void {
+    if (this.fromDate && this.toDate) {
+      const from = new Date(this.fromDate);
+      const to = new Date(this.toDate);
+      to.setHours(23, 59, 59, 999); // Include entire end date
+
+      this.filteredOrders = this.productionOrders.filter(order => {
+        const orderDate = new Date(order.startDate); // Update this property if your date field is named differently
+        return orderDate >= from && orderDate <= to;
+      });
+    } else {
+      this.filteredOrders = [...this.productionOrders];
+    }
+
+    this.cdr.detectChanges();
+  }
+
+
+    reset(): void {
     this.searchOrderId = null as any;
+    this.fromDate = null as any;
+    this.toDate = null as any;
     this.filteredOrders = [...this.productionOrders];
-     this.getAllProductionOrders();
+    this.getAllProductionOrders();
     this.cdr.detectChanges();
   }
 }

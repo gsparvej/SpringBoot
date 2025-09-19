@@ -1,28 +1,61 @@
 <div class="container mt-4">
-  <h4>Search Cutting Plan By Production Order Id</h4>
+  <div class="container my-5">
+    <h4 class="mb-4 text-primary fw-bold">Search Cutting Plans</h4>
 
-  <div class="input-group mb-3">
-    <input
-      type="number"
-      class="form-control"
-      placeholder="Enter Order ID"
-      [(ngModel)]="searchOrderId"
-      name="searchOrderId"
-    />
+    <div class="row g-4 mb-4">
+
+      <!-- Left Section: Search by Production Order ID -->
+      <div class="col-md-5">
+        <div class="border rounded p-3 shadow-sm h-100">
+          <h6 class="mb-3">Search by Production Order ID</h6>
+
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="Enter Production Order ID"
+              [(ngModel)]="searchOrderId" name="searchOrderId" />
+          </div>
+
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary w-100" (click)="searchByProductionOrderId()">
+              Search
+            </button>
+            <button class="btn btn-outline-secondary w-100" (click)="reset()">
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Section: Search by Cutting Date -->
+      <div class="col-md-7">
+        <div class="border rounded p-3 shadow-sm h-100">
+          <h6 class="mb-3">Search by Cutting Date Range</h6>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="fromDate" class="form-label">From Date</label>
+              <input type="date" class="form-control" id="fromDate" [(ngModel)]="fromDate" name="fromDate" />
+            </div>
+
+            <div class="col-md-6">
+              <label for="toDate" class="form-label">To Date</label>
+              <input type="date" class="form-control" id="toDate" [(ngModel)]="toDate" name="toDate" />
+            </div>
+          </div>
+
+          <div class="d-flex gap-2 mt-3">
+            <button class="btn btn-outline-success w-100" (click)="searchByDateRange()">
+              Search by Date
+            </button>
+            <button class="btn btn-outline-secondary w-100" (click)="reset()">
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="row mb-3">
-    <div class="col-md-4">
-      <button class="btn btn-outline-primary" (click)="searchByProductionOrderId()">
-        Search
-      </button>
-    </div>
-    <div class="col-md-4">
-      <button class="btn btn-outline-secondary" (click)="reset()">
-        Reset
-      </button>
-    </div>
-  </div>
 
   <h3 class="text-center mb-3">All Cutting Plans</h3>
 
@@ -55,14 +88,11 @@
           <p class="card-text mb-1"><strong>Production Order:</strong> {{ cp.productionOrder.id }}</p>
 
           <div class="mt-2">
-            <span
-              class="badge"
-              [ngClass]="{
+            <span class="badge" [ngClass]="{
                 'bg-secondary': cp.status === 'Planned',
                 'bg-warning text-dark': cp.status === 'Running',
                 'bg-success': cp.status === 'Completed'
-              }"
-            >
+              }">
               {{ cp.status }}
             </span>
           </div>

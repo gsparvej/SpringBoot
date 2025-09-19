@@ -8,26 +8,28 @@ import { DayWiseProService } from '../../service/Production/day-wise-pro-service
   templateUrl: './view-day-wise-production.html',
   styleUrl: './view-day-wise-production.css'
 })
-export class ViewDayWiseProduction implements OnInit{
+export class ViewDayWiseProduction implements OnInit {
 
-  
+
   dayWise: DayWiseProduction[] = [];
   filteredOrders: DayWiseProduction[] = [];
 
   searchOrderId!: number;
+  fromDate!: Date;
+  toDate!: Date;
 
   constructor(
     private dayWiseService: DayWiseProService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.getAllDayWise(); 
+    this.getAllDayWise();
   }
 
   getAllDayWise(): void {
     this.dayWiseService.getAllDayWisePro().subscribe((data) => {
-      
+
       this.dayWise = data;
       this.filteredOrders = data;
       this.cdr.detectChanges();
@@ -45,10 +47,28 @@ export class ViewDayWiseProduction implements OnInit{
     }
   }
 
-   reset(): void {
+ searchByDateRange(): void {
+    if (this.fromDate && this.toDate) {
+      const from = new Date(this.fromDate);
+      const to = new Date(this.toDate);
+      to.setHours(23, 59, 59, 999); // include the full end date
+
+      this.filteredOrders = this.dayWise.filter((item) => {
+        const prodDate = new Date(item.updatedDate); // replace with your actual date field name
+        return prodDate >= from && prodDate <= to;
+      });
+    } else {
+      this.filteredOrders = [...this.dayWise];
+    }
+    this.cdr.detectChanges();
+  }
+
+  reset(): void {
     this.searchOrderId = null as any;
+    this.fromDate = null as any;
+    this.toDate = null as any;
     this.filteredOrders = [...this.dayWise];
-     this.getAllDayWise();
+    this.getAllDayWise();
     this.cdr.detectChanges();
   }
 }

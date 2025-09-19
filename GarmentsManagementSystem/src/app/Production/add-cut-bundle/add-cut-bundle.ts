@@ -42,6 +42,7 @@ export class AddCutBundle implements OnInit{
       color: ['', Validators.required],
       plannedQty: ['', Validators.required],
       size: ['', Validators.required],
+      cutBundleDate: ['' , Validators.required],
       
 
       cuttingPlan: this.fb.group({
