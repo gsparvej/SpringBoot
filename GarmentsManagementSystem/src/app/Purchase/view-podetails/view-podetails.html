@@ -1,128 +1,143 @@
-<div class="container my-5 p-4 shadow-lg rounded bg-white border">
+<div class="container my-5 p-5 shadow rounded bg-light border">
+
   <!-- Header -->
   <div class="text-center mb-4">
-    <div class="row">
+    <div class="row align-items-center">
       <div class="col-md-4">
-        <img src="assets/images/Capture3.jpeg" alt="Company Logo" class="mb-3" style="height: 100px;">
+        <img src="assets/images/Capture3.jpeg" alt="Company Logo" class="img-fluid mb-2" style="max-height: 100px;">
       </div>
-      <div class="col-md-6">
-        <h3 class="text-primary fw-bold mb-1">PARVEJ Garments Ltd.</h3>
-        <p class="mb-0">House #12, Road #34, Gulshan-1, Dhaka-1212</p>
-        <p class="mb-0">Phone: +8801XXXXXXXXX </p>
+      <div class="col-md-8 text-md-start text-center">
+        <h2 class="text-primary fw-bold mb-1">PARVEJ Garments Ltd.</h2>
+        <p class="mb-0">🏠 House #12, Road #34, Gulshan-1, Dhaka-1212</p>
+        <p class="mb-0">📞 +8801XXXXXXXXX</p>
       </div>
     </div>
-    <hr />
+    <hr class="my-4" />
     <h4 class="text-secondary fw-bold">🧾 Purchase Order</h4>
   </div>
 
   <!-- PO Details -->
-  <div class="row mb-4">
-    <div class="col-md-4 mb-2">
-      <label class="form-label fw-semibold">PO Number</label>
-      <div class="text-secondary border-bottom pb-1">{{ po.poNumber }}</div>
-    </div>
-    <div class="col-md-4 mb-2">
-      <label class="form-label fw-semibold">PO Date</label>
-      <div class="text-secondary border-bottom pb-1">{{ po.poDate | date: 'dd MMMM, yyyy' }}</div>
-    </div>
-    <div class="col-md-4 mb-2">
-      <label class="form-label fw-semibold">Delivery Date</label>
-      <div class="text-secondary border-bottom pb-1">{{ po.deliveryDate | date: 'dd MMMM, yyyy' }}</div>
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-body bg-white">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label fw-semibold">PO Number</label>
+          <div class="text-dark border-bottom pb-1">{{ po.poNumber }}</div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label fw-semibold">PO Date</label>
+          <div class="text-dark border-bottom pb-1">{{ po.poDate | date: 'dd MMMM, yyyy' }}</div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label fw-semibold">Delivery Date</label>
+          <div class="text-dark border-bottom pb-1">{{ po.deliveryDate | date: 'dd MMMM, yyyy' }}</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Vendor Info -->
-  <h5 class="text-secondary fw-semibold mb-3">Vendor Information</h5>
-  <div class="row mb-4">
-    <div class="col-md-4">
-      <label class="form-label">Company Name</label>
-      <div class="text-secondary">{{ po.vendor.companyName }}</div>
-    </div>
-    <div class="col-md-4">
-      <label class="form-label">Contact Person</label>
-      <div class="text-secondary">{{ po.vendor.contactPerson }}</div>
-    </div>
-    <div class="col-md-4">
-      <label class="form-label">Phone</label>
-      <div class="text-secondary">{{ po.vendor.phone }}</div>
-    </div>
-    <div class="col-md-12 mt-2">
-      <label class="form-label">Vendor Address</label>
-      <div class="text-secondary">{{ po.vendor.address }}</div>
+  <div class="mb-4">
+    <h5 class="text-secondary fw-bold mb-3">🏢 Vendor Information</h5>
+    <div class="card border-0 shadow-sm">
+      <div class="card-body bg-white">
+        <div class="row mb-2">
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Company Name</label>
+            <div class="text-muted">{{ po.vendor.companyName }}</div>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Contact Person</label>
+            <div class="text-muted">{{ po.vendor.contactPerson }}</div>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label fw-semibold">Phone</label>
+            <div class="text-muted">{{ po.vendor.phone }}</div>
+          </div>
+          <div class="col-md-12 mt-3">
+            <label class="form-label fw-semibold">Vendor Address</label>
+            <div class="text-muted">{{ po.vendor.address }}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Ordered Items Table -->
-  <h5 class="text-secondary fw-semibold mb-3">📦 Ordered Items</h5>
-  <div class="table-responsive mb-4">
-    <table class="table table-bordered text-center align-middle">
-      <thead class="table-light">
-        <tr>
-          <th>SL</th>
-           <th>Product Name</th>
-          <th>Quantity</th>
-          <th>TAX %</th>
-          <th>Total Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr >
-          <td>{{  1 }}</td>
-           <td>{{ po.item.categoryName }}</td>
-
-          <td>{{ po.quantity| number:'1.2-2'}}  ({{po.item.unit}})</td>
-          <td>{{ po.tax }}</td>
-          <td>{{ po.totalAmount | number:'1.2-2' }}</td>
-          <!-- <td>{{ item.unitPrice | number:'1.2-2' }} BDT</td>
-          <td>{{ item.totalPrice | number:'1.2-2' }} BDT</td> -->
-        </tr>
-      </tbody>
-    </table>
+  <div class="mb-4">
+    <h5 class="text-secondary fw-bold mb-3">📦 Ordered Items</h5>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover text-center align-middle bg-white shadow-sm">
+        <thead class="table-primary text-uppercase small">
+          <tr>
+            <th>SL</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Tax %</th>
+            <th>Total Price (BDT)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ 1 }}</td>
+            <td>{{ po.item.categoryName }}</td>
+            <td>{{ po.quantity | number:'1.2-2' }} ({{ po.item.unit }})</td>
+            <td>{{ po.tax }}%</td>
+            <td class="fw-semibold">{{ po.totalAmount | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <!-- Totals -->
-  <!-- <div class="row mb-4">
+  <!-- Totals (Optional Section) -->
+  <!-- 
+  <div class="row mb-4">
     <div class="col-md-4">
-      <label class="form-label">Subtotal</label>
-      <div class="text-secondary fw-semibold">{{ po.subTotal | number:'1.2-2' }} BDT</div>
+      <label class="form-label fw-semibold">Subtotal</label>
+      <div class="text-muted">{{ po.subTotal | number:'1.2-2' }} BDT</div>
     </div>
     <div class="col-md-4">
-      <label class="form-label">VAT (5%)</label>
-      <div class="text-secondary fw-semibold">{{ po.tax| number:'1.2-2' }} BDT</div>
+      <label class="form-label fw-semibold">VAT ({{ po.tax }}%)</label>
+      <div class="text-muted">{{ po.tax | number:'1.2-2' }} BDT</div>
     </div>
     <div class="col-md-4">
-      <label class="form-label">Total Amount</label>
-      <div class="text-secondary fw-bold h5">{{ po.totalAmount | number:'1.2-2' }} BDT</div>
+      <label class="form-label fw-semibold">Total Amount</label>
+      <div class="h5 fw-bold text-success">{{ po.totalAmount | number:'1.2-2' }} BDT</div>
     </div>
-  </div> -->
+  </div>
+  -->
 
   <!-- Terms and Conditions -->
-  <div class="mb-5">
-    <h5 class="text-secondary fw-semibold">Terms & Conditions</h5>
-    <ul class="text-secondary">
-      <li>All goods must be delivered by the specified date.</li>
-      <li>Payment will be made within 30 days of delivery & invoice receipt.</li>
-      <li>Defective items must be replaced within 7 working days.</li>
-      <li>The PO number must be mentioned on all delivery challans and invoices.</li>
-    </ul>
+  <div class="card border-0 shadow-sm mb-5">
+    <div class="card-body bg-white">
+      <h5 class="text-secondary fw-bold mb-3">📄 Terms & Conditions</h5>
+      <ul class="text-muted mb-0">
+        <li>All goods must be delivered by the specified date.</li>
+        <li>Payment will be made within 30 days of delivery & invoice receipt.</li>
+        <li>Defective items must be replaced within 7 working days.</li>
+        <li>The PO number must be mentioned on all delivery challans and invoices.</li>
+      </ul>
+    </div>
   </div>
 
   <!-- Signature Section -->
   <div class="row mt-5">
     <div class="col-md-6">
-      <p class="fw-semibold">Authorized By (Purchase):</p>
+      <p class="fw-semibold">🖊️ Authorized By (Purchase):</p>
       <div class="border-bottom mb-2" style="height: 40px;"></div>
       <p class="mb-0"><strong>Md. Parvej Hossen</strong></p>
-      <p class="mb-0">Purchase Manager</p>
-      <p>Date: {{ po.poDate | date:'dd MMMM, yyyy' }}</p>
+      <p class="mb-0 text-muted">Purchase Manager</p>
+      <p class="text-muted">Date: {{ po.poDate | date:'dd MMMM, yyyy' }}</p>
     </div>
-    <div class="col-md-6 text-end">
-      <p class="fw-semibold">Approved By (Admin):</p>
+    <div class="col-md-6 text-md-end text-start">
+      <p class="fw-semibold">✅ Approved By (Admin):</p>
       <div class="border-bottom mb-2" style="height: 40px;"></div>
       <p class="mb-0"><strong>Admin Department</strong></p>
-      <p class="mb-0">ABC Garments Ltd.</p>
-      <p>Date: {{ po.poDate | date:'dd MMMM, yyyy' }}</p>
+      <p class="mb-0 text-muted">ABC Garments Ltd.</p>
+      <p class="text-muted">Date: {{ po.poDate | date:'dd MMMM, yyyy' }}</p>
     </div>
   </div>
+
   
 </div>

@@ -30,7 +30,7 @@
           <td>{{ a.id }}</td>
           <td>{{ a.employee?.id }}</td>
           <td>{{ a.employee?.name }}</td>
-          <td>{{ a.attDate | date: 'mediumDate' }}</td>
+          <td>{{ a.attDate | date: 'medium' }}</td>
           <td>
             <span class="badge" [ngClass]="{
                 'bg-success': a.status === 'Present',
