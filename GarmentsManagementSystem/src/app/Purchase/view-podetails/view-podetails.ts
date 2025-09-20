@@ -43,5 +43,63 @@ export class ViewPODetails implements OnInit{
     }
   });
 }
+printPage(): void {
+  const printContents = document.getElementById('po-details')?.innerHTML;
+  if (printContents) {
+    const popupWin = window.open('', '_blank', 'width=800,height=1000');
+    popupWin?.document.open();
+    popupWin?.document.write(`
+      <html>
+        <head>
+          <title>Print PO</title>
+          <style>
+            /* Landscape mode */
+            @page {
+              size: landscape;
+              margin: 20mm;
+            }
+
+            body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              overflow: hidden;
+            }
+
+            .content {
+              width: 100%;
+              max-width: 90%; /* Ensure it doesn't overflow */
+              padding: 20px;
+              box-sizing: border-box;
+              overflow: auto;
+            }
+
+            table {
+              width: 100%;
+              border-collapse: collapse;
+            }
+
+            th, td {
+              border: 1px solid #ccc;
+              padding: 8px;
+              text-align: left;
+            }
+          </style>
+        </head>
+        <body onload="window.print(); window.close();">
+          <div class="content">
+            ${printContents}
+          </div>
+        </body>
+      </html>
+    `);
+    popupWin?.document.close();
+  }
+}
+
 
 }
