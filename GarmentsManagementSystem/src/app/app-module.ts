@@ -87,7 +87,7 @@ import { PurchaseManager } from './Registration/purchase-manager/purchase-manage
 import { ProductionManager } from './Registration/production-manager/production-manager';
 import { HrAdminProfile } from './Profile/hr-admin-profile/hr-admin-profile';
 import { Navbar } from './navbar/navbar';
-import { NgxPrintModule } from 'ngx-print';
+
 
 @NgModule({
   declarations: [
@@ -178,8 +178,7 @@ import { NgxPrintModule } from 'ngx-print';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-     NgxPrintModule
+    ReactiveFormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
