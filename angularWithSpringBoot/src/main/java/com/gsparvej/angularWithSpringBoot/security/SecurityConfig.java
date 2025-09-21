@@ -50,34 +50,30 @@ public class SecurityConfig {
                                 "/api/pro_manager/reg",
                                 "/api/purchase_manager/reg",
                                 "/images/**",
-                                "/api/order/**", "/api/department/**"
-                                ).permitAll()
+                                "/api/order/**",
+                                "/api/department/**",
 
-                        .requestMatchers("/api/super_admin/reg",
+                                "/api/super_admin/reg",
                                 "/api/super_admin/profile",
                                 "/api/pro_manager/reg",
-                                "/api/purchase_manager/reg")
-                        .hasRole("SUPERADMIN")
+                                "/api/purchase_manager/reg",
 
-                        .requestMatchers("/api/admin/reg",
+                                "/api/admin/reg",
                                 "/api/admin/profile",
                                 "/api/department",
                                 "/api/designation/by-department/**",
-                                "/api/designation")
-                        .hasRole("ADMIN")
+                                "/api/designation",
 
-                        .requestMatchers("/api/hr_admin/reg")
-                        .hasRole("HRADMIN")
+                                "/api/hr_admin/reg",
 
-                        .requestMatchers("/api/merchan_manager/**",
+                                "/api/merchan_manager/**",
                                 "/api/merchan_manager/profile",
                                 "/api/bom/style/**" ,
                                 "/api/buyer",
                                 "/api/buyer/**",
-                                "/api/raw_materials")
-                        .hasRole("MERCHANDISERMANAGER")
+                                "/api/raw_materials",
 
-                        .requestMatchers("/api/pro_manager/**",
+                                "/api/pro_manager/**",
                                 "/api/pro_manager/profile",
                                 "/api/dayWisePro",
                                 "/api/dayWisePro/all",
@@ -90,10 +86,9 @@ public class SecurityConfig {
                                 "/api/proSummaryorder/production-summaryAll",
                                 "/api/cutBundle",
                                 "/api/cutting_plan",
-                                "/api/cutting_plan/production_OrderId/**" )
-                        .hasRole("PRODUCTIONMANAGER")
+                                "/api/cutting_plan/production_OrderId/**",
 
-                        .requestMatchers("/api/purchase_manager/**",
+                                "/api/purchase_manager/**",
                                 "/api/purchase_manager/profile",
                                 "/api/vendor",
                                 "/api/vendor/**" ,
@@ -107,16 +102,17 @@ public class SecurityConfig {
                                 "/api/requisition/**",
                                 "/api/requisition/id/**",
                                 "/api/po" ,
-                                "/api/po/id/**")
-                        .hasRole("PURCHASEMANAGER")
+                                "/api/po/id/**",
 
-                        .requestMatchers("/api/order/**",
+                                "/api/order/**",
                                 "/api/bomstyle",
                                 "/api/bomstyle/**",
                                 "/api/uom",
-                                "/api/uom/**")
-                        .hasAnyRole("PRODUCTIONMANAGER", "MERCHANDISERMANAGER")
+                                "/api/uom/**",
 
+                                "/api/messages"
+
+                                ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)
